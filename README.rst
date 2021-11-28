@@ -6,6 +6,8 @@ It bakes configuration for Zope 5
 
 ``cookiecutter-zope-instance`` is a cookiecutter template to create a full and complex configuration of a `Zope <https://zope.org>`_ WSGI instance.
 
+.. contents :: **Contents**
+
 Features
 ========
 
@@ -24,6 +26,7 @@ Usage
 Run ``cookiecutter -f https://github.com/bluedynamics/cookiecutter-zope-instance`` and answer tons of questions.
 
 Better: Prepare a ``cookiecutter.json`` with all option given and run cookiecutter with it.
+
 
 Options
 =======
@@ -83,8 +86,6 @@ Basic configuration
     Default:
 
     .. code-block:: JSON
-
-    .. code-block:: json
 
         {
             "zope_i18n_compile_mo_files": "true",
@@ -171,7 +172,7 @@ Database
 Zope/Plone offers different storage backends for different environments and needs:
 
 - For development a simple local file based direct storage is all you need.
-- As soon as you run more than one instance of Zope/Plone a storage server needs to e configured.
+- As soon as you run more than one instance of Zope/Plone (horizontal scaling) a storage server needs to e configured.
 - We recommend to use a Postgresql database over RelStorage as the storage server in production environments.
 - RelStorage also supports MySQL (and derivates) and Oracle as storae servers.
 - Since Zope comes with an own storage server (ZEO - Zope Enterprise Objects) this is supported here as well. It can be used in production environment too.
@@ -183,12 +184,36 @@ Zope/Plone offers different storage backends for different environments and need
 
     - Options are to store blobs in the primary database or in a shared filesystem.
     - If Blobs are in the primary database, the client needs only a local Blob cache.
-    - If Blobs are stored side-by-side in the filesystem, it needs a central shared folder (if spread over many servers using NFS or similar).
+    - If Blobs are stored (side-by-side with the storageserver) in the filesystem, it needs a central *shared* folder (if spread over many servers using NFS or similar).
     - For Postgresql it is recommend to store blobs in the database.
       However, it can be configured to store them separatly.
       Read the RelStorage documentation for details on other databases.
     - For ZEO blobs can be configured to be stored within ZEO or in a shared folder.
       Recommendation is to use a shared folder.
+
+Common options:
+
+``database``
+    Which storge type to be confiured.
+
+    Allowed values: ``direct``, ``relstroage``, ``zeo``
+
+    Default: ``direct``
+
+``blobs_mode``
+    Set if blobs are stored *shared* within all clients or are they stored on the storage backend and the client only operates as temporary *cache*.
+    For *direct* storage only *shared* applies (operates like shared with one single client).
+    Attention: Do not forget to set this to *cache* if you use RelStorage!
+
+    Allowed values: ``shared``, ``cache``
+
+    Default: ``shared``
+
+``blobs_location``
+    The name of the directory where the ZODB blob data or cache will be stored.
+
+    Default: ``{{ cookiecutter.var_location }}/blobs``.
+
 
 
 Direct storage
@@ -202,15 +227,80 @@ If you have only one application process, it can open ``filestorage`` database f
 
     Defaults: ``{{ cookiecutter.var_location }}/filestorage/Data.fs``.
 
-``blobs_location``
-    The name of the directory where the ZODB blob data will be stored.
-
-    Default: ``{{ cookiecutter.var_location }}/blobs``.
-
 RelStorage
 ~~~~~~~~~~
 
-**not implemented**
+``relstorage``
+    Set the database server to be used.
+
+    Allowed values: ``postgresql``, ``mysql``, ``oracle``, ``sqllite3``
+
+    Default: ``postgresql``
+
+Postgresql
+""""""""""
+
+``postgresql_driver``:
+    Driver to use.
+
+    Allowed values: ``psycopg2``, ``psycopg2 gevent``, ``psycopg2cffi``, ``pg8000``, details: `RelStorage: PostgreSQL adapter options <https://relstorage.readthedocs.io/en/latest/postgresql/options.html>`_
+
+    Default: ``psycopg2``
+
+``dsn``
+    Specifies the data source name for connecting to PostgreSQL. A PostgreSQL DSN is a list of parameters separated with whitespace. A typical DSN looks like:
+    ``dbname='plone' user='username' host='localhost' password='secret'``
+
+    Default: unset, empty string
+
+MySQL
+"""""
+
+``mysql_driver``:
+    Driver to use.
+
+    Allowed values: ``MySQLdb``, ``gevent MySQLdb``, ``PyMySQL``, ``C MySQL Connector/Python``, details: `RelStorage: MySQL adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+
+    Default: ``psycopg2``
+
+``mysql_parameters``:
+    A dictionary with all MySQL parameters. This depends on the driver. Details: `RelStorage: MySQL adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+
+    Example:
+
+    .. code-block:: JSON
+
+        {
+            ...
+            "mysql_parameters": {
+                "host": "localhost",
+                "user": "plone",
+                "passwd": "secret",
+                "db": "plone"
+            },
+            ...
+        }
+
+Oracle
+""""""
+
+For details read `RelStorage: Oracle adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+
+``oracle_user``
+    The Oracle account name.
+
+    Default: unset, empty string
+
+``oracle_password``
+    The Oracle account password.
+
+    Default: unset, empty string
+
+``oracle_dsn``
+    The Oracle data source name. The Oracle client library will normally expect to find the DSN in ``/etc/oratab``
+
+    Default: unset, empty string
+
 
 ZEO
 ~~~
