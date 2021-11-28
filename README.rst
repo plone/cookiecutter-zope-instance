@@ -61,14 +61,20 @@ Basic configuration
     - Default: ``1073741824`` (since this is the waitress default)
 
 ``clear_untrusted_proxy_headers``
-    -
+    - TODO
     - Allowed values: ``false`` or ``true``
     - Default: ``false``
 
-    "environment": {
+``environment``
+    - The environment set in ``zope.conf``.
+    - Values: It is a dictionary with key/value pairs.
+    - Default:
+
+    .. code-block:: JSON
+    {
         "zope_i18n_compile_mo_files": "true",
         "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
-    },
+    }
 
 
 Development
@@ -127,5 +133,5 @@ Problem
     The old recipe uses python string templates and is not very intuitive to write and maintain.
 
 Idea
-    `cockiecutter <https://cookiecutter.readthedocs.io>`_ is a widespread utility to create text-based code and configuration file-system structures.
+    `cookiecutter <https://cookiecutter.readthedocs.io>`_ is a widespread utility to create text-based code and configuration file-system structures.
     Let's utilize it's power and wrap it with a thin package to simplfy it's usage and add minor features needed for out use case.
