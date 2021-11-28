@@ -102,7 +102,7 @@ Initial user
 
 ``initial_user_password``
     Creates an initial password for the initial user.
-    If empty, a passwort will be generated and printed before the cookiecutter generation process starts.
+    If empty, a passwort will be generated and printed after the cookiecutter generation process run.
 
     Default: empty string
 

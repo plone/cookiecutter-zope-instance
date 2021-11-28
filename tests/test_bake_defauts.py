@@ -1,4 +1,4 @@
-from .utils import bake_in_temp_dir
+from utils import bake_in_temp_dir
 
 
 def test_bake_with_defaults(cookies):
@@ -8,6 +8,7 @@ def test_bake_with_defaults(cookies):
         assert result.exception is None
 
         found_toplevel_files = [f.name for f in result.project_path.iterdir()]
+        assert 'inituser' in found_toplevel_files
         assert 'etc' in found_toplevel_files
         etc_path = result.project_path / "etc"
         assert etc_path.is_dir()

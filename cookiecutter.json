@@ -13,6 +13,9 @@
         "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
     },
 
+    "initial_user_name": "",
+    "initial_user_password": "",
+
     "debug_mode": ["off", "on"],
     "verbose_security": ["off", "on"],
     "use_profiler": ["no", "yes"],
