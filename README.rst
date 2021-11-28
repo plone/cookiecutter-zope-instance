@@ -11,11 +11,10 @@ It bakes configuration for Zope 5
 Features
 ========
 
-- Creates basic filesystem structure with ``zope.conf``, ``zope.ini`` and ``site.zcml`` with package-includes.
-- Add inituser
-- Set Zope's main configuration options
+- Creates basic filesystem structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
+- Set Zope's main configuration options.
 - Configure different database backends such as local filesystem storage`, `RelSorage` or `ZEO`.
-- Enable profiling.
+- Enable development options.
 
 In future all non-ancient features of `plone.recipe.zope2instance <>`_ are planned to provide.
 
@@ -183,29 +182,29 @@ Example:
 Database
 --------
 
-Zope/Plone offers different storage backends for different environments and needs:
+Zope/Plone offers different ZODB storage backends for different environments and needs:
 
-- For development a simple local file based direct storage is all you need.
-- As soon as you run more than one instance of Zope/Plone (horizontal scaling) a storage server needs to e configured.
-- We recommend to use a Postgresql database over RelStorage as the storage server in production environments.
-- RelStorage also supports MySQL (and derivates) and Oracle as storae servers.
-- Since Zope comes with an own storage server (ZEO - Zope Enterprise Objects) this is supported here as well. It can be used in production environment too.
-- Blobs (binary large objects, like files and images) are handled in a special way:
+- For development a simple local file based *direct* storage is all you need (aka filestorage).
+- As soon as you want multiple application processes of Zope/Plone (horizontal scaling) you need to run a separate database server process and connect to it.
+    - We recommend to use a Postgresql database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
+      RelStorage also supports MySQL (and derivates), Oracle and SQLIte 3 as database servers.
+    - Zope and ZODB comes with *ZEO* (Zope Enterprise Objects). This more lightweight storage server is supported here too. It is widely used in production environment.
 
-  - They either are stored within the primary database or as a separate filesystem storage.
-  - in direct storage Blob files are in an own directory
-  - If stored  the primary database it is possible to choose how blobs are handled.
+*Blobs* (binary large objects, like files and images) are handled in a special way:
 
-    - Options are to store blobs in the primary database or in a shared filesystem.
-    - If Blobs are in the primary database, the client needs only a local Blob cache.
-    - If Blobs are stored (side-by-side with the storageserver) in the filesystem, it needs a central *shared* folder (if spread over many servers using NFS or similar).
-    - For Postgresql it is recommend to store blobs in the database.
-      However, it can be configured to store them separatly.
-      Read the RelStorage documentation for details on other databases.
-    - For ZEO blobs can be configured to be stored within ZEO or in a shared folder.
-      Recommendation is to use a shared folder.
+- In *direct* storage blob files are stored in a dedicated directory in filesystem.
+- With a *RelStorge* or *ZEO* there are two options:
 
-Common options:
+    1. Blobs stored within the primary database server as data.
+       The application client needs a local (non-shared) cache directory for the blobs.
+       This is recommended in general for *RelStorage*
+    2. Blobs stored in a separate dedicated filesystem directory.
+       This directory is in shared usage by all application processes.
+       If application processes are spread over many servers, a network filesystem such as NFS or similar must be used.
+       This is recommend for *ZEO*.
+
+
+Core database options:
 
 ``database``
     Which storge type to be confiured.
@@ -213,6 +212,21 @@ Common options:
     Allowed values: ``direct``, ``relstroage``, ``zeo``
 
     Default: ``direct``
+
+``database_cache_size``
+    Set the ZODB cache size, i.e. the number of objects which the ZODB cache will try to hold in RAM per connection.
+    The actual size depends on the data.
+    For each connection in the connection pool of the application process one cache is created.
+    In other words one cache is created for each active parallel running thread.
+    If in doubt do not touch.
+    On the other hand it is a powerful setting to tune your application.
+
+    Default: ``30000``.
+
+Blobs Settings
+~~~~~~~~~~~~~~
+
+The blob settings are valid for all storages.
 
 ``blobs_mode``
     Set if blobs are stored *shared* within all clients or are they stored on the storage backend and the client only operates as temporary *cache*.
@@ -224,27 +238,42 @@ Common options:
     Default: ``shared``
 
 ``blobs_location``
-    The name of the directory where the ZODB blob data or cache will be stored.
+    The name of the directory where the ZODB blob data or cache (depends on *blobs_mode*) will be stored.
 
     Default: ``{{ cookiecutter.var_location }}/blobs``.
 
+``blobs_cache_size``
+    Set the maximum size of the blob cache, in bytes.
+    With many blobs and enough disk space on the client hardware this should be increased.
+    If not set, then the cache size isn't checked and the blob directory will grow without bound.
+    Only valid for *blobs_mode* *cache*.
+
+    Default: ``6312427520`` (5GB).
+
+``blobs_cache_size_check``
+    Set the ZEO check size as percent of ``blobss_cache_size`` (for example, ``10`` for 10%).
+    The ZEO cache size will be checked when this many bytes have been loaded into the cache.
+    Only valid for *blobs_mode* *cache*.
+
+    Defaults: ``10`` (10% of the blob cache size).
 
 
-Direct storage
-~~~~~~~~~~~~~~
+Direct filestorage
+~~~~~~~~~~~~~~~~~~
 
-If you have only one application process, it can open ``filestorage`` database files directly without running a database server process.
+If you have only one application process, it can open a direct ``filestorage`` database files directly without running a database server process.
 
 
 ``filestorage_location``
     The filename where the ZODB data file will be stored.
+    Note: Side by side with the given file other ``Data.fs.*`` files (like locks and indexes) are created.
 
     Defaults: ``{{ cookiecutter.var_location }}/filestorage/Data.fs``.
 
 RelStorage
 ~~~~~~~~~~
 
-> `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
+`RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
 
 ``relstorage``
     Set the database server to be used.
@@ -252,6 +281,119 @@ RelStorage
     Allowed values: ``postgresql``, ``mysql``, ``oracle``, ``sqllite3``
 
     Default: ``postgresql``
+
+``relstorage_keep_history``
+    If this option is switched on, the adapter will create and use a history-preserving database schema (like FileStorage or ZEO).
+    A history-preserving schema supports ZODB-level undo, but also grows more quickly and requires extensive packing on a regular basis.
+
+    If this option is switched off, the adapter will create and use a history-free database schema.
+    Undo will not be supported, but the database will not grow as quickly.
+    The database will still require regular garbage collection (which is accessible through the database pack mechanism.)
+
+    Allowed values: ``on``, ``off``.
+
+    Default: ``on``.
+
+``relstorage_read_only``
+    If swiched on, only reads may be executed against the storage.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``.
+
+``relstorage_create_schema``
+    Normally, RelStorage will create or update the database schema on start-up.
+    Switch it off if you need to connect to a RelStorage database without automatic creation or updates.
+
+    Allowed values: ``on``, ``off``.
+
+    Default: ``on``.
+
+``relstorage_commit_lock_timeout``
+    During commit, RelStorage acquires a database-wide lock.
+    This option specifies how long to wait for the lock before failing the attempt to commit.
+    Consult and understand the RelStorage documentation before using this setting.
+
+    Default: unset, empty string, RelStorage default of ``30`` seconds is active.
+
+RelStorage provides advanced blob caching options.
+For details about caching read `RelStorage: Blobs <https://relstorage.readthedocs.io/en/latest/relstorage-options.html#blobs>`_.
+
+``relstorage_blob_cache_size_check_external``
+    For details read original RelStorage documentation.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``.
+
+``relstorage_blob_chunk_size``
+    For details read original RelStorage documentation.
+
+    Default: unset, empty string, RelStorage default of ``1048576`` (1 megabyte) is active.
+    This option allows suffixes such as “mb” or “gb”.
+
+RelStorage provides advanced RAM and pesistent caching options.
+For details about caching read `RelStorage: Database Caching <https://relstorage.readthedocs.io/en/latest/relstorage-options.html#database-caching>`_.
+The descriptions below are copied mainly from there (consult the original source, it may have changed!).
+
+``relstorage_cache_local_mb``
+    Configures the approximate maximum amount of memory the cache should consume, in megabytes.
+    Set to ``0`` to *disable* the in-memory cache (this is not recommended).
+
+    Default: unset, empty string, RelStorage default of ``10`` is active.
+
+``relstorage_cache_local_object_max``
+    Configures the maximum size of an object’s pickle (in bytes) that can qualify for the *local* cache.
+    The size is measured after compression.
+    Larger objects can still qualify for the remote cache.
+
+    Default: unset, empty string, RelStorage default of 16384 (1 << 14) bytes is active.
+
+``relstorage_cache_local_compression``
+    Configures compression within the *local* cache.
+    This option names a Python module that provides two functions, "compress()" and "decompress()".
+    Supported values include zlib, bz2, and none (no compression).
+    If you use the compressing storage wrapper "zc.zlibstorage", this option automatically does nothing.
+    With other compressing storage wrappers this should be set to none.
+
+    Default: unset, empty string, RelStorage default of ``none`` is active (to avoid copying data more than necessary).
+
+``relstorage_cache_local_dir``
+    The path to a directory where the local cache will be saved when the database is closed.
+    On startup, RelStorage will look in this directory for cache files to load into memory.
+    The cache files must be located on a local (not network) filesystem.
+    Consult and understand the *Database Caching* manual before using this setting.
+
+``relstorage_cache_prefix``
+    The prefix used as part of persistent cache file names.
+    All clients using a database should use the same cache-prefix.
+
+    Default: unset, empty string, RelStorage default of the database name is active.
+
+RelStorage has extra parameters for blobs.
+
+If your database runs replicated, RelStorage supports handling of replications.
+For details about replication options read `RelStorage: Replication <https://relstorage.readthedocs.io/en/latest/relstorage-options.html#replication>`_.
+
+``relstorage_replica_conf``
+    For details read original RelStorage documentation.
+
+    Default: unset, empty string
+
+``relstorage_ro_replica_conf``
+    For details read original RelStorage documentation.
+
+    Default: unset, empty string
+
+``relstorage_replica_timeout``
+    For details read original RelStorage documentation.
+
+    Default: unset, empty string
+
+``relstorage_replica_revert_when_stale``
+    For details read original RelStorage documentation.
+
+    Default: unset, empty string
 
 Postgresql
 """"""""""
@@ -262,6 +404,7 @@ For details about the options read: `RelStorage: PostgreSQL adapter options <htt
     Driver to use.
 
     Allowed values: ``psycopg2``, ``psycopg2 gevent``, ``psycopg2cffi``, ``pg8000``.
+
     Default: ``psycopg2``
 
 ``dsn``
@@ -320,6 +463,12 @@ For details about the options read: `RelStorage: Oracle adapter options <https:/
 
     Default: unset, empty string
 
+``relstorage_commit_lock_id``
+    During commit, RelStorage acquires a database-wide lock.
+    This option specifies the lock ID.
+    This option currently applies only to the Oracle adapter, but is documented under the global settings.
+
+
 SQLite
 """"""
 
@@ -344,13 +493,92 @@ For details about the options read: `RelStorage: SQLite adapter options <https:/
 
 ``sqlite3_pragma``
     For advanced tuning, nearly the entire set of SQLite PRAGMAs are available.
+
     Default: unset, empty dictionary.
 
 
 ZEO
 ~~~
 
-**not implemented**
+ZEO is a mature client-server storage created for ZODB for sharing a single storage among many clients.
+
+``zeo_address``
+    Set the address of the ZEO server.
+    You can set more than one address (white space delimited).
+    Alternative addresses will be used if the primary address is down.
+
+    Default: ``8100``.
+
+``zeo_read_only_fallback``
+    A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``
+
+``zeo_read_only``
+    Set zeo client as read only.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``
+
+ZEO supports authentication.
+You need to activate ZEO authentication on the server side as well, for this to work.
+Without this anyone that can connect to the database servers socket can read and write arbitrary data.
+
+``zeo_username``
+    Enable ZEO authentication and use the given username when accessing the ZEO server.
+    It is obligatory to also specify a zeo-password.
+
+    Default: unset, empty string, no authentication.
+
+``zeo_password``
+    Password to use when connecting to a ZEO server with authentication enabled.
+
+    Default: unset, empty string.
+
+``zeo_realm``
+    Authentication realm to use when authentication with a ZEO server.
+
+    Default: ``ZEO``.
+
+ZEO has some advance options for experts.
+If in doubt better do not touch them.
+
+``zeo_client_cache_size``
+    Set the size of the ZEO client cache.
+    The ZEO cache is a disk based cache shared between application threads.
+    It is stored either in temporary files or, in case you activate persistent cache files with the option ``client`` (see below), in the folder designated by the ``zeo_var`` option.
+
+    Default: ``128MB``.
+
+``zeo_client_client``
+    Set the persistent cache name that is used to construct the cache filenames.
+    This enables the ZEO cache to persist across application restarts.
+    Persistent cache files are disabled by default.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``.
+
+``zeo_client_drop_cache_rather_verify``
+    Indicates that the cache should be dropped rather than verified when the verification optimization is not available
+    (e.g. when the ZEO server restarted).
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``.
+
+``zeo_storage``
+    Set the storage name of the ZEO storage.
+
+    Default: ``1``.
+
+``zeo_var``
+    Used in the ZEO storage snippets to configure the ZEO var folder, which is used to store persistent ZEO client cache files.
+
+    Default: unset, empty string, the system temporary folder is used.
 
 Development
 -----------
@@ -365,36 +593,45 @@ Development
 
     Default: ``off``
 
-TODO: (not implmented)
 
-``use_profiler``
+Enable profiling with `repoze.profile <>`_.
+Ensure to execute ``pip install repoze.profile`` before switching this on.
+
+``repoze_profile``
     Allowed values: ``on``, ``off``.
 
-profile_log_filename
+``repoze_profile_log_filename``
   Filename of the raw profile data.
   Default to ``profile-SECTIONNAME.raw``.
   This file contains the raw profile data for further analysis.
 
-profile_cachegrind_filename
+``repoze_profile_cachegrind_filename``
   If the package ``pyprof2calltree`` is installed, another file is written.
   It is meant for consumation with any cachegrind compatible application.
   Defaults to ``cachegrind.out.SECTIONNAME``.
 
-profile_discard_first_request
+``repoze_profile_discard_first_request``
   Defaults to ``true``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
 
-profile_path
+``repoze_profile_path``
   Defaults to ``/__profile__``.
   The path for through the web access to the last profiled request.
 
-profile_flush_at_shutdown
+``repoze_profile_flush_at_shutdown``
   Defaults to ``true``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
 
-profile_unwind
+``repoze_profile_unwind``
   Defaults to ``false``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
+Sentry
+------
+
+TODO
+
+**not documented**
 
 
 Example Configuration

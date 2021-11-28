@@ -32,10 +32,11 @@
 
 
     "database": ["direct", "relstorage", "zeo"],
+
     "blobs_mode": ["shared", "cache"],
+    "blobs_location": "{{ cookiecutter.var_location }}/blobs",
 
     "filestorage_location": "{{ cookiecutter.var_location }}/filestorage/Data.fs",
-    "blobs_location": "{{ cookiecutter.var_location }}/blobs",
 
     "relstorage": ["postgresql", "mysql", "oracle", "sqllite3"],
 
