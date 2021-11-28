@@ -36,6 +36,9 @@
 
     "relstorage_server": ["postgresql", "mysql", "oracle", "sqllite3"],
 
-    "postgresql_driver": ["psycopg2", "psycopg2 gevent", "psycopg2cffi", "pg8000"]
+    "postgresql_driver": ["psycopg2", "psycopg2 gevent", "psycopg2cffi", "pg8000"],
+    "postgresql_dsn": "",
+
+    "mysql_driver": ["MySQLdb", "gevent MySQLdb", "PyMySQL", "C MySQL Connector/Python"]
 
 }

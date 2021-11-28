@@ -1,10 +1,15 @@
-# post generation step: replace relative with absolute path
+# post generation step 1: replace relative with absolute path
 # theres no way to get this path while generating the files
 
-import os
-import re
-
+from binascii import b2a_base64
 from cookiecutter.utils import work_in
+from hashlib import sha1
+
+import os
+import random
+import re
+import string
+
 
 target = """{{ cookiecutter.target }}"""
 cwd = os.path.abspath(os.getcwd())
@@ -30,3 +35,21 @@ with work_in(basedir):
                 fio.truncate()
                 for line in lines:
                     fio.writelines(line)
+
+
+# post generation step 2: generate initial user
+username = "{{ cookiecutter.initial_user_name }}" or "admin"
+password = "{{ cookiecutter.initial_user_password }}"
+if not password:
+    choices = list(string.ascii_letters + string.digits + "!#$%*(){}[]-")
+    random.shuffle(choices)
+    password = [random.choice(choices) for x in range(15)]
+    random.shuffle(password)
+    password = "".join(password)
+    print(f"Generated password for initial user '{username}' is: {password}")
+
+inituser_filenme = os.path.join(cwd, "inituser")
+with open(inituser_filenme, "w") as fp:
+    pw = b2a_base64(sha1(password.encode("utf-8")).digest())[:-1]
+    fp.write("%s:{SHA}%s\n" % (username, pw.decode("ascii")))
+os.chmod(inituser_filenme, 0o644)

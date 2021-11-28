@@ -92,6 +92,20 @@ Basic configuration
             "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
         }
 
+Initial user
+------------
+
+``initial_user_name``
+    Creates an initial user with the given name an "Manager" role (full web access).
+
+    Default: ``admin``
+
+``initial_user_password``
+    Creates an initial password for the initial user.
+    If empty, a passwort will be generated and printed before the cookiecutter generation process starts.
+
+    Default: empty string
+
 ZCML
 ----
 
