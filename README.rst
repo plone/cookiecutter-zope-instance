@@ -1,6 +1,6 @@
-===============================
-Create configuration for Zope 5
-===============================
+=================================
+It bakes configuration for Zope 5
+=================================
 
 **WIP: ALPHA QUALITY CODE**
 
