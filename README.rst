@@ -33,7 +33,7 @@ Basic configuration
 
 ``target``
     - The target directory name of the generated configuration.
-    - Attention, this is relative to current directory of to cookiecutters command line options if given ()``-o`` or ``--output-dir PATH``).
+    - Attention, this is relative to current directory or to cookiecutters command line options if given ()``-o`` or ``--output-dir PATH``).
     - Default: ``instance``
 
 ``var_location``
@@ -57,24 +57,32 @@ Basic configuration
     - Default: ``4`` (since this is the waitress default)
 
 ``max_request_body_size``
-    - Specify the maximum request body size in bytes.
-    - Default: ``1073741824`` (since this is the waitress default)
+    Specify the maximum request body size in bytes.
+    
+    Default: ``1073741824`` (since this is the waitress default)
 
 ``clear_untrusted_proxy_headers``
-    - TODO
-    - Allowed values: ``false`` or ``true``
-    - Default: ``false``
+    TODO
+    
+    Allowed values: ``false`` or ``true``
+    
+    Default: ``false``
 
 ``environment``
-    - The environment set in ``zope.conf``.
-    - Values: It is a dictionary with key/value pairs.
-    - Default:
-
+    The environment set in ``zope.conf``.
+    
+    Values: It is a dictionary with key/value pairs.
+    
+    Default:
+    
     .. code-block:: JSON
-    {
-        "zope_i18n_compile_mo_files": "true",
-        "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
-    }
+
+    .. code-block:: json
+
+        {
+            "zope_i18n_compile_mo_files": "true",
+            "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
+        }
 
 
 Development
@@ -122,7 +130,7 @@ This looks like so:
 
 .. code-block:: JSON
 
-{}
+    {}
 
 
 Rationale
