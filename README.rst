@@ -244,6 +244,8 @@ If you have only one application process, it can open ``filestorage`` database f
 RelStorage
 ~~~~~~~~~~
 
+> `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
+
 ``relstorage``
     Set the database server to be used.
 
@@ -254,11 +256,12 @@ RelStorage
 Postgresql
 """"""""""
 
+For details about the options read: `RelStorage: PostgreSQL adapter options <https://relstorage.readthedocs.io/en/latest/postgresql/options.html>`_
+
 ``postgresql_driver``:
     Driver to use.
 
-    Allowed values: ``psycopg2``, ``psycopg2 gevent``, ``psycopg2cffi``, ``pg8000``, details: `RelStorage: PostgreSQL adapter options <https://relstorage.readthedocs.io/en/latest/postgresql/options.html>`_
-
+    Allowed values: ``psycopg2``, ``psycopg2 gevent``, ``psycopg2cffi``, ``pg8000``.
     Default: ``psycopg2``
 
 ``dsn``
@@ -270,15 +273,17 @@ Postgresql
 MySQL
 """""
 
+For details about the options read: `RelStorage: MySQL adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+
 ``mysql_driver``:
     Driver to use.
 
-    Allowed values: ``MySQLdb``, ``gevent MySQLdb``, ``PyMySQL``, ``C MySQL Connector/Python``, details: `RelStorage: MySQL adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+    Allowed values: ``MySQLdb``, ``gevent MySQLdb``, ``PyMySQL``, ``C MySQL Connector/Python``.
 
     Default: ``psycopg2``
 
 ``mysql_parameters``:
-    A dictionary with all MySQL parameters. This depends on the driver. Details: `RelStorage: MySQL adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+    A dictionary with all MySQL parameters. This depends on the driver.
 
     Example:
 
@@ -298,7 +303,7 @@ MySQL
 Oracle
 """"""
 
-For details read `RelStorage: Oracle adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
+For details about the options read: `RelStorage: Oracle adapter options <https://relstorage.readthedocs.io/en/latest/mysql/options.html>`_
 
 ``oracle_user``
     The Oracle account name.
@@ -314,6 +319,32 @@ For details read `RelStorage: Oracle adapter options <https://relstorage.readthe
     The Oracle data source name. The Oracle client library will normally expect to find the DSN in ``/etc/oratab``
 
     Default: unset, empty string
+
+SQLite
+""""""
+
+For details about the options read: `RelStorage: SQLite adapter options <https://relstorage.readthedocs.io/en/latest/sqlite3/options.html>`_
+
+``sqlite3_driver``
+    Allowed values: ``sqlite3``, ``gevent sqlite3``
+
+    Default: ``sqlite3``
+
+``sqlite3_data_dir``
+    The path to a directory to hold the data.
+    Choosing a dedicated directory is strongly recommended.
+    A network filesystem is generally not recommended.
+
+    Default: ``{{ cookiecutter.var_location }}/sqlite3/``
+
+``sqlite3_gevent_yield_interval``
+    Only used if the driver is ``gevent sqlite``
+
+    Default: unset, empty string - RelStorage has an internal default of 100.
+
+``sqlite3_pragma``
+    For advanced tuning, nearly the entire set of SQLite PRAGMAs are available.
+    Default: unset, empty dictionary.
 
 
 ZEO

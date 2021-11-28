@@ -30,18 +30,28 @@
         "resources_directory_location": ""
     },
 
+
     "database": ["direct", "relstorage", "zeo"],
     "blobs_mode": ["shared", "cache"],
 
     "filestorage_location": "{{ cookiecutter.var_location }}/filestorage/Data.fs",
     "blobs_location": "{{ cookiecutter.var_location }}/blobs",
 
-
-    "relstorage_server": ["postgresql", "mysql", "oracle", "sqllite3"],
+    "relstorage": ["postgresql", "mysql", "oracle", "sqllite3"],
 
     "postgresql_driver": ["psycopg2", "psycopg2 gevent", "psycopg2cffi", "pg8000"],
     "postgresql_dsn": "",
 
-    "mysql_driver": ["MySQLdb", "gevent MySQLdb", "PyMySQL", "C MySQL Connector/Python"]
+    "mysql_driver": ["MySQLdb", "gevent MySQLdb", "PyMySQL", "C MySQL Connector/Python"],
+    "mysql_parameters": {},
+
+    "orcale_user": "",
+    "orcale_password": "",
+    "orcale_dsn": "",
+
+    "sqlite3_driver": ["sqlite3", "gevent sqlite3"],
+    "sqlite3_data_dir": "{{ cookiecutter.var_location }}/sqlite3/",
+    "sqlite3_gevent_yield_interval": "",
+    "sqlite3_pragma": {}
 
 }
