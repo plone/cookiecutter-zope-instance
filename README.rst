@@ -168,10 +168,34 @@ Example:
 Database
 --------
 
+Zope/Plone offers different storage backends for different environments and needs:
+
+- For development a simple local file based direct storage is all you need.
+- As soon as you run more than one instance of Zope/Plone a storage server needs to e configured.
+- We recommend to use a Postgresql database over RelStorage as the storage server in production environments.
+- RelStorage also supports MySQL (and derivates) and Oracle as storae servers.
+- Since Zope comes with an own storage server (ZEO - Zope Enterprise Objects) this is supported here as well. It can be used in production environment too.
+- Blobs (binary large objects, like files and images) are handled in a special way:
+
+  - They either are stored within the primary database or as a separate filesystem storage.
+  - in direct storage Blob files are in an own directory
+  - If stored  the primary database it is possible to choose how blobs are handled.
+
+    - Options are to store blobs in the primary database or in a shared filesystem.
+    - If Blobs are in the primary database, the client needs only a local Blob cache.
+    - If Blobs are stored side-by-side in the filesystem, it needs a central shared folder (if spread over many servers using NFS or similar).
+    - For Postgresql it is recommend to store blobs in the database.
+      However, it can be configured to store them separatly.
+      Read the RelStorage documentation for details on other databases.
+    - For ZEO blobs can be configured to be stored within ZEO or in a shared folder.
+      Recommendation is to use a shared folder.
+
+
 Direct storage
 ~~~~~~~~~~~~~~
 
-If you have only one application process, it can open the database files directly without running a database server process.
+If you have only one application process, it can open ``filestorage`` database files directly without running a database server process.
+
 
 ``filestorage_location``
     The filename where the ZODB data file will be stored.
@@ -181,7 +205,17 @@ If you have only one application process, it can open the database files directl
 ``blobs_location``
     The name of the directory where the ZODB blob data will be stored.
 
-    Default: ``{{ cookiecutter.var_location }}/blobstorage``.
+    Default: ``{{ cookiecutter.var_location }}/blobs``.
+
+RelStorage
+~~~~~~~~~~
+
+**not implemented**
+
+ZEO
+~~~
+
+**not implemented**
 
 Development
 -----------
