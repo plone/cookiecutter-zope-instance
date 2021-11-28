@@ -1,0 +1,51 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta"
+    xmlns:five="http://namespaces.zope.org/five">
+
+  <include package="Products.Five" />
+
+  <meta:redefinePermission from="zope2.Public" to="zope.Public" />
+
+{%- if cookiecutter.load_zcml.get("locales_directory_location", "") %}
+  <!-- Load the local locales  -->
+  <i18n:registerTranslations directory="{{ cookiecutter.load_zcml["locales_directory_location"] }}" />
+{%- endif %}
+
+  <!-- META -->
+{%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
+  <include package="{{ value }}" />
+{%- endfor %}
+  <five:loadProducts file="meta.zcml"/>
+
+  <!-- INCLUDES -->
+{%- for value in cookiecutter.load_zcml.get("package_includes", []) %}
+  <include package="{{ value }}" />
+{%- endfor %}
+  <five:loadProducts />
+{%- if cookiecutter.load_zcml.get("include_file_location", "") %}
+  <!-- Load the local configuration:  -->
+  <include file="{{ cookiecutter.load_zcml["include_file_location"] }}" />
+{%- endif %}
+
+
+  <!-- OVERRIDES -->
+{%- for value in cookiecutter.load_zcml.get("package_overrides", []) %}
+  <includeOverrides package="{{ value }}" />
+{%- endfor %}
+  <five:loadProductsOverrides />
+{%- if cookiecutter.load_zcml.get("override_file_location", "") %}
+  <!-- Load the local overrides  -->
+  <include file="{{ cookiecutter.load_zcml["override_file_location"] }}" />
+{%- endif %}
+
+{%- if cookiecutter.load_zcml.get("resources_directory_location", "") %}
+  <!-- RESOURCES -->
+  <include package="plone.resource" file="meta.zcml"/>
+  <plone:static directory="{{ cookiecutter.load_zcml["resources_directory_location"]}}"/>
+{%- endif %}
+
+  <securityPolicy
+      component="AccessControl.security.SecurityPolicy" />
+
+</configure>

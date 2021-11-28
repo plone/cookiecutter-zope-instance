@@ -1,0 +1,37 @@
+{
+    "target": "instance",
+    "var_location": "{{ cookiecutter.target }}/var",
+    "log_location": "{{ cookiecutter.var_location }}/log",
+
+    "http_port": "8080",
+    "http_host": "localhost",
+    "threads": "4",
+    "max_request_body_size": "1073741824",
+    "clear_untrusted_proxy_headers": ["false", "true"],
+    "environment": {
+        "zope_i18n_compile_mo_files": "true",
+        "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
+    },
+
+    "debug_mode": ["off", "on"],
+    "verbose_security": ["off", "on"],
+    "use_profiler": ["no", "yes"],
+
+    "load_zcml": {
+        "package_metas": ["test.project"],
+        "package_includes": ["test.project"],
+        "package_overrides": ["test.project"],
+        "locales_directory_location": "foolocales",
+        "include_file_location": "foo.zcml",
+        "overrides_file_location": "fooover.zcml",
+        "resources_directory_location": "foores"
+    },
+
+    "storage_backend": ["file", "relstorage", "zeo"],
+
+    "blobs_location": "{{ cookiecutter.var_location }}/blobstorage",
+    "filestorage_location": "{{ cookiecutter.var_location }}/filestorage"
+
+
+
+}

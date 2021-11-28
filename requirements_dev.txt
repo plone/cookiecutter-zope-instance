@@ -1,0 +1,4 @@
+pytest
+pytest-cookies
+tox
+cookiecutter
