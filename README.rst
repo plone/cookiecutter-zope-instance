@@ -32,49 +32,56 @@ Basic configuration
 -------------------
 
 ``target``
-    - The target directory name of the generated configuration.
-    - Attention, this is relative to current directory or to cookiecutters command line options if given ()``-o`` or ``--output-dir PATH``).
-    - Default: ``instance``
+    The target directory name of the generated configuration.
+
+    Attention, this is relative to current directory or to cookiecutters command line options if given ()``-o`` or ``--output-dir PATH``).
+
+    Default: ``instance``
 
 ``var_location``
-    - Zope's ``var`` directory.
-    - Default: ``{{ cookiecutter.target }}/var``
+    Zope's ``var`` directory.
+
+    Default: ``{{ cookiecutter.target }}/var``
 
 ``log_location``
-    - Base directory for all log files.
-    - Default: ``{{ cookiecutter.var_location }}/log``
+    Base directory for all log files.
+
+    Default: ``{{ cookiecutter.var_location }}/log``
 
 ``http_host``
-    - IP address or hostname the HTTP server binds to.
-    - Default: ``localhost``
+    IP address or hostname the HTTP server binds to.
+
+    Default: ``localhost``
 
 ``http_port``
-    - Port number the HTTP server binds to.
-    - Default: ``8080``
+    Port number the HTTP server binds to.
+
+    Default: ``8080``
 
 ``threads``
-    - Specify the number of worker threads used to service requests.
-    - Default: ``4`` (since this is the waitress default)
+    Specify the number of worker threads used to service requests.
+
+    Default: ``4`` (since this is the waitress default)
 
 ``max_request_body_size``
     Specify the maximum request body size in bytes.
-    
+
     Default: ``1073741824`` (since this is the waitress default)
 
 ``clear_untrusted_proxy_headers``
-    TODO
-    
+    This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwared-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
+
     Allowed values: ``false`` or ``true``
-    
+
     Default: ``false``
 
 ``environment``
     The environment set in ``zope.conf``.
-    
+
     Values: It is a dictionary with key/value pairs.
-    
+
     Default:
-    
+
     .. code-block:: JSON
 
     .. code-block:: json
@@ -84,24 +91,48 @@ Basic configuration
             "CHAMELEON_CACHE": "{{ cookiecutter.var_location }}/cache"
         }
 
-
-Development
------------
-
-TODO
-
 ZCML
 ----
 
-TODO
+The ZCML is loaded an defined in a dictionary ``load_zcml``.
 
-Locales
--------
+Keys and values of the dictionary are:
 
-``locales``
-    Specify a locales directory.
-    Relative to the targets ``etc`` directory.
-    Default: empty
+``package_meta``
+    A list of values of ``meta.zcml`` files from packages to include.
+
+    Default: unused, empty list.
+
+``package_include``
+    A list of values of ``configure.zcml`` files from packages to include.
+
+    Default: unused, empty list.
+
+``package_overrides``
+    A list of values of ``overrides.zcml`` files from packages to include.
+
+    Default: unused, empty list.
+
+``include_file_location``
+    A (relative to ``TARGET/etc``) path to a ZCML file to include.
+
+    Default: unused, empty string.
+
+``overrides_file_location``
+    A (relative to ``TARGET/etc``) path to an overrides ZCML file to include.
+
+    Default: unused, empty string.
+
+``resources_directory_location``
+    A relative to ``TARGET/etc``) path to an Plone resource directory to include.
+    Please refer to `plone.resource <https://pypi.org/project/plone.resource>`_ for more details and setup instructions.
+
+    Default: unused, empty string.
+
+``locales_directory_location``
+    Specify a (relative to ``TARGET/etc``) locales directory.
+
+    Default: unused, empty string
 
     This registers a locales directory with extra or different translations.
     Given you want to override a few translations from the ``plone`` domain in the English language.
@@ -116,8 +147,31 @@ Locales
     Translations for other message ids are not affected and will continue
     to work.
 
+Example:
+
+.. code-block:: JSON
+
+    {
+        ...
+        "load_zcml": {
+            "package_metas": ["my.fancy.project"],
+            "package_includes": ["my.fancy.project"],
+            "package_overrides": ["my.fancy.project"],
+            "include_file_location": "../../my_fancy_project.zcml",
+            "overrides_file_location": "../../my_fance_overrides.zcml",
+            "resources_directory_location": "../../my_fancy_project_resources",
+            "locales_directory_location": "../../my_fancy_project_locales",
+        },
+        ...
+    }
+
 Database
 --------
+
+TODO
+
+Development
+-----------
 
 TODO
 
