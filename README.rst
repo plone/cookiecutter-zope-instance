@@ -168,12 +168,65 @@ Example:
 Database
 --------
 
-TODO
+Direct storage
+~~~~~~~~~~~~~~
+
+If you have only one application process, it can open the database files directly without running a database server process.
+
+``filestorage_location``
+    The filename where the ZODB data file will be stored.
+
+    Defaults: ``{{ cookiecutter.var_location }}/filestorage/Data.fs``.
+
+``blobs_location``
+    The name of the directory where the ZODB blob data will be stored.
+
+    Default: ``{{ cookiecutter.var_location }}/blobstorage``.
 
 Development
 -----------
 
-TODO
+``debug_mode``
+    Allowed values: ``on``, ``off``.
+
+``verbose_security``
+    Switches verbose security on (and switch to the Python security implementation).
+
+    Allowed values: ``on``, ``off``.
+
+    Default: ``off``
+
+TODO: (not implmented)
+
+``use_profiler``
+    Allowed values: ``on``, ``off``.
+
+profile_log_filename
+  Filename of the raw profile data.
+  Default to ``profile-SECTIONNAME.raw``.
+  This file contains the raw profile data for further analysis.
+
+profile_cachegrind_filename
+  If the package ``pyprof2calltree`` is installed, another file is written.
+  It is meant for consumation with any cachegrind compatible application.
+  Defaults to ``cachegrind.out.SECTIONNAME``.
+
+profile_discard_first_request
+  Defaults to ``true``.
+  See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
+profile_path
+  Defaults to ``/__profile__``.
+  The path for through the web access to the last profiled request.
+
+profile_flush_at_shutdown
+  Defaults to ``true``.
+  See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
+profile_unwind
+  Defaults to ``false``.
+  See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
 
 Example Configuration
 =====================

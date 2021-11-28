@@ -29,9 +29,7 @@
 
     "storage_backend": ["file", "relstorage", "zeo"],
 
-    "blobs_location": "{{ cookiecutter.var_location }}/blobstorage",
-    "filestorage_location": "{{ cookiecutter.var_location }}/filestorage"
-
-
+    "filestorage_location": "{{ cookiecutter.var_location }}/filestorage/Data.fs",
+    "blobs_location": "{{ cookiecutter.var_location }}/blobstorage"
 
 }
