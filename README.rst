@@ -36,7 +36,7 @@ Basic configuration
 ``target``
     The target directory name of the generated configuration.
 
-    Attention, this is relative to current directory or to cookiecutters command line options if given ()``-o`` or ``--output-dir PATH``).
+    Attention, this is relative to current directory or to cookiecutters command line options if given (``-o PATH`` or ``--output-dir PATH``).
 
     Default: ``instance``
 
@@ -192,16 +192,17 @@ Zope/Plone offers different ZODB storage backends for different environments and
 
 *Blobs* (binary large objects, like files and images) are handled in a special way:
 
-- In *direct* storage blob files are stored in a dedicated directory in filesystem.
-- With a *RelStorge* or *ZEO* there are two options:
+In *direct* storage blob files are stored in a dedicated directory in filesystem.
 
-    1. Blobs stored within the primary database server as data.
-       The application client needs a local (non-shared) cache directory for the blobs.
-       This is recommended in general for *RelStorage*
-    2. Blobs stored in a separate dedicated filesystem directory.
-       This directory is in shared usage by all application processes.
-       If application processes are spread over many servers, a network filesystem such as NFS or similar must be used.
-       This is recommend for *ZEO*.
+With a *RelStorge* or *ZEO* there are two options:
+
+1. Blobs stored within the primary database server as data.
+   The application client needs a local (non-shared) cache directory for the blobs.
+   This is recommended in general for *RelStorage*
+2. Blobs stored in a separate dedicated filesystem directory.
+   This directory is in shared usage by all application processes.
+   If application processes are spread over many servers, a network filesystem such as NFS or similar must be used.
+   This is recommend for *ZEO*.
 
 
 Core database options:
