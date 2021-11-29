@@ -186,9 +186,10 @@ Zope/Plone offers different ZODB storage backends for different environments and
 
 - For development a simple local file based *direct* storage is all you need (aka filestorage).
 - As soon as you want multiple application processes of Zope/Plone (horizontal scaling) you need to run a separate database server process and connect to it.
-    - We recommend to use a Postgresql database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
-      RelStorage also supports MySQL (and derivates), Oracle and SQLIte 3 as database servers.
-    - Zope and ZODB comes with *ZEO* (Zope Enterprise Objects). This more lightweight storage server is supported here too. It is widely used in production environment.
+
+  - We recommend to use a Postgresql database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
+    RelStorage also supports MySQL (and derivates), Oracle and SQLIte 3 as database servers.
+  - Zope and ZODB comes with *ZEO* (Zope Enterprise Objects). This more lightweight storage server is supported here too. It is widely used in production environment.
 
 *Blobs* (binary large objects, like files and images) are handled in a special way:
 
