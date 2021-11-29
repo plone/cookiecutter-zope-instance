@@ -211,7 +211,7 @@ Core database options:
 ``database``
     Which storge type to be confiured.
 
-    Allowed values: ``direct``, ``relstroage``, ``zeo``
+    Allowed values: ``direct``, ``relstorage``, ``zeo``
 
     Default: ``direct``
 
