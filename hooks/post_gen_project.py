@@ -14,7 +14,7 @@ import string
 
 target = """{{ cookiecutter.target }}"""
 cwd = os.path.abspath(os.getcwd())
-basedir = cwd[: -len(target)]
+basedir = cwd[: -len(target)] + "/etc"
 
 
 with work_in(basedir):
@@ -22,20 +22,23 @@ with work_in(basedir):
         for filename in files:
             infile = os.path.join(dir, filename)
             lines = []
-            with open(infile, "r") as fio:
-                for line in fio:
-                    mo = re.match(r".*ABSPATH\((.*?)\).*", line)
-                    if mo:
-                        for path in mo.groups():
-                            line = line.replace(
-                                f"ABSPATH({path})", os.path.abspath(path)
-                            )
-                    lines.append(line)
+            try:
+                with open(infile, "r") as fio:
+                    for line in fio:
+                        mo = re.match(r".*ABSPATH\((.*?)\).*", line)
+                        if mo:
+                            for path in mo.groups():
+                                line = line.replace(
+                                    f"ABSPATH({path})", os.path.abspath(path)
+                                )
+                        lines.append(line)
 
-            with open(infile, "w") as fio:
-                fio.truncate()
-                for line in lines:
-                    fio.writelines(line)
+                with open(infile, "w") as fio:
+                    fio.truncate()
+                    for line in lines:
+                        fio.writelines(line)
+            except Exception:
+                print(f"Can not replace ABSPATH() in file {infile}")
 
 
 # post generation step 2: generate initial user
