@@ -64,6 +64,6 @@ with work_in(basedir):
     Path("{{ cookiecutter.log_location }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.blobs_location }}").mkdir(parents=True, exist_ok=True)
     if "{{ cookiecutter.database }}" == "direct":
-        Path("{{ cookiecutter.filestorage_location }}").mkdir(
+        Path("{{ cookiecutter.filestorage_location }}").parent.mkdir(
             parents=True, exist_ok=True
         )
