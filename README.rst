@@ -208,6 +208,8 @@ With a *RelStorge* or *ZEO* there are two options:
 
 Core database options:
 
+TODO check here https://zodb.org/en/latest/reference/zodb.html#database-text-configuration
+
 ``database``
     Which storge type to be confiured.
 
@@ -216,12 +218,17 @@ Core database options:
     Default: ``direct``
 
 ``database_cache_size``
-    Set the ZODB cache size, i.e. the number of objects which the ZODB cache will try to hold in RAM per connection.
+    Set the ZODB cache target maximum number of non-ghost objects, i.e. the number of objects which the ZODB cache will try to hold in RAM per connection.
     The actual size depends on the data.
     For each connection in the connection pool of the application process one cache is created.
     In other words one cache is created for each active parallel running thread.
     If in doubt do not touch.
     On the other hand it is a powerful setting to tune your application.
+
+    Default: ``30000``.
+
+``database_cache_size_byes``
+    Set the ZODB cache target total memory usage of non-ghost objects in each connection object cache.
 
     Default: ``30000``.
 

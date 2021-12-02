@@ -16,10 +16,6 @@
     "initial_user_name": "",
     "initial_user_password": "",
 
-    "debug_mode": ["off", "on"],
-    "verbose_security": ["off", "on"],
-    "use_profiler": ["no", "yes"],
-
     "load_zcml": {
         "package_metas": [],
         "package_includes": [],
@@ -30,8 +26,9 @@
         "resources_directory_location": ""
     },
 
-
     "database": ["direct", "relstorage", "zeo"],
+    "database_cache_size": "30000",
+    "database_cache_size_bytes": "",
 
     "blobs_mode": ["shared", "cache"],
     "blobs_location": "{{ cookiecutter.var_location }}/blobs",
@@ -39,6 +36,21 @@
     "filestorage_location": "{{ cookiecutter.var_location }}/filestorage/Data.fs",
 
     "relstorage": ["postgresql", "mysql", "oracle", "sqllite3"],
+    "relstorage_keep_history": ["on", "off"],
+    "relstorage_read_only":  ["off", "on"],
+    "relstorage_create_schema": ["on", "off"],
+    "relstorage_commit_lock_timeout": "",
+    "relstorage_blob_cache_size_check_external": "",
+    "relstorage_blob_chunk_size": "",
+    "relstorage_cache_local_mb": "",
+    "relstorage_cache_local_object_max": "",
+    "relstorage_cache_local_compression": "",
+    "relstorage_cache_local_dir": "",
+    "relstorage_cache_prefix": "",
+    "relstorage_replica_conf": "",
+    "relstorage_ro_replica_conf": "",
+    "relstorage_replica_revert_when_stale": "",
+
 
     "postgresql_driver": ["psycopg2", "psycopg2 gevent", "psycopg2cffi", "pg8000"],
     "postgresql_dsn": "",
@@ -53,6 +65,31 @@
     "sqlite3_driver": ["sqlite3", "gevent sqlite3"],
     "sqlite3_data_dir": "{{ cookiecutter.var_location }}/sqlite3/",
     "sqlite3_gevent_yield_interval": "",
-    "sqlite3_pragma": {}
+    "sqlite3_pragma": {},
+
+    "zeo_address": "8100",
+    "zeo_read_only_fallback": ["off", "on"],
+    "zeo_read_only": ["off", "on"],
+    "zeo_username": "",
+    "zeo_password": "",
+    "zeo_realm": "",
+    "zeo_client_cache_size": "128MB",
+    "zeo_client_client": ["off", "on"],
+    "zeo_client_drop_cache_rather_verify": ["off", "on"],
+    "zeo_storage": "1",
+    "zeo_var": "",
+
+    "debug_mode": ["off", "on"],
+    "verbose_security": ["off", "on"],
+
+    "repoze_profile": ["off", "on"],
+    "repoze_profile_log_filename": "",
+    "repoze_profile_cachegrind_filename": "",
+    "repoze_profile_discard_first_request": "",
+    "repoze_profile_path": "",
+    "repoze_profile_flush_at_shutdown": "",
+    "repoze_profile_unwind": "",
+
+    "sentry": ["off", "on"]
 
 }

@@ -4,6 +4,7 @@
 from binascii import b2a_base64
 from cookiecutter.utils import work_in
 from hashlib import sha1
+from pathlib import Path
 
 import os
 import random
@@ -55,3 +56,12 @@ if not os.path.exists(inituser_filename):
         pw = b2a_base64(sha1(password.encode("utf-8")).digest())[:-1]
         fp.write("%s:{SHA}%s\n" % (username, pw.decode("ascii")))
     os.chmod(inituser_filename, 0o644)
+
+
+# post generation step 3: generate directories
+with work_in(basedir):
+    Path("{{ cookiecutter.var_location }}").mkdir(parents=True, exist_ok=True)
+    Path("{{ cookiecutter.log_location }}").mkdir(parents=True, exist_ok=True)
+    Path("{{ cookiecutter.blobs_location }}").mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.database }}" == "direct":
+        Path("{{ cookiecutter.filestorage_location }}").mkdir(parents=True, exist_ok=True)
