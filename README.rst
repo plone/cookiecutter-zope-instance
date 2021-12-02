@@ -416,7 +416,7 @@ For details about the options read: `RelStorage: PostgreSQL adapter options <htt
 
     Default: ``psycopg2``
 
-``dsn``
+``postgresql_dsn``
     Specifies the data source name for connecting to PostgreSQL. A PostgreSQL DSN is a list of parameters separated with whitespace. A typical DSN looks like:
     ``dbname='plone' user='username' host='localhost' password='secret'``
 

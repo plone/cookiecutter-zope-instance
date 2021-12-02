@@ -22,7 +22,7 @@ with work_in(basedir):
         for filename in files:
             infile = os.path.join(dir, filename)
             lines = []
-            with open(infile) as fio:
+            with open(infile, "r") as fio:
                 for line in fio:
                     mo = re.match(r".*ABSPATH\((.*?)\).*", line)
                     if mo:
@@ -64,6 +64,5 @@ with work_in(basedir):
     Path("{{ cookiecutter.log_location }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.blobs_location }}").mkdir(parents=True, exist_ok=True)
     if "{{ cookiecutter.database }}" == "direct":
-        Path("{{ cookiecutter.filestorage_location }}").parent.mkdir(
-            parents=True, exist_ok=True
-        )
+        filepath = Path("{{ cookiecutter.filestorage_location }}")
+        filepath.parent.mkdir(parents=True, exist_ok=True)
