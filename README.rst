@@ -589,26 +589,55 @@ ZEO
 
 ZEO is a mature client-server storage created for ZODB for sharing a single storage among many clients.
 
-``db_zeo_address``
-    Set the address of the ZEO server.
+All options can be found in the `Zope Configuration Reference under "<zeoclient> (ZODB.config.ZEOClient)"" <https://zope.readthedocs.io/en/latest/operation.html#zope-configuration-reference>`_
+
+Main settings:
+
+``db_zeo_server``
+    Set the server address of the ZEO server.
     You can set more than one address (white space delimited).
     Alternative addresses will be used if the primary address is down.
 
-    Default: ``8100``.
+    Default: ``localhost:8100``.
 
-``db_zeo_read_only_fallback``
-    A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
+``db_zeo_name``
+    Set the storage name of the ZEO storage.
 
-    Allowed values: ``off``, ``on``.
+    Default: ``1``.
 
-    Default: ``off``
+Caching settings
 
-``db_zeo_read_only``
-    Set zeo client as read only.
+*db_cache_size* and *db_cache_size_byes* is taken into account.
+Additional persistent caching is possible.
 
-    Allowed values: ``off``, ``on``.
+TODO: figure out what *cache-size* in ZEO clent means.
 
-    Default: ``off``
+``db_zeo_client``
+    Enables persistent cache files.
+    Set the persistent cache name that is used to construct the cache filenames.
+    This enables the ZEO cache to persist across application restarts.
+
+    Persistent cache files are disabled by default.
+    If disabled, the client creates a temporary cache that will only be used by the current object.
+
+    The string passed here is used to construct the cache filenames.
+
+    Allowed values: string.
+
+    Default: unset.
+
+``db_zeo_var``
+    The directory where persistent cache files are stored.
+    By default cache files, if they are persistent, are stored in the current directory.    Used in the ZEO storage snippets to configure the ZEO var folder, which is used to store persistent ZEO client cache files.
+
+    Default: unset, empty string, the system temporary folder is used.
+
+``db_zeo_cache_size``
+    Set the size of the file based ZEO client cache.
+    The ZEO cache is a disk based cache shared between application threads.
+    It is stored either in temporary files or, in case you activate persistent cache files with the option ``client`` (see below), in the folder designated by the ``db_zeo_var`` option.
+
+    Default: ``128MB``.
 
 ZEO supports authentication.
 You need to activate ZEO authentication on the server side as well, for this to work.
@@ -630,42 +659,31 @@ Without this anyone that can connect to the database servers socket can read and
 
     Default: ``ZEO``.
 
-ZEO has some advance options for experts.
+ZEO has some advance options.
 If in doubt better do not touch them.
 
-``db_zeo_client_cache_size``
-    Set the size of the ZEO client cache.
-    The ZEO cache is a disk based cache shared between application threads.
-    It is stored either in temporary files or, in case you activate persistent cache files with the option ``client`` (see below), in the folder designated by the ``db_zeo_var`` option.
 
-    Default: ``128MB``.
-
-``db_zeo_client_client``
-    Set the persistent cache name that is used to construct the cache filenames.
-    This enables the ZEO cache to persist across application restarts.
-    Persistent cache files are disabled by default.
+``db_zeo_read_only_fallback``
+    A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
 
     Allowed values: ``off``, ``on``.
 
-    Default: ``off``.
+    Default: ``off``
 
-``db_zeo_client_drop_cache_rather_verify``
+``db_zeo_read_only``
+    Set zeo client as read only.
+
+    Allowed values: ``off``, ``on``.
+
+    Default: ``off``
+
+``db_zeo_drop_cache_rather_verify``
     Indicates that the cache should be dropped rather than verified when the verification optimization is not available
     (e.g. when the ZEO server restarted).
 
     Allowed values: ``off``, ``on``.
 
     Default: ``off``.
-
-``db_zeo_storage``
-    Set the storage name of the ZEO storage.
-
-    Default: ``1``.
-
-``db_zeo_var``
-    Used in the ZEO storage snippets to configure the ZEO var folder, which is used to store persistent ZEO client cache files.
-
-    Default: unset, empty string, the system temporary folder is used.
 
 Development
 -----------

@@ -15,7 +15,6 @@ import string
 target = """{{ cookiecutter.target }}"""
 cwd = Path.cwd()
 basedir = cwd.parent
-print(basedir)
 
 with work_in(basedir):
     for dir, subdirs, files in os.walk(cwd):

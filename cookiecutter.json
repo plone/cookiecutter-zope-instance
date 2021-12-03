@@ -73,17 +73,19 @@
     "db_relstorage_sqlite3_gevent_yield_interval": "",
     "db_relstorage_sqlite3_pragma": {},
 
-    "db_zeo_address": "8100",
-    "db_zeo_read_only_fallback": ["off", "on"],
-    "db_zeo_read_only": ["off", "on"],
+    "db_zeo_server": "localhost:8100",
+    "db_zeo_name": "1",
+    "db_zeo_client": "",
+    "db_zeo_var": "",
+    "db_zeo_cache_size": "128MB",
+
     "db_zeo_username": "",
     "db_zeo_password": "",
     "db_zeo_realm": "",
-    "db_zeo_client_cache_size": "128MB",
-    "db_zeo_client_client": ["off", "on"],
-    "db_zeo_client_drop_cache_rather_verify": ["off", "on"],
-    "db_zeo_storage": "1",
-    "db_zeo_var": "",
+
+    "db_zeo_read_only_fallback": ["off", "on"],
+    "db_zeo_read_only": ["off", "on"],
+    "db_zeo_drop_cache_rather_verify": ["off", "on"],
 
     "debug_mode": ["off", "on"],
     "verbose_security": ["off", "on"],
