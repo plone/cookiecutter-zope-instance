@@ -4,7 +4,7 @@ It bakes configuration for Zope 5
 
 **ALPHA QUALITY CODE** - but it works in it's foundations!
 
-``cookiecutter-zope-instance`` is a cookiecutter template to create a full and complex configuration of a `Zope <https://zope.org>`_ WSGI instance.
+``cookiecutter-zope-instance`` is a `cookiecutter <https://cookiecutter.readthedocs.io>`_ template to create a full and complex configuration of a `Zope <https://zope.org>`_ WSGI instance.
 
 .. contents :: **Contents**
 
@@ -21,6 +21,8 @@ In future all non-ancient features of `plone.recipe.zope2instance <>`_ are plann
 
 Usage
 =====
+
+Install latest cookiecutter from Github with ``pip install -e git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter
 
 Run ``cookiecutter -f https://github.com/bluedynamics/cookiecutter-zope-instance`` and answer tons of questions.
 
