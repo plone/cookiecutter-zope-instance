@@ -35,7 +35,7 @@ Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (ad
         load_zcml:
             package_includes: ['my.awesome.addon']
 
-        database: direct
+        db_storage: direct
 
 Run:
 
