@@ -22,7 +22,7 @@ In future all non-ancient features of `plone.recipe.zope2instance <>`_ are plann
 Usage
 =====
 
-Install latest cookiecutter from Github with ``pip install -e git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter
+Install latest cookiecutter from Github with ``pip install -e git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter``.
 
 Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (add option as needed):
 
