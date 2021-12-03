@@ -46,6 +46,7 @@
     "db_relstorage_read_only":  ["off", "on"],
     "db_relstorage_create_schema": ["on", "off"],
     "db_relstorage_commit_lock_timeout": "",
+    "db_relstorage_commit_lock_id": "",
     "db_relstorage_blob_cache_size_check_external": "",
     "db_relstorage_blob_chunk_size": "",
     "db_relstorage_cache_local_mb": "",
@@ -56,6 +57,7 @@
     "db_relstorage_replica_conf": "",
     "db_relstorage_ro_replica_conf": "",
     "db_relstorage_replica_revert_when_stale": "",
+    "db_relstorage_replica_timeout": "",
 
 
     "db_relstorage_postgresql_driver": ["psycopg2", "psycopg2 gevent", "psycopg2cffi", "pg8000"],

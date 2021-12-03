@@ -17,7 +17,7 @@ cwd = Path.cwd()
 basedir = cwd.parent
 
 with work_in(basedir):
-    for dir, subdirs, files in os.walk(cwd):
+    for dir, subdirs, files in os.walk(cwd / "etc"):
         for filename in files:
             infile = Path(dir) / filename
             lines = []
