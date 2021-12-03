@@ -13,14 +13,14 @@ import string
 
 
 target = """{{ cookiecutter.target }}"""
-cwd = os.path.abspath(os.getcwd())
-basedir = cwd[: -len(target)] + "/etc"
-
+cwd = Path.cwd()
+basedir = cwd.parent
+print(basedir)
 
 with work_in(basedir):
     for dir, subdirs, files in os.walk(cwd):
         for filename in files:
-            infile = os.path.join(dir, filename)
+            infile = Path(dir) / filename
             lines = []
             try:
                 with open(infile, "r") as fio:
@@ -63,9 +63,9 @@ if not os.path.exists(inituser_filename):
 
 # post generation step 3: generate directories
 with work_in(basedir):
-    Path("{{ cookiecutter.var_location }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.log_location }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.blobs_location }}").mkdir(parents=True, exist_ok=True)
-    if "{{ cookiecutter.database }}" == "direct":
-        filepath = Path("{{ cookiecutter.filestorage_location }}")
+    Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
+    Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)
+    Path("{{ cookiecutter.db_blobs_location }}").mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_storage }}" == "direct":
+        filepath = Path("{{ cookiecutter.db_filestorage_location }}")
         filepath.parent.mkdir(parents=True, exist_ok=True)
