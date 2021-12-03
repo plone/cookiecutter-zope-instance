@@ -30,8 +30,8 @@ Better: Prepare a ``cookiecutter.json`` with all option given and run cookiecutt
 Options
 =======
 
-Basic configuration
--------------------
+Base Loctions
+-------------
 
 ``target``
     The target directory name of the cookiecutter generated configuration.
@@ -48,6 +48,9 @@ Basic configuration
     Traditionally this is the **var** directory of the *instancehome*.
 
     Default: ``{{ cookiecutter.target }}/var``
+
+Basic configuration
+-------------------
 
 ``location_log``
     Base directory for all log files.
