@@ -24,9 +24,9 @@ Usage
 
 Install latest cookiecutter from Github with ``pip install -e git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter
 
-Prepare a ``instance.yaml`` with the parameters needed. A minimla example is:
+Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (add option as needed):
 
-.. code-block:: JSON
+.. code-block:: YML
 
     default_context:
         initial_user_name: 'admin'
