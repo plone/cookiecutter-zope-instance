@@ -47,8 +47,8 @@ Run:
 Options
 =======
 
-Base Loctions
--------------
+Base Locations
+--------------
 
 ``target``
     The target directory name of the cookiecutter generated configuration.
