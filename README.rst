@@ -2,7 +2,7 @@
 It bakes configuration for Zope 5
 =================================
 
-**WIP: ALPHA QUALITY CODE**
+**ALPHA QUALITY CODE** - but it works in it's foundations!
 
 ``cookiecutter-zope-instance`` is a cookiecutter template to create a full and complex configuration of a `Zope <https://zope.org>`_ WSGI instance.
 
