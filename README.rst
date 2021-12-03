@@ -24,9 +24,24 @@ Usage
 
 Install latest cookiecutter from Github with ``pip install -e git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter
 
-Run ``cookiecutter -f https://github.com/bluedynamics/cookiecutter-zope-instance`` and answer tons of questions.
+Prepare a ``instance.yaml`` with the parameters needed. A minimla example is:
 
-Better: Prepare a ``cookiecutter.json`` with all option given and run cookiecutter with it.
+.. code-block:: JSON
+
+    default_context:
+        initial_user_name: 'admin'
+        initial_user_password: 'admin'
+
+        load_zcml:
+            package_includes: ['my.awesome.addon']
+
+        database: direct
+
+Run:
+
+.. code-block:: bash
+
+    cookiecutter -f --no-input --config-file instance.yaml https://github.com/bluedynamics/cookiecutter-zope-instance
 
 
 Options
