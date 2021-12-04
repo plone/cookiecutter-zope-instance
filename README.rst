@@ -80,9 +80,10 @@ Basic configuration
     Default: ``localhost:8080``
 
 ``wsgi_fast_listen``
-    IP address or hostname with port the HTTP server binds to.
+    Like *wsgi_listen*, but uses [waitress_fastlisten](https://pypi.org/project/waitress-fastlisten/).
+    Needs latter package to be installed (add it to *requirements.txt*).
 
-    Default: ````
+    Default: empty string. Switched off.
 
 
 ``wsgi_threads``
