@@ -74,32 +74,35 @@ Basic configuration
 
     Default: ``{{ cookiecutter.location_clienthome }}/log``
 
-``http_host``
-    IP address or hostname the HTTP server binds to.
+``wsgi_listen``
+    IP address or hostname with port the HTTP server binds to.
 
-    Default: ``localhost``
+    Default: ``localhost:8080``
 
-``http_port``
-    Port number the HTTP server binds to.
+``wsgi_fast_listen``
+    IP address or hostname with port the HTTP server binds to.
 
-    Default: ``8080``
+    Default: ````
 
-``threads``
+
+``wsgi_threads``
     Specify the number of worker threads used to service requests.
 
     Default: ``4`` (since this is the waitress default)
 
-``max_request_body_size``
+``wsgi_max_request_body_size``
     Specify the maximum request body size in bytes.
 
     Default: ``1073741824`` (since this is the waitress default)
 
-``clear_untrusted_proxy_headers``
+``wsgi_clear_untrusted_proxy_headers``
     This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwared-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
 
     Allowed values: ``false`` or ``true``
 
     Default: ``false``
+
+TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/arguments.html
 
 ``environment``
     The environment set in ``zope.conf``.
@@ -731,13 +734,6 @@ Ensure to execute ``pip install repoze.profile`` before switching this on.
   Defaults to ``false``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
 
-Sentry
-------
-
-TODO
-
-**not documented**
-
 
 Example Configuration
 =====================
@@ -751,8 +747,12 @@ This looks like so:
     {}
 
 
+
 Rationale
 =========
+
+Base
+----
 
 Problem
     We no longer want to use buildout and need a replacement for the old feature rich buildout recipe `plone.recipe.zope2instance` to configure zope.
@@ -761,3 +761,19 @@ Problem
 Idea
     `cookiecutter <https://cookiecutter.readthedocs.io>`_ is a widespread utility to create text-based code and configuration file-system structures.
     Let's utilize it's power and wrap it with a thin package to simplfy it's usage and add minor features needed for out use case.
+
+Difference
+----------
+
+to ``plone.recipe.zope2instance``
+
+variable names
+    They changed.
+    "Namespaces are one honking great idea -- let's do more of those!" (import this)
+
+``Sentry``
+    It was possible to configure Sentry.
+    Now use `collective.sentry <https://pypi.org/project/collective.sentry/>`_ - much better.
+
+The ``ctl.py``
+    Move now to plonectl

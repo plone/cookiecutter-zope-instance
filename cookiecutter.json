@@ -3,11 +3,12 @@
     "location_clienthome": "{{ cookiecutter.target }}/var",
     "location_log": "{{ cookiecutter.location_clienthome }}/log",
 
-    "http_port": "8080",
-    "http_host": "localhost",
-    "threads": "4",
-    "max_request_body_size": "1073741824",
-    "clear_untrusted_proxy_headers": ["false", "true"],
+    "wsgi_listen": "localhost:8080",
+    "wsgi_fast_listen": "",
+    "wsgi_threads": "4",
+    "wsgi_max_request_body_size": "1073741824",
+    "wsgi_clear_untrusted_proxy_headers": ["false", "true"],
+
     "environment": {
         "zope_i18n_compile_mo_files": "true",
         "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
@@ -98,8 +99,6 @@
     "profile_repoze_discard_first_request": "",
     "profile_repoze_path": "",
     "profile_repoze_flush_at_shutdown": "",
-    "profile_repoze_unwind": "",
-
-    "logging_sentry": ["off", "on"]
+    "profile_repoze_unwind": ""
 
 }
