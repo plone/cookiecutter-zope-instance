@@ -17,5 +17,5 @@ if (
 
 # minimal sanity check for password
 password = "{{ cookiecutter.initial_user_password }}"
-if 0 < len(password) < 5:
-    print("Warning: initial user's password must be at least 5 characters long!\n")
+if 0 < len(password) < 10:
+    print("Warning: initial user's password is insecure, it should be at least 10 characters long!\n")
