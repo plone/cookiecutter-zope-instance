@@ -7,7 +7,7 @@
     "wsgi_fast_listen": "",
     "wsgi_threads": "4",
     "wsgi_max_request_body_size": "1073741824",
-    "wsgi_clear_untrusted_proxy_headers": ["false", "true"],
+    "wsgi_clear_untrusted_proxy_headers": false,
 
     "environment": {
         "zope_i18n_compile_mo_files": "true",
@@ -37,15 +37,15 @@
     "db_blobs_location": "{{ cookiecutter.location_clienthome }}/blobs",
 
     "db_filestorage_location": "{{ cookiecutter.location_clienthome }}/filestorage/Data.fs",
-    "db_filestorage_pack_keep_old": ["on", "off"],
+    "db_filestorage_pack_keep_old": true,
     "db_filestorage_quota": "",
     "db_filestorage_packer": "",
     "db_filestorage_pack_gc": "",
 
     "db_relstorage": ["postgresql", "mysql", "oracle", "sqlite3"],
-    "db_relstorage_keep_history": ["on", "off"],
-    "db_relstorage_read_only":  ["off", "on"],
-    "db_relstorage_create_schema": ["on", "off"],
+    "db_relstorage_keep_history": true,
+    "db_relstorage_read_only":  false,
+    "db_relstorage_create_schema": true,
     "db_relstorage_commit_lock_timeout": "",
     "db_relstorage_commit_lock_id": "",
     "db_relstorage_blob_cache_size_check_external": "",
@@ -86,15 +86,15 @@
     "db_zeo_password": "",
     "db_zeo_realm": "",
 
-    "db_zeo_read_only_fallback": ["off", "on"],
-    "db_zeo_read_only": ["off", "on"],
-    "db_zeo_drop_cache_rather_verify": ["off", "on"],
+    "db_zeo_read_only_fallback": false,
+    "db_zeo_read_only": false,
+    "db_zeo_drop_cache_rather_verify": false,
 
-    "debug_mode": ["off", "on"],
-    "verbose_security": ["off", "on"],
+    "debug_mode": false,
+    "verbose_security": false,
     "deprecation_warnings": ["default", "error", "ignore", "always", "module", "once"],
 
-    "profile_repoze": ["off", "on"],
+    "profile_repoze": false,
     "profile_repoze_log_filename": "",
     "profile_repoze_cachegrind_filename": "",
     "profile_repoze_discard_first_request": "",

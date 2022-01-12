@@ -331,9 +331,9 @@ For details read the `Zope configuration reference <_https://zope.readthedocs.io
 ``db_filestorage_pack_keep_old``
     If switched on, a copy of the database before packing is kept in a ``.old`` file.
 
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
-    Default: ``on``.
+    Default: ``true``.
 
 ``db_filestorage_quota``
     Maximum allowed size of the storage file.
@@ -355,9 +355,9 @@ For details read the `Zope configuration reference <_https://zope.readthedocs.io
     If switched off, then no garbage collection will be performed when packing.
     This can make packing go much faster and can avoid problems when objects are referenced only from other databases.
 
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
-    Default: ``on``.
+    Default: ``true``.
 
 
 RelStorage
@@ -380,24 +380,24 @@ RelStorage
     Undo will not be supported, but the database will not grow as quickly.
     The database will still require regular garbage collection (which is accessible through the database pack mechanism.)
 
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
-    Default: ``on``.
+    Default: ``true``.
 
 ``db_relstorage_read_only``
     If swiched on, only reads may be executed against the storage.
 
-    Allowed values: ``off``, ``on``.
+    Allowed values: ``false``, ``true``.
 
-    Default: ``off``.
+    Default: ``false``.
 
 ``db_relstorage_create_schema``
     Normally, RelStorage will create or update the database schema on start-up.
     Switch it off if you need to connect to a RelStorage database without automatic creation or updates.
 
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
-    Default: ``on``.
+    Default: ``true``.
 
 ``db_relstorage_commit_lock_timeout``
     During commit, RelStorage acquires a database-wide lock.
@@ -412,9 +412,9 @@ For details about caching read `RelStorage: Blobs <https://relstorage.readthedoc
 ``db_relstorage_blob_cache_size_check_external``
     For details read original RelStorage documentation.
 
-    Allowed values: ``off``, ``on``.
+    Allowed values: ``false``, ``true``.
 
-    Default: ``off``.
+    Default: ``false``.
 
 ``db_relstorage_blob_chunk_size``
     For details read original RelStorage documentation.
@@ -670,37 +670,37 @@ If in doubt better do not touch them.
 ``db_zeo_read_only_fallback``
     A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
 
-    Allowed values: ``off``, ``on``.
+    Allowed values: ``false``, ``true``.
 
-    Default: ``off``
+    Default: ``false``
 
 ``db_zeo_read_only``
     Set zeo client as read only.
 
-    Allowed values: ``off``, ``on``.
+    Allowed values: ``false``, ``true``.
 
-    Default: ``off``
+    Default: ``false``
 
 ``db_zeo_drop_cache_rather_verify``
     Indicates that the cache should be dropped rather than verified when the verification optimization is not available
     (e.g. when the ZEO server restarted).
 
-    Allowed values: ``off``, ``on``.
+    Allowed values: ``false``, ``true``.
 
-    Default: ``off``.
+    Default: ``false``.
 
 Development
 -----------
 
 ``debug_mode``
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
 ``verbose_security``
     Switches verbose security on (and switch to the Python security implementation).
 
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
-    Default: ``off``
+    Default: ``false``
 
 ``deprecation_warnings``
     Defines the warning handling for a ``DeprecationWarning``.
@@ -721,7 +721,7 @@ Enable profiling with `repoze.profile <>`_.
 Ensure to execute ``pip install repoze.profile`` before switching this on.
 
 ``profile_repoze``
-    Allowed values: ``on``, ``off``.
+    Allowed values: ``true``, ``false``.
 
 ``profile_repoze_log_filename``
   Filename of the raw profile data.
