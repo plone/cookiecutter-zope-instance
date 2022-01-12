@@ -92,6 +92,7 @@
 
     "debug_mode": ["off", "on"],
     "verbose_security": ["off", "on"],
+    "deprecation_warnings": ["default", "error", "ignore", "always", "module", "once"],
 
     "profile_repoze": ["off", "on"],
     "profile_repoze_log_filename": "",
