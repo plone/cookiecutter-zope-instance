@@ -11,9 +11,9 @@ It bakes configuration for Zope 5
 Features
 ========
 
-- Creates basic filesystem structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
+- Creates basic file-system structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
 - Set Zope's main configuration options.
-- Configure different database backends such as local filesystem storage`, `RelSorage` or `ZEO`.
+- Configure different database backends such as local file-system storage`, `RelStorage` or `ZEO`.
 - Enable development options.
 
 In future all non-ancient features of `plone.recipe.zope2instance <>`_ are planned to provide.
@@ -22,7 +22,7 @@ In future all non-ancient features of `plone.recipe.zope2instance <>`_ are plann
 Usage
 =====
 
-Install latest cookiecutter from Github with ``pip install git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter``.
+Install latest cookiecutter from GitHub with ``pip install git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter``.
 
 Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (add option as needed):
 
@@ -97,7 +97,7 @@ Basic configuration
     Default: ``1073741824`` (since this is the waitress default)
 
 ``wsgi_clear_untrusted_proxy_headers``
-    This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwared-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
+    This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwarded-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
 
     Allowed values: ``false`` or ``true``
 
@@ -129,7 +129,7 @@ Initial user
 
 ``initial_user_password``
     Creates an initial password for the initial user.
-    If empty, a passwort will be generated and printed after the cookiecutter generation process run.
+    If empty, a password will be generated and printed after the cookiecutter generation process run.
 
     Default: empty string
 
@@ -216,14 +216,14 @@ Zope/Plone offers different ZODB storage backends for different environments and
 - As soon as you want multiple application processes of Zope/Plone (horizontal scaling) you need to run a separate database server process and connect to it.
 
   - We recommend to use a Postgresql database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
-    RelStorage supports very well MySQL (and derivates), Oracle and SQLite 3 as database servers.
+    RelStorage supports very well MySQL (and derivatives), Oracle and SQLite 3 as database servers.
   - Zope and ZODB comes with *ZEO* (Zope Enterprise Objects). This more lightweight storage server is supported here too. It is widely used in production environment.
 
 *Blobs* (binary large objects, like files and images) are handled in a special way:
 
 In *direct* storage blob files are stored in a dedicated directory in filesystem.
 
-With a *RelStorge* or *ZEO* there are two options:
+With a *RelStorage* or *ZEO* there are two options:
 
 1. Blobs stored within the primary database server as data.
    The application client needs a local (non-shared) cache directory for the blobs.
@@ -239,7 +239,7 @@ Core database options:
 TODO check here https://zodb.org/en/latest/reference/zodb.html#database-text-configuration
 
 ``db_storage``
-    Which storge type to be confiured.
+    Which storage type to be configured.
 
     Allowed values: ``direct``, ``relstorage``, ``zeo``
 
@@ -385,7 +385,7 @@ RelStorage
     Default: ``true``.
 
 ``db_relstorage_read_only``
-    If swiched on, only reads may be executed against the storage.
+    If switched on, only reads may be executed against the storage.
 
     Allowed values: ``false``, ``true``.
 
@@ -422,7 +422,7 @@ For details about caching read `RelStorage: Blobs <https://relstorage.readthedoc
     Default: unset, empty string, RelStorage default of ``1048576`` (1 megabyte) is active.
     This option allows suffixes such as “mb” or “gb”.
 
-RelStorage provides advanced RAM and pesistent caching options.
+RelStorage provides advanced RAM and persistent caching options.
 For details about caching read `RelStorage: Database Caching <https://relstorage.readthedocs.io/en/latest/relstorage-options.html#database-caching>`_.
 The descriptions below are copied mainly from there (consult the original source, it may have changed!).
 
@@ -614,7 +614,7 @@ Caching settings
 *db_cache_size* and *db_cache_size_byes* is taken into account.
 Additional persistent caching is possible.
 
-TODO: figure out what *cache-size* in ZEO clent means.
+TODO: figure out what *cache-size* in ZEO client means.
 
 ``db_zeo_client``
     Enables persistent cache files.
@@ -730,7 +730,7 @@ Ensure to execute ``pip install repoze.profile`` before switching this on.
 
 ``profile_repoze_cachegrind_filename``
   If the package ``pyprof2calltree`` is installed, another file is written.
-  It is meant for consumation with any cachegrind compatible application.
+  It is meant for consumption with any cachegrind compatible application.
   Defaults to ``cachegrind.out.SECTIONNAME``.
 
 ``profile_repoze_discard_first_request``
@@ -775,7 +775,7 @@ Problem
 
 Idea
     `cookiecutter <https://cookiecutter.readthedocs.io>`_ is a widespread utility to create text-based code and configuration file-system structures.
-    Let's utilize it's power and wrap it with a thin package to simplfy it's usage and add minor features needed for out use case.
+    Let's utilize it's power and wrap it with a thin package to simplify it's usage and add minor features needed for out use case.
 
 Difference
 ----------
@@ -791,4 +791,4 @@ variable names
     Now use `collective.sentry <https://pypi.org/project/collective.sentry/>`_ - much better.
 
 The ``ctl.py``
-    Move now to plonectl
+    Move now to plonectl?
