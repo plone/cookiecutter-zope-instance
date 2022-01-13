@@ -702,20 +702,6 @@ Development
 
     Default: ``false``
 
-``deprecation_warnings``
-    Defines the warning handling for a ``DeprecationWarning``.
-
-    Allowed values:
-
-    - ``error`` turn warnings into exceptions
-    - ``ignore`` never print matching warnings
-    - ``always``  always print matching warnings
-    - ``default`` print the first occurrence of matching warnings for each location where the warning is issued
-    - ``module``  print the first occurrence of matching warnings for each module where the warning is issued
-    - ``once``    print only the first occurrence of matching warnings, regardless of location
-
-    Default ``default``
-
 
 Enable profiling with `repoze.profile <>`_.
 Ensure to execute ``pip install repoze.profile`` before switching this on.
