@@ -33,7 +33,7 @@
 
   <!-- OVERRIDES -->
 {%- for value in cookiecutter.load_zcml.get("package_overrides", []) %}
-  <includeOverrides package="{{ value }}" />
+  <includeOverrides package="{{ value }}" file="overrides.zcml"/>
 {%- endfor %}
   <five:loadProductsOverrides />
 {%- if cookiecutter.load_zcml.get("override_file_location", "") %}

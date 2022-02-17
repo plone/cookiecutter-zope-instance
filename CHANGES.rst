@@ -1,9 +1,8 @@
 Changelog
 =========
 
-
-1.0.0a1 (unreleased)
---------------------
+- Fix loading of `overrides.zcml`` and `meta.zcml`.
+  [jensens, 2022-02-07]
 
 - Initial work.
   [jensens]
