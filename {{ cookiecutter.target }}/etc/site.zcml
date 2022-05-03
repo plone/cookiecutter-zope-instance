@@ -16,7 +16,7 @@
 
   <!-- META -->
 {%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
-  <include package="{{ value }}" />
+  <include package="{{ value }}" file="meta.zcml" />
 {%- endfor %}
   <five:loadProducts file="meta.zcml"/>
 
