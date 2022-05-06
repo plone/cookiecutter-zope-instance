@@ -2,7 +2,7 @@
 It bakes configuration for Zope 5
 =================================
 
-**BETA QUALITY CODE** - features are in, but bugs expected, please try and report!
+**BETA QUALITY CODE** - all features are in, but more real world testing is needed, please try and report!
 
 ``cookiecutter-zope-instance`` is a `cookiecutter <https://cookiecutter.readthedocs.io>`_ template to create a full and complex configuration of a `Zope <https://zope.org>`_ WSGI instance.
 
