@@ -780,7 +780,7 @@ The ``ctl.py``
     Move now to plonectl?
 
 Contributors
-------------
+============
 
 Idea and initial implementation by Jens Klein (`Klein & Partner KG <https://kleinundpartner.at>`_ of `BlueDynamics Alliance <https://bluedynamics.com>`_).
 Then donated to the Plone Foundation.
