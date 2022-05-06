@@ -41,7 +41,7 @@ Run:
 
 .. code-block:: bash
 
-    cookiecutter -f --no-input --config-file instance.yaml https://github.com/bluedynamics/cookiecutter-zope-instance
+    cookiecutter -f --no-input --config-file instance.yaml https://github.com/plone/cookiecutter-zope-instance
 
 
 Options
@@ -778,3 +778,9 @@ variable names
 
 The ``ctl.py``
     Move now to plonectl?
+
+Contributors
+------------
+
+Idea and initial implementation by Jens Klein (`Klein & Partner KG <https://kleinundpartner.at>`_ of `BlueDynamics Alliance <https://bluedynamics.com>`_
+Then donated to the Plone Foundation.
