@@ -16,7 +16,7 @@ Features
 - Configure different database backends such as local file-system storage`, `RelStorage` or `ZEO`.
 - Enable development options.
 
-In future all non-ancient features of `plone.recipe.zope2instance <>`_ are planned to provide.
+All non-ancient features of `plone.recipe.zope2instance <https://pypi.org/project/plone.recipe.zope2instance/>`_ are provided plus new features.
 
 
 Usage
