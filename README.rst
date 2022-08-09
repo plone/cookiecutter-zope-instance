@@ -22,7 +22,7 @@ All non-ancient features of `plone.recipe.zope2instance <https://pypi.org/projec
 Usage
 =====
 
-Install latest cookiecutter from GitHub with ``pip install git+https://github.com/cookiecutter/cookiecutter.git#egg=cookiecutter``.
+Install latest cookiecutter from GitHub with ``pip install "cookiecutter==2.1.1"``.
 
 Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (add option as needed):
 
