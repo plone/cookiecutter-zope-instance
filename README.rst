@@ -41,7 +41,7 @@ Run:
 
 .. code-block:: bash
 
-    cookiecutter -f --no-input --config-file instance.yaml https://github.com/plone/cookiecutter-zope-instance
+    cookiecutter -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance
 
 
 Options
