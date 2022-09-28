@@ -136,7 +136,7 @@ Initial user
 ZCML
 ----
 
-The ZCML is loaded an defined in a dictionary ``load_zcml``.
+The ZCML is loaded and defined in a dictionary ``load_zcml``.
 
 Keys and values of the dictionary are:
 
