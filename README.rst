@@ -255,10 +255,10 @@ TODO check here https://zodb.org/en/latest/reference/zodb.html#database-text-con
 
     Default: ``30000``.
 
-``db_cache_size_byes``
+``db_cache_size_bytes``
     Set the ZODB cache target total memory usage of non-ghost objects in each connection object cache.
     This setting sets an additional limit on top of ``db_cache_size``.
-    The cache is kept below the value of either ``db_cache_size`` or ``db_cache_size_byes``, whatever limit was hit first.
+    The cache is kept below the value of either ``db_cache_size`` or ``db_cache_size_bytes``, whatever limit was hit first.
     If value is ``0`` the byte size check is switched off and only ``db_cache_size`` is taken into account.
 
     Allowed values: byte-size (integer format with postfix KB, MB, GB)
@@ -611,7 +611,7 @@ Main settings:
 
 Caching settings
 
-*db_cache_size* and *db_cache_size_byes* is taken into account.
+*db_cache_size* and *db_cache_size_bytes* is taken into account.
 Additional persistent caching is possible.
 
 TODO: figure out what *cache-size* in ZEO client means.
