@@ -9,9 +9,9 @@
     "wsgi_max_request_body_size": "1073741824",
     "wsgi_clear_untrusted_proxy_headers": false,
 
+    "environment_CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache",
     "environment": {
-        "zope_i18n_compile_mo_files": "true",
-        "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
+        "zope_i18n_compile_mo_files": "true"
     },
 
     "initial_user_name": "",
