@@ -100,6 +100,9 @@
     "profile_repoze_discard_first_request": "",
     "profile_repoze_path": "",
     "profile_repoze_flush_at_shutdown": "",
-    "profile_repoze_unwind": ""
+    "profile_repoze_unwind": "",
 
+    "_extensions": [
+        "local_extensions.AbsPathExtension"
+    ]
 }
