@@ -10,9 +10,7 @@
     "wsgi_clear_untrusted_proxy_headers": false,
 
     "environment_CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache",
-    "environment": {
-        "zope_i18n_compile_mo_files": "true"
-    },
+    "environment_zope_i18n_compile_mo_files": "true",
 
     "initial_user_name": "",
     "initial_user_password": "",
