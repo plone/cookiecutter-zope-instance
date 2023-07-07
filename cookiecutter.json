@@ -18,9 +18,9 @@
     "initial_user_password": "",
 
     "load_zcml": {
-        "package_metas": [],
-        "package_includes": [],
-        "package_overrides": [],
+        "package_metas": null,
+        "package_includes": null,
+        "package_overrides": null,
         "locales_directory_location": "",
         "include_file_location": "",
         "overrides_file_location": "",
