@@ -19,8 +19,8 @@
 {%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
   <include package="{{ value }}" file="meta.zcml" />
 {%- endfor %}
-  <five:loadProducts file="meta.zcml"/>
 {%- endif %}
+  <five:loadProducts file="meta.zcml"/>
 
 {%- if cookiecutter.load_zcml.get("package_includes", None) %}
   <!-- INCLUDES -->
