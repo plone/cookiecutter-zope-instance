@@ -693,14 +693,17 @@ Development
 -----------
 
 ``debug_mode``
-    Allowed values: ``true``, ``false``.
+    Switches debug mode on or off.
+    Allowed values: ``'True'``, ``'False'``.
+
+    Default: ``'False'``
 
 ``verbose_security``
     Switches verbose security on (and switch to the Python security implementation).
 
-    Allowed values: ``true``, ``false``.
+    Allowed values: ``'True'``, ``'False'``.
 
-    Default: ``false``
+    Default: ``'False'``
 
 
 Enable profiling with `repoze.profile <>`_.
