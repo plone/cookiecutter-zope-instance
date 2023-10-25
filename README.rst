@@ -130,12 +130,12 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
 
     default: "1MB",
 
-``dos_protection_file_disk_limit``
+``dos_protection_form_disk_limit``
     The maximum size of a POST request body.
 
     default: "1GB",
 
-``dos_protection_memfile_disk_limit``
+``dos_protection_form_memfile_limit``
     The value of form variables of type file with larger size are stored on disk rather than in memory.
 
     default: "4KB",
