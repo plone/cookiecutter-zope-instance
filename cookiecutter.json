@@ -27,6 +27,11 @@
         "resources_directory_location": ""
     },
 
+    "dos_protection_settings": true,
+    "dos_protection_file_memory_limit": "1MB",
+    "dos_protection_file_disk_limit": "1GB",
+    "dos_protection_memfile_disk_limit": "4KB",
+
     "db_storage": ["direct", "relstorage", "zeo"],
     "db_cache_size": "30000",
     "db_cache_size_bytes": "",
