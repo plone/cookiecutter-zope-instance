@@ -119,6 +119,27 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
             "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
         }
 
+``dos_protection_available``
+    In Zope 5.8.4 and later, DOS protection is available.
+    For older versions of Zope set this to ``false``.
+
+    Default: ``true``
+
+``dos_protection_file_memory_limit``
+    The maximum size for each part in a multipart post request, for the complete body in an urlencoded post request and for the complete request body when accessed as bytes (rather than a file).
+
+    default: "1MB",
+
+``dos_protection_file_disk_limit``
+    The maximum size of a POST request body.
+
+    default: "1GB",
+
+``dos_protection_memfile_disk_limit``
+    The value of form variables of type file with larger size are stored on disk rather than in memory.
+
+    default: "4KB",
+
 Initial user
 ------------
 
