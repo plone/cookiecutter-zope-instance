@@ -125,7 +125,7 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
 
     Default: ``true``
 
-``dos_protection_file_memory_limit``
+``dos_protection_form_memory_limit``
     The maximum size for each part in a multipart post request, for the complete body in an urlencoded post request and for the complete request body when accessed as bytes (rather than a file).
 
     default: "1MB",

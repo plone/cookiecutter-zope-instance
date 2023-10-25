@@ -28,7 +28,7 @@
     },
 
     "dos_protection_available": true,
-    "dos_protection_file_memory_limit": "1MB",
+    "dos_protection_form_memory_limit": "1MB",
     "dos_protection_file_disk_limit": "1GB",
     "dos_protection_memfile_disk_limit": "4KB",
 
