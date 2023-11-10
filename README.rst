@@ -13,7 +13,7 @@ Features
 
 - Creates basic file-system structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
 - Set Zope's main configuration options.
-- Configure different database backends such as local file-system storage`, `RelStorage` or `ZEO`.
+- Configure different database backends such as local file-system storage, ``RelStorage`` or ``ZEO``.
 - Enable development options.
 
 All non-ancient features of `plone.recipe.zope2instance <https://pypi.org/project/plone.recipe.zope2instance/>`_ are provided plus new features.
