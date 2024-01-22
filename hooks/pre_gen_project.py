@@ -18,8 +18,23 @@ if (
 # minimal sanity check for password
 password = "{{ cookiecutter.initial_user_password }}"
 if 0 < len(password) < 10:
-    print("Warning: initial user's password is insecure, it should be at least 10 characters long!\n")
+    print(
+        "Warning: initial user's password is insecure, it should be at least 10 characters long!\n"
+    )
 
 # version 2 config changes check
 if "{{ 'zcml' in cookiecutter.__dict__ }}" == "True":
-    print("Warning: 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!\n")
+    print(
+        "Error: 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!\n"
+    )
+    exit(1)
+
+if "{{ cookiecutter.debug_mode in [True, False] }}" != "True":
+    print(
+        "Error: 'debug_mode' setting must be boolean in 2.0, please fix your configuration!\n"
+    )
+    exit(1)
+
+if "{{ cookiecutter.verbose_security in [True, False] }}" != "True":
+    print("Error: 'verbose_security' setting must be boolean in 2.0, please fix your configuration!\n")
+    exit(1)
