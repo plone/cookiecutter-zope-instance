@@ -53,7 +53,7 @@ Version 1 to 2
   Since 2.x they expect a boolean value ``true`` or ``false`` as any other boolean settings variable.
 
 - In 1.x the variable ``zcml`` was a dict with keys for the different settings.
-  Since 2.x it for each setting there is a variable prefixed with ``zcml_``.
+  Since 2.x, for each setting there is a variable prefixed with ``zcml_``.
   This unifies the usage of the variables.
   See section ZCML below.
 
