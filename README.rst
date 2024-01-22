@@ -746,7 +746,7 @@ Development
 ``profile_repoze_discard_first_request``
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
 
-  Allowed values boolean: ``true'``, ``false``.
+  Allowed values boolean: ``true``, ``false``.
 
   Defaults to ``true``.
 
