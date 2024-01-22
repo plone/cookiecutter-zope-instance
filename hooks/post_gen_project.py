@@ -1,6 +1,3 @@
-# post generation step 1: replace relative with absolute path
-# theres no way to get this path while generating the files
-
 from binascii import b2a_base64
 from cookiecutter.utils import work_in
 from hashlib import sha1
@@ -8,39 +5,14 @@ from pathlib import Path
 
 import os
 import random
-import re
 import string
 
 
-target = """{{ cookiecutter.target }}"""
 cwd = Path.cwd()
 basedir = cwd.parent
 
-with work_in(basedir):
-    for dir, subdirs, files in os.walk(cwd / "etc"):
-        for filename in files:
-            infile = Path(dir) / filename
-            lines = []
-            try:
-                with open(infile, "r") as fio:
-                    for line in fio:
-                        mo = re.match(r".*ABSPATH\((.*?)\).*", line)
-                        if mo:
-                            for path in mo.groups():
-                                line = line.replace(
-                                    f"ABSPATH({path})", os.path.abspath(path)
-                                )
-                        lines.append(line)
 
-                with open(infile, "w") as fio:
-                    fio.truncate()
-                    for line in lines:
-                        fio.writelines(line)
-            except Exception:
-                print(f"Can not replace ABSPATH() in file {infile}")
-
-
-# post generation step 2: generate initial user
+# post generation step 1: generate initial user
 username = "{{ cookiecutter.initial_user_name }}" or "admin"
 password = "{{ cookiecutter.initial_user_password }}"
 
@@ -60,7 +32,7 @@ if not os.path.exists(inituser_filename):
     os.chmod(inituser_filename, 0o644)
 
 
-# post generation step 3: generate directories
+# post generation step 2: generate directories
 with work_in(basedir):
     Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)

@@ -132,6 +132,10 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
             "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
         }
 
+``environment_paths``
+    Since all relative paths are turned into absolute ones, we need to tell the cookiecutter which environment variables are paths.
+    By default it is set to ``["CHAMELEON_CACHE"]`` (when customizing, always include it)
+
 ``dos_protection_available``
     In Zope 5.8.4 and later, DOS protection is available.
     For older versions of Zope set this to ``false``.

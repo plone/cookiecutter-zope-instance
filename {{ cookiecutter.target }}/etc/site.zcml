@@ -11,12 +11,12 @@
 
 {%- if cookiecutter.zcml_locales_directory_location %}
   <!-- Load the local locales  -->
-  <i18n:registerTranslations directory="{{ cookiecutter.zcml_ocales_directory_location }}" />
+  <i18n:registerTranslations directory="{{ cookiecutter.zcml_locales_directory_location | abspath }}" />
 {%- endif %}
 
 {%- if cookiecutter.zcml_package_metas %}
   <!-- META -->
-{%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
+{%- for value in cookiecutter.zcml_package_metas %}
   <include package="{{ value }}" file="meta.zcml" />
 {%- endfor %}
 {%- endif %}
@@ -32,7 +32,7 @@
 
 {%- if cookiecutter.zcml_include_file_location %}
   <!-- Load the local configuration:  -->
-  <include file="{{ cookiecutter.zcml_include_file_location }}" />
+  <include file="{{ cookiecutter.zcml_include_file_location | abspath }}" />
 {%- endif %}
 
 {%- if cookiecutter.zcml_package_overrides %}
@@ -45,13 +45,13 @@
 
 {%- if cookiecutter.zcml_overrides_file_location %}
   <!-- Load the local overrides  -->
-  <include file="{{ cookiecutter.zcml_overrides_file_location }}" />
+  <include file="{{ cookiecutter.zcml_overrides_file_location | abspath}}" />
 {%- endif %}
 
 {%- if cookiecutter.zcml_resources_directory_location %}
   <!-- RESOURCES -->
   <include package="plone.resource" file="meta.zcml"/>
-  <plone:static directory="{{ cookiecutter.zcml_resources_directory_location }}"/>
+  <plone:static directory="{{ cookiecutter.zcml_resources_directory_location | abspath}}"/>
 {%- endif %}
 
   <securityPolicy component="AccessControl.security.SecurityPolicy" />

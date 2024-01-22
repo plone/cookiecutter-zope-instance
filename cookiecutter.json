@@ -1,4 +1,7 @@
 {
+  "_extensions": [
+    "local_extensions.AbsPathExtension"
+  ],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
   "location_log": "{{ cookiecutter.location_clienthome }}/log",
@@ -13,6 +16,7 @@
     "zope_i18n_compile_mo_files": "true",
     "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
   },
+  "environment_paths": ["CHAMELEON_CACHE"],
 
   "initial_user_name": "",
   "initial_user_password": "",

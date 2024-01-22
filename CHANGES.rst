@@ -4,6 +4,10 @@ Changelog
 2.0
 ---
 
+- Generate absolute paths in outputs.
+  Fixes https://github.com/plone/cookiecutter-zope-instance/issues/5
+  [@me-kell, @jensens, 2024-01-22]
+
 - Flatten zcml variables dict to multiple variables prefixed with zcml.
   This allows for modification of variables in Docker entry points.
   [@jensens, 2024-01-21]
