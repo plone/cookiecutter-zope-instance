@@ -3,10 +3,10 @@ from jinja2.ext import pass_context
 from pathlib import Path
 
 
-class AbsPathExtension(Extension):
+class ZopeExtensions(Extension):
     def __init__(self, environment):
-        super(AbsPathExtension, self).__init__(environment)
-        environment.filters["abspath"] = AbsPathExtension.abspath
+        super().__init__(environment)
+        environment.filters["abspath"] = ZopeExtensions.abspath
 
     @pass_context
     def abspath(context, path, append_path=""):

@@ -1,6 +1,6 @@
 {
   "_extensions": [
-    "local_extensions.AbsPathExtension"
+    "local_extensions.ZopeExtensions"
   ],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
