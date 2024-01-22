@@ -19,3 +19,7 @@ if (
 password = "{{ cookiecutter.initial_user_password }}"
 if 0 < len(password) < 10:
     print("Warning: initial user's password is insecure, it should be at least 10 characters long!\n")
+
+# version 2 config changes check
+if "{{ 'zcml' in cookiecutter.__dict__ }}" == "True":
+    print("Warning: 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!\n")

@@ -4,6 +4,10 @@ Changelog
 2.0
 ---
 
+- Flatten zcml variables dict to multiple variables prefixed with zcml.
+  This allows for modification of variables in Docker entry points.
+  [@jensens, 2024-01-21]
+
 - Boolean values in configuration are always true or false (bool).
   Unified for verbose_security and debug_mode.
   [@jensens, 2024-01-21]
@@ -12,10 +16,10 @@ Changelog
 ---
 
 - Add `dos_protection_*` settings for feature introduced in https://github.com/zopefoundation/Zope/pull/1142
-  [jensens, 2023-10-25]
+  [@jensens, 2023-10-25]
 
 - Fix loading of `overrides.zcml`` and `meta.zcml`.
-  [jensens, 2022-02-07]
+  [@jensens, 2022-02-07]
 
 - Initial work.
-  [jensens]
+  [@jensens]

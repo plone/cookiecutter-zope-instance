@@ -43,6 +43,19 @@ Run:
 
     cookiecutter -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance
 
+Upgrading
+=========
+
+Version 1 to 2
+--------------
+
+- In 1.x variables ``debug_mode`` and ``verbose_security`` expected a string value "True" or "False".
+  Since 2.x they expect a boolean value ``true`` or ``false`` as any other boolean settings variable.
+
+- In 1.x the variable ``zcml`` was a dict with keys for the different settings.
+  Since 2.x it for each setting there is a variable prefixed with ``zcml_``.
+  This unifies the usage of the variables.
+  See section ZCML below.
 
 Options
 =======
@@ -159,42 +172,38 @@ Initial user
 ZCML
 ----
 
-The ZCML is loaded and defined in a dictionary ``load_zcml``.
-
-Keys and values of the dictionary are:
-
-``package_meta``
+``zcml_package_meta``
     A list of values of ``meta.zcml`` files from packages to include.
 
     Default: unused, empty list.
 
-``package_include``
+``zcml_package_include``
     A list of values of ``configure.zcml`` files from packages to include.
 
     Default: unused, empty list.
 
-``package_overrides``
+``zcml_package_overrides``
     A list of values of ``overrides.zcml`` files from packages to include.
 
     Default: unused, empty list.
 
-``include_file_location``
+``zcml_include_file_location``
     A (relative to ``TARGET/etc``) path to a ZCML file to include.
 
     Default: unused, empty string.
 
-``overrides_file_location``
+``zcml_overrides_file_location``
     A (relative to ``TARGET/etc``) path to an overrides ZCML file to include.
 
     Default: unused, empty string.
 
-``resources_directory_location``
+``zcml_resources_directory_location``
     A relative to ``TARGET/etc``) path to an Plone resource directory to include.
     Please refer to `plone.resource <https://pypi.org/project/plone.resource>`_ for more details and setup instructions.
 
     Default: unused, empty string.
 
-``locales_directory_location``
+``zcml_locales_directory_location``
     Specify a (relative to ``TARGET/etc``) locales directory.
 
     Default: unused, empty string
@@ -209,26 +218,7 @@ Keys and values of the dictionary are:
         msgid "you_are_here"
         msgstr "You are very welcome here:"
 
-    Translations for other message ids are not affected and will continue
-    to work.
-
-Example:
-
-.. code-block:: JSON
-
-    {
-        ...
-        "load_zcml": {
-            "package_metas": ["my.fancy.project"],
-            "package_includes": ["my.fancy.project"],
-            "package_overrides": ["my.fancy.project"],
-            "include_file_location": "../../my_fancy_project.zcml",
-            "overrides_file_location": "../../my_fance_overrides.zcml",
-            "resources_directory_location": "../../my_fancy_project_resources",
-            "locales_directory_location": "../../my_fancy_project_locales",
-        },
-        ...
-    }
+    Translations for other message ids are not affected and will continue to work.
 
 Database
 --------

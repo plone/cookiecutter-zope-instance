@@ -9,12 +9,12 @@
 
   <meta:redefinePermission from="zope2.Public" to="zope.Public" />
 
-{%- if cookiecutter.load_zcml.get("locales_directory_location", "") %}
+{%- if cookiecutter.zcml_locales_directory_location %}
   <!-- Load the local locales  -->
-  <i18n:registerTranslations directory="{{ cookiecutter.load_zcml["locales_directory_location"] }}" />
+  <i18n:registerTranslations directory="{{ cookiecutter.zcml_ocales_directory_location }}" />
 {%- endif %}
 
-{%- if cookiecutter.load_zcml.get("package_metas", None) %}
+{%- if cookiecutter.zcml_package_metas %}
   <!-- META -->
 {%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
   <include package="{{ value }}" file="meta.zcml" />
@@ -22,36 +22,36 @@
 {%- endif %}
   <five:loadProducts file="meta.zcml"/>
 
-{%- if cookiecutter.load_zcml.get("package_includes", None) %}
+{%- if cookiecutter.zcml_package_includes %}
   <!-- INCLUDES -->
-{%- for value in cookiecutter.load_zcml.get("package_includes", []) %}
+{%- for value in cookiecutter.zcml_package_includes %}
   <include package="{{ value }}" />
 {%- endfor %}
 {%- endif %}
   <five:loadProducts />
 
-{%- if cookiecutter.load_zcml.get("include_file_location", "") %}
+{%- if cookiecutter.zcml_include_file_location %}
   <!-- Load the local configuration:  -->
-  <include file="{{ cookiecutter.load_zcml["include_file_location"] }}" />
+  <include file="{{ cookiecutter.zcml_include_file_location }}" />
 {%- endif %}
 
-{%- if cookiecutter.load_zcml.get("package_overrides", None) %}
+{%- if cookiecutter.zcml_package_overrides %}
   <!-- OVERRIDES -->
-{%- for value in cookiecutter.load_zcml.get("package_overrides", []) %}
+{%- for value in cookiecutter.zcml_package_overrides %}
   <includeOverrides package="{{ value }}" file="overrides.zcml"/>
 {%- endfor %}
 {%- endif %}
   <five:loadProductsOverrides />
 
-{%- if cookiecutter.load_zcml.get("override_file_location", "") %}
+{%- if cookiecutter.zcml_overrides_file_location %}
   <!-- Load the local overrides  -->
-  <include file="{{ cookiecutter.load_zcml["override_file_location"] }}" />
+  <include file="{{ cookiecutter.zcml_overrides_file_location }}" />
 {%- endif %}
 
-{%- if cookiecutter.load_zcml.get("resources_directory_location", "") %}
+{%- if cookiecutter.zcml_resources_directory_location %}
   <!-- RESOURCES -->
   <include package="plone.resource" file="meta.zcml"/>
-  <plone:static directory="{{ cookiecutter.load_zcml["resources_directory_location"]}}"/>
+  <plone:static directory="{{ cookiecutter.zcml_resources_directory_location }}"/>
 {%- endif %}
 
   <securityPolicy component="AccessControl.security.SecurityPolicy" />
