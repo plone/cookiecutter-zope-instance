@@ -14,28 +14,35 @@
   <i18n:registerTranslations directory="{{ cookiecutter.load_zcml["locales_directory_location"] }}" />
 {%- endif %}
 
+{%- if cookiecutter.load_zcml.get("package_metas", None) %}
   <!-- META -->
 {%- for value in cookiecutter.load_zcml.get("package_metas", []) %}
   <include package="{{ value }}" file="meta.zcml" />
 {%- endfor %}
+{%- endif %}
   <five:loadProducts file="meta.zcml"/>
 
+{%- if cookiecutter.load_zcml.get("package_includes", None) %}
   <!-- INCLUDES -->
 {%- for value in cookiecutter.load_zcml.get("package_includes", []) %}
   <include package="{{ value }}" />
 {%- endfor %}
+{%- endif %}
   <five:loadProducts />
+
 {%- if cookiecutter.load_zcml.get("include_file_location", "") %}
   <!-- Load the local configuration:  -->
   <include file="{{ cookiecutter.load_zcml["include_file_location"] }}" />
 {%- endif %}
 
-
+{%- if cookiecutter.load_zcml.get("package_overrides", None) %}
   <!-- OVERRIDES -->
 {%- for value in cookiecutter.load_zcml.get("package_overrides", []) %}
   <includeOverrides package="{{ value }}" file="overrides.zcml"/>
 {%- endfor %}
+{%- endif %}
   <five:loadProductsOverrides />
+
 {%- if cookiecutter.load_zcml.get("override_file_location", "") %}
   <!-- Load the local overrides  -->
   <include file="{{ cookiecutter.load_zcml["override_file_location"] }}" />

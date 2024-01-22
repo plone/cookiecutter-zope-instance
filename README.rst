@@ -13,7 +13,7 @@ Features
 
 - Creates basic file-system structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
 - Set Zope's main configuration options.
-- Configure different database backends such as local file-system storage`, `RelStorage` or `ZEO`.
+- Configure different database backends such as local file-system storage, ``RelStorage`` or ``ZEO``.
 - Enable development options.
 
 All non-ancient features of `plone.recipe.zope2instance <https://pypi.org/project/plone.recipe.zope2instance/>`_ are provided plus new features.
@@ -22,7 +22,7 @@ All non-ancient features of `plone.recipe.zope2instance <https://pypi.org/projec
 Usage
 =====
 
-Install latest cookiecutter from GitHub with ``pip install "cookiecutter==2.1.1"``.
+Install latest cookiecutter from GitHub with ``pip install "cookiecutter"``.
 
 Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (add option as needed):
 
@@ -118,6 +118,27 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
             "zope_i18n_compile_mo_files": "true",
             "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
         }
+
+``dos_protection_available``
+    In Zope 5.8.4 and later, DOS protection is available.
+    For older versions of Zope set this to ``false``.
+
+    Default: ``true``
+
+``dos_protection_form_memory_limit``
+    The maximum size for each part in a multipart post request, for the complete body in an urlencoded post request and for the complete request body when accessed as bytes (rather than a file).
+
+    default: "1MB",
+
+``dos_protection_form_disk_limit``
+    The maximum size of a POST request body.
+
+    default: "1GB",
+
+``dos_protection_form_memfile_limit``
+    The value of form variables of type file with larger size are stored on disk rather than in memory.
+
+    default: "4KB",
 
 Initial user
 ------------
@@ -693,14 +714,17 @@ Development
 -----------
 
 ``debug_mode``
-    Allowed values: ``true``, ``false``.
+    Switches debug mode on or off.
+    Allowed values: ``'True'``, ``'False'``.
+
+    Default: ``'False'``
 
 ``verbose_security``
     Switches verbose security on (and switch to the Python security implementation).
 
-    Allowed values: ``true``, ``false``.
+    Allowed values: ``'True'``, ``'False'``.
 
-    Default: ``false``
+    Default: ``'False'``
 
 
 Enable profiling with `repoze.profile <>`_.
