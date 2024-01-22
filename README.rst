@@ -719,7 +719,7 @@ Development
 ``verbose_security``
     Switches verbose security on (and switch to the Python security implementation).
 
-    Allowed values boolean: ``true'``, ``false``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``false``
 
