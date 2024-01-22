@@ -99,7 +99,7 @@ Basic configuration
 ``wsgi_clear_untrusted_proxy_headers``
     This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwarded-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
 
-    Allowed values: ``false`` or ``true``
+    Allowed values boolean: ``false`` or ``true``
 
     Default: ``false``
 
@@ -122,6 +122,8 @@ TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/argumen
 ``dos_protection_available``
     In Zope 5.8.4 and later, DOS protection is available.
     For older versions of Zope set this to ``false``.
+
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``true``
 
@@ -352,7 +354,7 @@ For details read the `Zope configuration reference <_https://zope.readthedocs.io
 ``db_filestorage_pack_keep_old``
     If switched on, a copy of the database before packing is kept in a ``.old`` file.
 
-    Allowed values: ``true``, ``false``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``true``.
 
@@ -376,7 +378,7 @@ For details read the `Zope configuration reference <_https://zope.readthedocs.io
     If switched off, then no garbage collection will be performed when packing.
     This can make packing go much faster and can avoid problems when objects are referenced only from other databases.
 
-    Allowed values: ``true``, ``false``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``true``.
 
@@ -401,14 +403,14 @@ RelStorage
     Undo will not be supported, but the database will not grow as quickly.
     The database will still require regular garbage collection (which is accessible through the database pack mechanism.)
 
-    Allowed values: ``true``, ``false``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``true``.
 
 ``db_relstorage_read_only``
     If switched on, only reads may be executed against the storage.
 
-    Allowed values: ``false``, ``true``.
+    Allowed values boolean: ``false``, ``true``.
 
     Default: ``false``.
 
@@ -416,7 +418,7 @@ RelStorage
     Normally, RelStorage will create or update the database schema on start-up.
     Switch it off if you need to connect to a RelStorage database without automatic creation or updates.
 
-    Allowed values: ``true``, ``false``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``true``.
 
@@ -433,7 +435,7 @@ For details about caching read `RelStorage: Blobs <https://relstorage.readthedoc
 ``db_relstorage_blob_cache_size_check_external``
     For details read original RelStorage documentation.
 
-    Allowed values: ``false``, ``true``.
+    Allowed values boolean: ``false``, ``true``.
 
     Default: ``false``.
 
@@ -706,7 +708,7 @@ If in doubt better do not touch them.
     Indicates that the cache should be dropped rather than verified when the verification optimization is not available
     (e.g. when the ZEO server restarted).
 
-    Allowed values: ``false``, ``true``.
+    Allowed values boolean: ``false``, ``true``.
 
     Default: ``false``.
 
@@ -715,49 +717,65 @@ Development
 
 ``debug_mode``
     Switches debug mode on or off.
-    Allowed values: ``'True'``, ``'False'``.
 
-    Default: ``'False'``
+    Allowed values boolean: ``true``, ``false``.
+
+    Default: ``false``
 
 ``verbose_security``
     Switches verbose security on (and switch to the Python security implementation).
 
-    Allowed values: ``'True'``, ``'False'``.
+    Allowed values boolean: ``true'``, ``false``.
 
-    Default: ``'False'``
-
-
-Enable profiling with `repoze.profile <>`_.
-Ensure to execute ``pip install repoze.profile`` before switching this on.
+    Default: ``false``
 
 ``profile_repoze``
-    Allowed values: ``true``, ``false``.
+    Enable profiling with `repoze.profile <>`_.
+    Ensure to execute ``pip install repoze.profile`` before switching this on.
+
+    Allowed values boolean: ``true``, ``false``.
+
+    Defaults to ``false``.
 
 ``profile_repoze_log_filename``
   Filename of the raw profile data.
-  Default to ``profile-SECTIONNAME.raw``.
   This file contains the raw profile data for further analysis.
+
+  Default to ``profile-SECTIONNAME.raw``.
 
 ``profile_repoze_cachegrind_filename``
   If the package ``pyprof2calltree`` is installed, another file is written.
   It is meant for consumption with any cachegrind compatible application.
+
   Defaults to ``cachegrind.out.SECTIONNAME``.
 
 ``profile_repoze_discard_first_request``
-  Defaults to ``true``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
+  Allowed values boolean: ``true'``, ``false``.
+
+  Defaults to ``true``.
+
 
 ``profile_repoze_path``
-  Defaults to ``/__profile__``.
+  See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
   The path for through the web access to the last profiled request.
 
+  Defaults to ``/__profile__``.
+
+
 ``profile_repoze_flush_at_shutdown``
+
+  Allowed values boolean: ``true'``, ``false``.
+
   Defaults to ``true``.
-  See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
 
 ``profile_repoze_unwind``
-  Defaults to ``false``.
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
+
+  Allowed values boolean: ``true'``, ``false``.
+
+  Defaults to ``false``.
 
 
 Example Configuration

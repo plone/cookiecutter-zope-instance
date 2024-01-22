@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.0
+---
+
+- Boolean values in configuration are always true or false (bool).
+  Unified for verbose_security and debug_mode.
+  [@jensens, 2024-01-21]
+
 1.0
 ---
 
