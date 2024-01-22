@@ -46,7 +46,8 @@ Upgrading
 =========
 
 If you do not want to upgrade your configuration right away, you can still use the old version of the cookiecutter.
-Just specify the version number with ``-c`` like: ``cookiecutter -c 1.0 -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance``
+Just specify the version number with ``-c`` like: ``cookiecutter -c 1.0.1 -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance``
+Check the `releases <https://github.com/plone/cookiecutter-zope-instance/releases>`_ for the latest 1-series version number.
 
 Version 1 to 2
 --------------
