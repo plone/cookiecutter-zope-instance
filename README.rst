@@ -404,7 +404,7 @@ RelStorage
 ``db_relstorage_read_only``
     If switched on, only reads may be executed against the storage.
 
-    Allowed values boolean: ``false``, ``true``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``false``.
 
@@ -429,7 +429,7 @@ For details about caching read `RelStorage: Blobs <https://relstorage.readthedoc
 ``db_relstorage_blob_cache_size_check_external``
     For details read original RelStorage documentation.
 
-    Allowed values boolean: ``false``, ``true``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``false``.
 
@@ -687,14 +687,14 @@ If in doubt better do not touch them.
 ``db_zeo_read_only_fallback``
     A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
 
-    Allowed values: ``false``, ``true``.
+    Allowed values: ``true``, ``false``.
 
     Default: ``false``
 
 ``db_zeo_read_only``
     Set zeo client as read only.
 
-    Allowed values: ``false``, ``true``.
+    Allowed values: ``true``, ``false``.
 
     Default: ``false``
 
@@ -702,7 +702,7 @@ If in doubt better do not touch them.
     Indicates that the cache should be dropped rather than verified when the verification optimization is not available
     (e.g. when the ZEO server restarted).
 
-    Allowed values boolean: ``false``, ``true``.
+    Allowed values boolean: ``true``, ``false``.
 
     Default: ``false``.
 
@@ -760,7 +760,7 @@ Development
 
 ``profile_repoze_flush_at_shutdown``
 
-  Allowed values boolean: ``true'``, ``false``.
+  Allowed values boolean: ``true``, ``false``.
 
   Defaults to ``true``.
 
