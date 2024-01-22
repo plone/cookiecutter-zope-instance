@@ -77,7 +77,7 @@ Base Locations
 ``location_clienthome``
     Zope's **clienthome** directory is were by default all writable files are written.
     Such as database with blobs, logs, PID-file, ...
-    This is the only place, where the user the WSGI process is started with needs to have write access.
+    This is the only place, where the user of the WSGI process needs write access.
     Traditionally this is the **var** directory of the *instancehome*.
 
     Default: ``{{ cookiecutter.target }}/var``
@@ -115,11 +115,11 @@ Basic configuration
 ``wsgi_clear_untrusted_proxy_headers``
     This tells Waitress (WSGI server) to remove any untrusted proxy headers ("Forwarded", "X-Forwarded-For", "X-Forwarded-By", "X-Forwarded-Host", "X-Forwarded-Port", "X-Forwarded-Proto") not explicitly allowed by trusted_proxy_headers.
 
-    Allowed values boolean: ``false`` or ``true``
+    Allowed values boolean: ``true``, ``false``
 
     Default: ``false``
 
-TODO: support https://docs.pylonsproject.org/projects/waitress/en/latest/arguments.html
+TODO: support all of https://docs.pylonsproject.org/projects/waitress/en/latest/arguments.html
 
 ``environment``
     The environment set in ``zope.conf``.
