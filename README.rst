@@ -32,8 +32,7 @@ Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (ad
         initial_user_name: 'admin'
         initial_user_password: 'admin'
 
-        load_zcml:
-            package_includes: ['my.awesome.addon']
+        zcml_package_includes: ['my.awesome.addon']
 
         db_storage: direct
 
@@ -45,6 +44,9 @@ Run:
 
 Upgrading
 =========
+
+If you do not want to upgrade your configuration right away, you can still use the old version of the cookiecutter.
+Just specify the version number with ``-c`` like: ``cookiecutter -c 1.0 -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance``
 
 Version 1 to 2
 --------------
@@ -813,10 +815,11 @@ variable names
     Now use `collective.sentry <https://pypi.org/project/collective.sentry/>`_ - much better.
 
 The ``ctl.py``
-    Move now to plonectl?
+    Move now to use `mxmake <https://pypi.org/project/mxmake/>`_, which already has support for this cookiecutter
 
 Contributors
 ============
 
 Idea and initial implementation by Jens Klein (`Klein & Partner KG <https://kleinundpartner.at>`_ of `BlueDynamics Alliance <https://bluedynamics.com>`_).
 Then donated to the Plone Foundation.
+See CHANGES.rst and/or https://github.com/plone/cookiecutter-zope-instance/graphs/contributors for all contributors.
