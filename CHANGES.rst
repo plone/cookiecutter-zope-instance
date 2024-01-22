@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.0
+---
+
 - Add `dos_protection_*` settings for feature introduced in https://github.com/zopefoundation/Zope/pull/1142
   [jensens, 2023-10-25]
 
