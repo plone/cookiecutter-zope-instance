@@ -4,6 +4,10 @@ Changelog
 2.0
 ---
 
+- Feature: Helper script to transform an input configuration file for
+cookie-cutter-zopeinstance from environment variables with a given prefix
+and output the result to a file.
+
 - Generate absolute paths in outputs.
   Fixes https://github.com/plone/cookiecutter-zope-instance/issues/5
   [@me-kell, @jensens, 2024-01-22]

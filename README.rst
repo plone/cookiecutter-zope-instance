@@ -782,18 +782,76 @@ Development
   Defaults to ``false``.
 
 
-Example Configuration
-=====================
+Helpers
+=======
 
-TODO
-
-This looks like so:
-
-.. code-block:: JSON
-
-    {}
+Helper scripts for copy paste usage in projects.
+Located in the ``helper`` directory of cookiecutter-zope-instance.
 
 
+``transform_from_environment.py``
+---------------------------------
+
+Creates configuration from from prefixed environment variables.
+This is useful for containerized deployments.
+
+Precondition: Python 3 with `pyyaml <https://pypi.org/project/PyYAML/>`_ installed.
+
+It takes a YAML configuration file as input and outputs a YAML configuration file.
+Any environment variable with a given prefix (``INSTANCE_`` by default) is transformed into a configuration variable.
+The prefix is stripped and the rest of the environment variable name either add or replaces the configuration variable name.
+
+Give we have a configuration file ``instance.yaml`` (like for development):
+
+.. code-block:: YAML
+
+    default_context:
+        wsgi_fast_listen: 0.0.0.0:8080
+        initial_user_name: admin
+        initial_user_password: admin
+        debug_mode: true
+        verbose_security: true
+        zcml_package_includes: my.fancy.package
+        db_storage: direct
+
+Then we set a bunch of environment variables for production:
+
+.. code-block:: bash
+
+    export INSTANCE_wsgi_fast_listen=
+    export INSTANCE_wsgi_listen=127.0.0.1:8080
+    export INSTANCE_initial_user_password=
+    export INSTANCE_debug_mode=false
+    export INSTANCE_verbose_security=false
+    export INSTANCE_db_storage=relstorage
+    export INSTANCE_db_blobs_mode=cache
+    export INSTANCE_db_relstorage_keep_history=false
+    export INSTANCE_db_relstorage=postgresql
+    export INSTANCE_db_relstorage_postgresql_dsn="host='db' dbname='plone' user='plone' password='verysecret'"
+    export INSTANCE_db_cache_size=50000
+    export INSTANCE_db_cache_size_bytes=1500MB
+
+And after calling the script ``transform_from_environment.py`` in the directory of the configuration file,
+all prefixed environment variables are transformed into a new configuration file ``instance-from-environment.yaml``:
+
+.. code-block:: YAML
+
+    default_context:
+        db_blobs_mode: cache
+        db_cache_size: '50000'
+        db_cache_size_bytes: 1500MB
+        db_relstorage: postgresql
+        db_relstorage_keep_history: false
+        db_relstorage_postgresql_dsn: host='db' dbname='plone' user='plone' password='verysecret'
+        db_storage: relstorage
+        debug_mode: false
+        initial_user_name: admin
+        initial_user_password: ''
+        verbose_security: false
+        wsgi_fast_listen: ''
+        wsgi_listen: 127.0.0.1:8080
+        zcml_package_includes: my.fancy.package
+`
 
 Rationale
 =========
