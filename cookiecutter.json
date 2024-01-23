@@ -28,6 +28,7 @@
   "zcml_include_file_location": "",
   "zcml_overrides_file_location": "",
   "zcml_resources_directory_location": "",
+  "load_zcml": "gone in 2.0",
 
   "dos_protection_available": true,
   "dos_protection_form_memory_limit": "1MB",

@@ -23,18 +23,24 @@ if 0 < len(password) < 10:
     )
 
 # version 2 config changes check
-if "{{ 'zcml' in cookiecutter.__dict__ }}" == "True":
+upgrade_error = False
+if "{{ cookiecutter.load_zcml }}" != "gone in 2.0":
     print(
         "Error: 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!\n"
     )
-    exit(1)
+    upgrade_error = True
 
 if "{{ cookiecutter.debug_mode in [True, False] }}" != "True":
     print(
         "Error: 'debug_mode' setting must be boolean in 2.0, please fix your configuration!\n"
     )
-    exit(1)
+    upgrade_error = True
 
 if "{{ cookiecutter.verbose_security in [True, False] }}" != "True":
-    print("Error: 'verbose_security' setting must be boolean in 2.0, please fix your configuration!\n")
+    print(
+        "Error: 'verbose_security' setting must be boolean in 2.0, please fix your configuration!\n"
+    )
+    upgrade_error = True
+
+if upgrade_error:
     exit(1)
