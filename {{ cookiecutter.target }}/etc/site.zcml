@@ -16,16 +16,16 @@
 
 {%- if cookiecutter.zcml_package_metas %}
   <!-- META -->
-{%- for value in cookiecutter.zcml_package_metas %}
-  <include package="{{ value }}" file="meta.zcml" />
+{%- for value in cookiecutter.zcml_package_metas.split(",") %}
+  <include package="{{ value.strip() }}" file="meta.zcml" />
 {%- endfor %}
 {%- endif %}
   <five:loadProducts file="meta.zcml"/>
 
 {%- if cookiecutter.zcml_package_includes %}
-  <!-- INCLUDES -->
-{%- for value in cookiecutter.zcml_package_includes %}
-  <include package="{{ value }}" />
+  <!-- INCLUDES {{ cookiecutter.zcml_package_includes }} -->
+{%- for value in cookiecutter.zcml_package_includes.split(",") %}
+  <include package="{{ value.strip() }}" />
 {%- endfor %}
 {%- endif %}
   <five:loadProducts />
@@ -37,8 +37,8 @@
 
 {%- if cookiecutter.zcml_package_overrides %}
   <!-- OVERRIDES -->
-{%- for value in cookiecutter.zcml_package_overrides %}
-  <includeOverrides package="{{ value }}" file="overrides.zcml"/>
+{%- for value in cookiecutter.zcml_package_overrides.split(",") %}
+  <includeOverrides package="{{ value.strip() }}" file="overrides.zcml"/>
 {%- endfor %}
 {%- endif %}
   <five:loadProductsOverrides />

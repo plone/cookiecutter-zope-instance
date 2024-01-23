@@ -58,6 +58,7 @@ Version 1 to 2
 - In 1.x the variable ``zcml`` was a dict with keys for the different settings.
   Since 2.x, for each setting there is a variable prefixed with ``zcml_``.
   This unifies the usage of the variables.
+  If a list of values were given in 1.x, now a comma separated string is expected.
   See section ZCML below.
 
 Options
@@ -180,19 +181,25 @@ ZCML
 ----
 
 ``zcml_package_meta``
-    A list of values of ``meta.zcml`` files from packages to include.
+    A string with comma separated values of ``meta.zcml`` files from packages to include.
 
-    Default: unused, empty list.
+    Examples: "my.fancypackage" or "myns.mypackage, collective.example"
+
+    Default: empty string
 
 ``zcml_package_include``
-    A list of values of ``configure.zcml`` files from packages to include.
+    A string with comma separated  ``configure.zcml`` files from packages to include.
 
-    Default: unused, empty list.
+    Examples: "my.fancypackage" or "myns.mypackage, collective.example"
+
+    Default: empty string
 
 ``zcml_package_overrides``
-    A list of values of ``overrides.zcml`` files from packages to include.
+    A string with comma separated  ``overrides.zcml`` files from packages to include.
 
-    Default: unused, empty list.
+    Examples: "my.fancypackage" or "myns.mypackage, collective.example"
+
+    Default: empty string
 
 ``zcml_include_file_location``
     A (relative to ``TARGET/etc``) path to a ZCML file to include.
