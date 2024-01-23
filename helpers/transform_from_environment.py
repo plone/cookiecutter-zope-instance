@@ -53,7 +53,7 @@ for envkey, value in os.environ.items():
         continue
 
     # handle boolean values.
-    if value.lower() in ("true", "false"):
+    if isinstance(value, str) and value.lower() in ("true", "false"):
         value = value.lower() == "true"
 
     key = envkey[len(args.prefix) :].lower()
