@@ -30,8 +30,7 @@ Prepare a ``instance.yaml`` with the parameters needed. A minimal example is (ad
         initial_user_name: 'admin'
         initial_user_password: 'admin'
 
-        zcml_package_includes: ['my.awesome.addon']
-
+        zcml_package_includes: my.awesome.addon, my.otheraddon
         db_storage: direct
 
 Run:
@@ -185,7 +184,7 @@ ZCML
 
     Default: empty string
 
-``zcml_package_include``
+``zcml_package_includes``
     A string with comma separated  ``configure.zcml`` files from packages to include.
 
     Examples: "my.fancypackage" or "myns.mypackage, collective.example"
