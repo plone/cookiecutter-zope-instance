@@ -849,6 +849,28 @@ all prefixed environment variables are transformed into a new configuration file
         wsgi_listen: 127.0.0.1:8080
         zcml_package_includes: my.fancy.package
 
+As special case is, if we want the value to represent a dict/mapping.
+The helper script supports this by using a "_DICT_ as separator.
+The environment variables
+
+.. code-block:: bash
+
+    export INSTANCE_a_DICT_b="value b"
+    export INSTANCE_a_DICT_c="value c"
+
+will be transformed into
+
+.. code-block:: YAML
+
+    default_context:
+       a:
+            b: value b
+            c: value c
+
+This works recursive and updates existing values in the configuration file.
+
+It is useful to modify the ``environment`` settings in the configuration file.
+
 
 Rationale
 =========
