@@ -340,7 +340,7 @@ The blob settings are valid for all storages.
     Defaults: ``10`` (10% of the blob cache size).
 
 
-Direct filestorage
+Direct Filestorage
 ~~~~~~~~~~~~~~~~~~
 
 If you have only one application process, it can open a direct ``filestorage`` database files directly without running a database server process.
@@ -508,6 +508,43 @@ For details about replication options read `RelStorage: Replication <https://rel
     For details read original RelStorage documentation.
 
     Default: unset, empty string
+
+RelStorage provides helper scripts for packing (zodbpack) and import/export from filestorage (zodbconvert).
+
+The configuration for the scripts is generated as separate file:
+
+The file ``relstorage-pack.conf`` for the command line utility ``zobdpack``is always generated for all RelStorage configurations.
+For usage information read `Packing Or Reference Checking A ZODB Storage: zodbpack <https://relstorage.readthedocs.io/en/latest/zodbpack.html>`_.
+
+The file ``relstorage-export.conf`` is generated if the two ``db_relstorage_export_*`` settings are given.
+The file ``relstorage-import.conf`` is generated if the two ``db_relstorage_import_*`` settings are given.
+Both are for the command line utility ``zobdconvert``.
+For usage information read `Copying Data Between ZODB Storages: zodbconvert <https://relstorage.readthedocs.io/en/latest/zodbconvert.html>`_
+
+At the moment only the filestorage with blobs is supported.
+In future there may be more options, like converting from/to a ZEO-server or another RelStorage/Database.
+Latter would be useful to upgrade a database or convert MyQL to Postgresql or vice versa.
+
+``db_relstorage_import_filestorage_location``
+    The filename of the filestorage to import from.
+
+    Default: unset, empty string
+
+``db_relstorage_import_blobs_location``
+    The directory of the blob storage to import from.
+
+    Default: unset, empty string
+
+``db_relstorage_export_filestorage_location``
+    The filename of the filestorage to export to.
+
+    Default: unset, empty string
+
+``db_relstorage_export_blobs_location``
+    The directory of the blob storage to export to.
+
+    Default: unset, empty string
+
 
 Postgresql
 """"""""""

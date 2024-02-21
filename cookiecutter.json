@@ -1,7 +1,5 @@
 {
-  "_extensions": [
-    "local_extensions.ZopeExtensions"
-  ],
+  "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
   "location_log": "{{ cookiecutter.location_clienthome }}/log",
@@ -92,6 +90,11 @@
   "db_relstorage_sqlite3_data_dir": "{{ cookiecutter.location_clienthome }}/sqlite3/",
   "db_relstorage_sqlite3_gevent_yield_interval": "",
   "db_relstorage_sqlite3_pragma": {},
+
+  "db_relstorage_import_filestorage_location": "",
+  "db_relstorage_import_blobs_location": "",
+  "db_relstorage_export_filestorage_location": "",
+  "db_relstorage_export_blobs_location": "",
 
   "db_zeo_server": "localhost:8100",
   "db_zeo_name": "1",

@@ -4,6 +4,9 @@ Changelog
 2.0
 ---
 
+- Feature: Implement #14 Generate RelStorage specific pack/import/export configuration.
+  [@jensens, 2024-02-21]
+
 - Feature: Helper script to transform an input configuration file for
   cookie-cutter-zopeinstance from environment variables with a given prefix
   and output the result to a file.
