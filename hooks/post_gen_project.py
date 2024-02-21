@@ -76,6 +76,9 @@ with work_in(basedir):
     else:
         # cleanup relstorage files if no relstorage is configured
         etc = cwd / "etc"
-        (etc / "relstorage-export").unlink()
-        (etc / "relstorage-import").unlink()
-        (etc / "relstorage-pack").unlink()
+        if (etc / "relstorage-export").exists():
+            (etc / "relstorage-export").unlink()
+        if (etc / "relstorage-import").exists():
+            (etc / "relstorage-import").unlink()
+        if (etc / "relstorage-pack").exists():
+            (etc / "relstorage-pack").unlink()
