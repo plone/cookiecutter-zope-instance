@@ -389,6 +389,9 @@ RelStorage
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
 
+General settings
+""""""""""""""""
+
 ``db_relstorage``
     Set the database server to be used.
 
@@ -509,11 +512,14 @@ For details about replication options read `RelStorage: Replication <https://rel
 
     Default: unset, empty string
 
+Command Line Utilities
+""""""""""""""""""""""
+
 RelStorage provides helper scripts for packing (zodbpack) and import/export from filestorage (zodbconvert).
 
 The configuration for the scripts is generated as separate file:
 
-The file ``relstorage-pack.conf`` for the command line utility ``zobdpack``is always generated for all RelStorage configurations.
+The file ``relstorage-pack.conf`` for the command line utility ``zobdpack`` is always generated for all RelStorage configurations.
 For usage information read `Packing Or Reference Checking A ZODB Storage: zodbpack <https://relstorage.readthedocs.io/en/latest/zodbpack.html>`_.
 
 The file ``relstorage-export.conf`` is generated if the two ``db_relstorage_export_*`` settings are given.
