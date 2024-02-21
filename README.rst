@@ -133,6 +133,8 @@ TODO: support all of https://docs.pylonsproject.org/projects/waitress/en/latest/
             "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache"
         }
 
+    Attention, due to a `bug in cookiecutter 2.2.0 to 2.5.0 <https://github.com/plone/cookiecutter-zope-instance/issues/15>`_ the value of the environment variable is not added or updated but replaced!
+
 ``environment_paths``
     Since all relative paths are turned into absolute ones, we need to tell the cookiecutter which environment variables are paths.
     By default it is set to ``["CHAMELEON_CACHE"]`` (when customizing, always include it)
@@ -912,7 +914,12 @@ will be transformed into
 
 This works recursive and updates existing values in the configuration file.
 
-It is useful to modify the ``environment`` settings in the configuration file.
+It is useful to modify the ``environment`` settings in the configuration file, i.e. like so to reduce the loaded languages to English and German:
+
+.. code-block:: bash
+
+    export INSTANCE_environment_DICT_PTS_LANGUAGES="de en"
+    export INSTANCE_environment_DICT_zope_i18n_allowed_languages=="de en"
 
 
 Rationale
