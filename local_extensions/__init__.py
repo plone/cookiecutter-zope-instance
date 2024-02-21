@@ -1,5 +1,5 @@
 from jinja2.ext import Extension
-from jinja2.ext import pass_context
+from jinja2 import pass_context
 from pathlib import Path
 
 
