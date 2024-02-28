@@ -113,14 +113,6 @@
 
   "debug_mode": false,
   "verbose_security": false,
-  "deprecation_warnings": [
-    "default",
-    "error",
-    "ignore",
-    "always",
-    "module",
-    "once"
-  ],
 
   "profile_repoze": false,
   "profile_repoze_log_filename": "{{ cookiecutter.location_log }}/repoze_profile.raw.log",
