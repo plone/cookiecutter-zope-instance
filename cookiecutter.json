@@ -123,10 +123,10 @@
   ],
 
   "profile_repoze": false,
-  "profile_repoze_log_filename": "",
-  "profile_repoze_cachegrind_filename": "",
-  "profile_repoze_discard_first_request": "",
-  "profile_repoze_path": "",
-  "profile_repoze_flush_at_shutdown": "",
-  "profile_repoze_unwind": ""
+  "profile_repoze_log_filename": "{{ cookiecutter.location_log }}/repoze_profile.raw.log",
+  "profile_repoze_cachegrind_filename": "{{ cookiecutter.location_log }}/repoze_cachegrind.out.bar",
+  "profile_repoze_discard_first_request": "true",
+  "profile_repoze_path": "/__profile__",
+  "profile_repoze_flush_at_shutdown": "true",
+  "profile_repoze_unwind": "false"
 }

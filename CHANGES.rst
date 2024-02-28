@@ -25,7 +25,11 @@ Changelog
   [@jensens, 2024-01-21]
 
 - Bugfix: typo `db_relstorage_orcale_*` in `cookiecutter.json` fixed.
-  [@mliebischer + @jensens, 2024-01-21]
+  [@mliebischer + @jensens, 2024-02-28]
+
+- Bugfix: `profile_repoze_*` settings were not taken into account.
+  [@mliebischer + @jensens, 2024-02-28]
+
 
 1.0
 ---

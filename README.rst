@@ -787,13 +787,13 @@ Development
   Filename of the raw profile data.
   This file contains the raw profile data for further analysis.
 
-  Default to ``profile-SECTIONNAME.raw``.
+  Default to ``location_log/repoze_profile.raw.log"``.
 
 ``profile_repoze_cachegrind_filename``
   If the package ``pyprof2calltree`` is installed, another file is written.
   It is meant for consumption with any cachegrind compatible application.
 
-  Defaults to ``cachegrind.out.SECTIONNAME``.
+  Defaults to ``location_log/repoze_cachegrind.out.bar``.
 
 ``profile_repoze_discard_first_request``
   See `repoze.profile docs <https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python>`_ for details.
