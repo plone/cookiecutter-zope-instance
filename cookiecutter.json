@@ -83,9 +83,9 @@
   ],
   "db_relstorage_mysql_parameters": {},
 
-  "db_relstorage_orcale_user": "",
-  "db_relstorage_orcale_password": "",
-  "db_relstorage_orcale_dsn": "",
+  "db_relstorage_oracle_user": "",
+  "db_relstorage_oraclce_password": "",
+  "db_relstorage_oracle_dsn": "",
 
   "db_relstorage_sqlite3_driver": ["sqlite3", "gevent sqlite3"],
   "db_relstorage_sqlite3_data_dir": "{{ cookiecutter.location_clienthome }}/sqlite3/",

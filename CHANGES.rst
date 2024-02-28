@@ -24,6 +24,8 @@ Changelog
   Unified for verbose_security and debug_mode.
   [@jensens, 2024-01-21]
 
+- Bugfix: typo `db_relstorage_orcale_*` in `cookiecutter.json` fixed.
+  [@mliebischer + @jensens, 2024-01-21]
 
 1.0
 ---
