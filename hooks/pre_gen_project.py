@@ -27,7 +27,7 @@ if 0 < len(password) < 10:
 upgrade_warnings = []
 upgrade_errors = []
 load_zcml = {{ cookiecutter.load_zcml }}
-has_old_zcml = True if [value for value in load_zcml.values() if value] else False
+has_old_zcml = bool([value for value in load_zcml.values() if value])
 if has_old_zcml:
     upgrade_warnings.append(
         "The 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!"
