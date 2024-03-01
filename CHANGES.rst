@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.1
+-----
+
+- Fix: Implement a fallback to old zcml configurations Fixes #18.
+  [@ericof, 2024-03-01]
+
 2.0
 ---
 
