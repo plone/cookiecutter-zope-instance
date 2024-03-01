@@ -27,7 +27,15 @@
   "zcml_include_file_location": "",
   "zcml_overrides_file_location": "",
   "zcml_resources_directory_location": "",
-  "load_zcml": "gone in 2.0",
+  "load_zcml": {
+    "package_metas": null,
+    "package_includes": null,
+    "package_overrides": null,
+    "locales_directory_location": "",
+    "include_file_location": "",
+    "overrides_file_location": "",
+    "resources_directory_location": ""
+  },
 
   "dos_protection_available": true,
   "dos_protection_form_memory_limit": "1MB",

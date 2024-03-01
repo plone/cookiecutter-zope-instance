@@ -1,5 +1,6 @@
-# invariant checks
+from collections import OrderedDict
 
+# invariant checks
 # check database mode direct and blobs not cache
 if (
     "{{ cookiecutter.db_storage }}" == "direct"
@@ -23,24 +24,32 @@ if 0 < len(password) < 10:
     )
 
 # version 2 config changes check
-upgrade_error = False
-if "{{ cookiecutter.load_zcml }}" != "gone in 2.0":
-    print(
-        "Error: 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!\n"
+upgrade_warnings = []
+upgrade_errors = []
+load_zcml = {{ cookiecutter.load_zcml }}
+has_old_zcml = True if [value for value in load_zcml.values() if value] else False
+if has_old_zcml:
+    upgrade_warnings.append(
+        "The 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!"
     )
-    upgrade_error = True
 
 if "{{ cookiecutter.debug_mode in [True, False] }}" != "True":
-    print(
-        "Error: 'debug_mode' setting must be boolean in 2.0, please fix your configuration!\n"
+    upgrade_errors.append(
+        "The 'debug_mode' setting must be boolean in 2.0, please fix your configuration!\n"
     )
-    upgrade_error = True
 
 if "{{ cookiecutter.verbose_security in [True, False] }}" != "True":
-    print(
-        "Error: 'verbose_security' setting must be boolean in 2.0, please fix your configuration!\n"
+    upgrade_errors.append(
+        "The'verbose_security' setting must be boolean in 2.0, please fix your configuration!\n"
     )
-    upgrade_error = True
 
-if upgrade_error:
+if upgrade_errors:
+    print("The following errors prevent cookiecutter-zope-instance from continuing, please fix them:")
+    for error_msg in upgrade_errors:
+        print(f" - Error: {error_msg}")
     exit(1)
+
+elif upgrade_warnings:
+    print("Please review the following warning messages and fix them at your earliest convenience:")
+    for warning_msg in upgrade_warnings:
+        print(f" - Warning: {warning_msg}")
