@@ -1,0 +1,15 @@
+{%- if cookiecutter.cors_enabled %}
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+  <plone:CORSPolicy
+      allow_origin="{{ cookiecutter.allow_origin }}"
+      allow_credentials="{{ cookiecutter.allow_credentials }}"
+      allow_methods="{{ cookiecutter.allow_methods }}"
+      expose_headers="{{ cookiecutter.expose_headers }}"
+      allow_headers="{{ cookiecutter.allow_headers }}"
+      max_age="{{ cookiecutter.max_age }}"
+      />
+</configure>
+{%- endif %}
