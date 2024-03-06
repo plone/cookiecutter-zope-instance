@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.1.0
+-----
+
+- Feature: Add cors support by generating a `cors.zcml` if enabled.
+  [@jensens, 2024-03-06]
+
 2.0.1
 -----
 
