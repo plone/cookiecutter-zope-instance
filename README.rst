@@ -761,7 +761,7 @@ If in doubt better do not touch them.
 Cross-Origin Resource Sharing (CORS)
 ------------------------------------
 
-Plone offers [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) handling with the [plone.rest](https://pypi.org/project/plone.rest/) package.
+Plone offers `CORS <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS`_ handling with the `plone.rest <https://pypi.org/project/plone.rest/>`_ package.
 CORS configuration is needed, if you want to access the Plone REST API from a different domain than the one Plone is running on.
 
 ``cors_enabled``
