@@ -44,6 +44,11 @@
 {%- endif %}
   <five:loadProducts />
 
+{%- if cookiecutter.cors_enabled %}
+  <!-- Load the CORS configuration:  -->
+  <include file="cors.zcml" />
+{%- endif %}
+
 {%- if zcml_include_file_location %}
   <!-- Load the local configuration:  -->
   <include file="{{ zcml_include_file_location | abspath }}" />

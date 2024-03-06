@@ -9,6 +9,7 @@ import string
 
 cwd = Path.cwd()
 basedir = cwd.parent
+etc = cwd / "etc"
 
 
 # post generation step 1: generate initial user
@@ -75,7 +76,10 @@ with work_in(basedir):
             filepath.parent.mkdir(parents=True, exist_ok=True)
     else:
         # cleanup relstorage files if no relstorage is configured
-        etc = cwd / "etc"
         (etc / "relstorage-export.conf").unlink()
         (etc / "relstorage-import.conf").unlink()
         (etc / "relstorage-pack.conf").unlink()
+
+# 3: remove unused files
+if "{{ cookiecutter.cors_enabled }}" == "False":
+    (etc / "cors.zcml").unlink()

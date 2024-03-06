@@ -119,6 +119,14 @@
   "db_zeo_read_only": false,
   "db_zeo_drop_cache_rather_verify": false,
 
+  "cors_enabled": false,
+  "cors_allow_credentials": "true",
+  "cors_allow_headers": "Accept,Authorization,Content-Type,Lock-Token",
+  "cors_allow_methods": "DELETE,GET,OPTIONS,PATCH,POST,PUT",
+  "cors_allow_origin": "http://localhost:3000,http://127.0.0.1:3000",
+  "cors_expose_headers": "Content-Length",
+  "cors_max_age": "3600",
+
   "debug_mode": false,
   "verbose_security": false,
 
