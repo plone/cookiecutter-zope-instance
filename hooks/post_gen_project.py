@@ -81,5 +81,5 @@ with work_in(basedir):
         (etc / "relstorage-pack.conf").unlink()
 
 # 3: remove unused files
-if "{{ cors_enabled }}" == "false":
+if "{{ cookiecutter.cors_enabled }}" == "false":
     (etc / "cors.zcml").unlink()
