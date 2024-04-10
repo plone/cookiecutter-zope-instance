@@ -2,8 +2,10 @@
   "_version": "2.0.0",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
-  "location_clienthome": "{{ cookiecutter.target }}/var",
+  "location_instancehome": "{{ cookiecutter.target | abspath }}",
+  "location_clienthome": "{{ cookiecutter.instance_home }}/var",
   "location_log": "{{ cookiecutter.location_clienthome }}/log",
+  "create_directories": true,
 
   "wsgi_listen": "localhost:8080",
   "wsgi_fast_listen": "",
@@ -136,5 +138,7 @@
   "profile_repoze_discard_first_request": "true",
   "profile_repoze_path": "/__profile__",
   "profile_repoze_flush_at_shutdown": "true",
-  "profile_repoze_unwind": "false"
+  "profile_repoze_unwind": "false",
+
+  "k8s_enabled": false
 }

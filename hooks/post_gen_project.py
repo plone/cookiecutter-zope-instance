@@ -5,6 +5,7 @@ from pathlib import Path
 
 import random
 import string
+import textwrap
 
 
 cwd = Path.cwd()
@@ -33,53 +34,83 @@ if not inituser_filename.exists():
 
 
 # post generation step 2: generate directories
-with work_in(basedir):
-    Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.db_blobs_location }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.environment['CHAMELEON_CACHE'] }}").mkdir(
-        parents=True, exist_ok=True
-    )
-    if "{{ cookiecutter.db_storage }}" == "direct":
-        filepath = Path("{{ cookiecutter.db_filestorage_location }}")
-        filepath.parent.mkdir(parents=True, exist_ok=True)
-    if "{{ cookiecutter.db_storage }}" == "direct":
-        filepath = Path("{{ cookiecutter.db_filestorage_location }}")
-        filepath.parent.mkdir(parents=True, exist_ok=True)
-    if "{{ cookiecutter.db_storage }}" == "relstorage":
-        # import
-        db_relstorage_import_blobs_location = (
-            "{{ cookiecutter.db_relstorage_import_blobs_location | abspath }}"
+if "{{ cookiecutter.create_directories }}" == "true":
+    with work_in(basedir):
+        Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
+        Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)
+        Path("{{ cookiecutter.db_blobs_location }}").mkdir(parents=True, exist_ok=True)
+        Path("{{ cookiecutter.environment['CHAMELEON_CACHE'] }}").mkdir(
+            parents=True, exist_ok=True
         )
-        if db_relstorage_import_blobs_location:
-            filepath = Path(db_relstorage_import_blobs_location)
-            filepath.mkdir(parents=True, exist_ok=True)
-        db_relstorage_import_filestorage_location = (
-            "{{ cookiecutter.db_relstorage_import_filestorage_location | abspath }}"
-        )
-        if db_relstorage_import_filestorage_location:
-            filepath = Path(db_relstorage_import_filestorage_location)
+        if "{{ cookiecutter.db_storage }}" == "direct":
+            filepath = Path("{{ cookiecutter.db_filestorage_location }}")
             filepath.parent.mkdir(parents=True, exist_ok=True)
-
-        # export
-        db_relstorage_export_blobs_location = (
-            "{{ cookiecutter.db_relstorage_export_blobs_location | abspath }}"
-        )
-        if db_relstorage_export_blobs_location:
-            filepath = Path(db_relstorage_export_blobs_location)
-            filepath.mkdir(parents=True, exist_ok=True)
-        db_relstorage_export_filestorage_location = (
-            "{{ cookiecutter.db_relstorage_export_filestorage_location | abspath }}"
-        )
-        if db_relstorage_export_filestorage_location:
-            filepath = Path(db_relstorage_export_filestorage_location)
+        if "{{ cookiecutter.db_storage }}" == "direct":
+            filepath = Path("{{ cookiecutter.db_filestorage_location }}")
             filepath.parent.mkdir(parents=True, exist_ok=True)
-    else:
-        # cleanup relstorage files if no relstorage is configured
-        (etc / "relstorage-export.conf").unlink()
-        (etc / "relstorage-import.conf").unlink()
-        (etc / "relstorage-pack.conf").unlink()
+        if "{{ cookiecutter.db_storage }}" == "relstorage":
+            # import
+            db_relstorage_import_blobs_location = (
+                "{{ cookiecutter.db_relstorage_import_blobs_location | abspath }}"
+            )
+            if db_relstorage_import_blobs_location:
+                filepath = Path(db_relstorage_import_blobs_location)
+                filepath.mkdir(parents=True, exist_ok=True)
+            db_relstorage_import_filestorage_location = (
+                "{{ cookiecutter.db_relstorage_import_filestorage_location | abspath }}"
+            )
+            if db_relstorage_import_filestorage_location:
+                filepath = Path(db_relstorage_import_filestorage_location)
+                filepath.parent.mkdir(parents=True, exist_ok=True)
 
-# 3: remove unused files
-if "{{ cookiecutter.cors_enabled }}" == "False":
-    (etc / "cors.zcml").unlink()
+            # export
+            db_relstorage_export_blobs_location = (
+                "{{ cookiecutter.db_relstorage_export_blobs_location | abspath }}"
+            )
+            if db_relstorage_export_blobs_location:
+                filepath = Path(db_relstorage_export_blobs_location)
+                filepath.mkdir(parents=True, exist_ok=True)
+            db_relstorage_export_filestorage_location = (
+                "{{ cookiecutter.db_relstorage_export_filestorage_location | abspath }}"
+            )
+            if db_relstorage_export_filestorage_location:
+                filepath = Path(db_relstorage_export_filestorage_location)
+                filepath.parent.mkdir(parents=True, exist_ok=True)
+        else:
+            # cleanup relstorage files if no relstorage is configured
+            (etc / "relstorage-export.conf").unlink()
+            (etc / "relstorage-import.conf").unlink()
+            (etc / "relstorage-pack.conf").unlink()
+
+# 3: generate k8s configmap
+PACK_PART_PREFIX = """\
+pack:
+  command: "[\"/app/bin/zodbpack\", \"/app/etc/zodbpack.conf\"]"
+  schedule: "45 9 * * *"
+  zodbpackconf: |-
+"""
+
+if "{{ cookiecutter.k8s_enabled }}" == "True":
+    k8s = cwd / "k8s"
+    k8s.mkdir(exist_ok=True)
+    with work_in(cwd):
+        with open(k8s / "values-parts.yaml", "w") as fp:
+            fp.write("wsgiini: |-\n")
+            fp.write(textwrap.indent((etc / "zope.ini").read_text(), "  "))
+            fp.write("zopeconf: |-\n")
+            fp.write(textwrap.indent((etc / "zope.conf").read_text(), "  "))
+            fp.write("sitezcml: |-\n")
+            fp.write(textwrap.indent((etc / "site.zcml").read_text(), "  "))
+            if "{{ cookiecutter.db_storage }}" == "relstorage":
+                fp.write("relstorageexport: |-\n")
+                fp.write(
+                    textwrap.indent((etc / "relstorage-export.conf").read_text(), "  ")
+                )
+                fp.write("relstorageimport: |-\n")
+                fp.write(
+                    textwrap.indent((etc / "relstorage-import.conf").read_text(), "  ")
+                )
+                fp.write(PACK_PART_PREFIX)
+                fp.write(
+                    textwrap.indent((etc / "relstorage-pack.conf").read_text(), "  ")
+                )

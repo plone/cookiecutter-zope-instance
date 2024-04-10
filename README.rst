@@ -66,11 +66,16 @@ Base Locations
 
 ``target``
     The target directory name of the cookiecutter generated configuration.
-    This is also the so called *INSTANCEHOME*.
 
     Attention, this is relative to current directory or to cookiecutters command line options if given (``-o PATH`` or ``--output-dir PATH``).
 
     Default: ``instance``
+
+``location_instancehome``
+    This is also the so called *INSTANCEHOME*.
+    Zope's **instancehome** directory is were by default all configuration is found.
+
+    Default: ``{{ cookiecutter.target | abspath }}``
 
 ``location_clienthome``
     Zope's **clienthome** directory is were by default all writable files are written.
@@ -79,6 +84,14 @@ Base Locations
     Traditionally this is the **var** directory of the *instancehome*.
 
     Default: ``{{ cookiecutter.target }}/var``
+
+``create_directories``
+    This cookiecutter may generate the needed directories for you.
+    It is handy if you want to start right away, but you may want to switch it off if you want to use the generated code on a different machine.
+
+    Allowed values boolean: ``true``, ``false``
+
+    Default: ``true``
 
 Basic configuration
 -------------------
