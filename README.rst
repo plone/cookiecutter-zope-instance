@@ -94,11 +94,10 @@ Basic configuration
     Default: ``localhost:8080``
 
 ``wsgi_fast_listen``
-    Like *wsgi_listen*, but uses [waitress_fastlisten](https://pypi.org/project/waitress-fastlisten/).
+    Like *wsgi_listen*, but uses `waitress_fastlisten <https://pypi.org/project/waitress-fastlisten/>`_.
     Needs latter package to be installed (add it to *requirements.txt*).
 
     Default: empty string. Switched off.
-
 
 ``wsgi_threads``
     Specify the number of worker threads used to service requests.
@@ -390,6 +389,9 @@ RelStorage
 ~~~~~~~~~~
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
+
+Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blobs_mode`` to ``cache``. 
+Usually you will also have to set up the correct DSN for your database.
 
 General settings
 """"""""""""""""
