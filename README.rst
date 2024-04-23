@@ -396,7 +396,7 @@ RelStorage
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
 
-Note: `Please see Database <#database_>`_ and `db_blobs_mode <#db_blobs_mode_>`_ , because you will have to adjust those settings accordingly. Usually you will also have to set up the correct DSN.
+Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blobs_mode`` to ``cache``. Usually you will also have to set up the correct DSN for your database.
 
 General settings
 """"""""""""""""
