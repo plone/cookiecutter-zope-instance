@@ -236,6 +236,8 @@ ZCML
 Database
 --------
 
+.. _database:
+
 Zope/Plone offers different ZODB storage backends for different environments and needs:
 
 - For development a simple local file based *direct* storage is all you need (aka filestorage).
@@ -313,6 +315,9 @@ Blobs Settings
 The blob settings are valid for all storages.
 
 ``db_blobs_mode``
+
+.. db_blobs_mode:
+
     Set if blobs are stored *shared* within all clients or are they stored on the storage backend and the client only operates as temporary *cache*.
     For *direct* storage only *shared* applies (operates like shared with one single client).
     Attention: Do not forget to set this to *cache* if you use RelStorage!
@@ -390,6 +395,8 @@ RelStorage
 ~~~~~~~~~~
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
+
+Note: `Please see Database <#database_>`_ and `db_blobs_mode <#db_blobs_mode_>`_ , because you will have to adjust those settings accordingly. Usually you will also have to set up the correct DSN.
 
 General settings
 """"""""""""""""
