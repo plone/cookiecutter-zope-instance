@@ -94,7 +94,7 @@ Basic configuration
     Default: ``localhost:8080``
 
 ``wsgi_fast_listen``
-    Like *wsgi_listen*, but uses [waitress_fastlisten](https://pypi.org/project/waitress-fastlisten/).
+    Like *wsgi_listen*, but uses `waitress_fastlisten <https://pypi.org/project/waitress-fastlisten/>`_.
     Needs latter package to be installed (add it to *requirements.txt*).
 
     Default: empty string. Switched off.
