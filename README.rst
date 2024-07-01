@@ -9,7 +9,7 @@ It bakes configuration for Zope 5
 Features
 ========
 
-- Creates basic file-system structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  inital user.
+- Creates basic file-system structure with ``zope.conf``, ``zope.ini``, ``site.zcml`` and  initial user.
 - Set Zope's main configuration options.
 - Configure different database backends such as local file-system storage, ``RelStorage`` or ``ZEO``.
 - Enable development options.
@@ -68,7 +68,7 @@ Base Locations
     The target directory name of the cookiecutter generated configuration.
     This is also the so called *INSTANCEHOME*.
 
-    Attention, this is relative to current directory or to cookiecutters command line options if given (``-o PATH`` or ``--output-dir PATH``).
+    Attention, this is relative to current directory or to cookiecutter command line options if given (``-o PATH`` or ``--output-dir PATH``).
 
     Default: ``instance``
 
@@ -240,7 +240,7 @@ Zope/Plone offers different ZODB storage backends for different environments and
 - For development a simple local file based *direct* storage is all you need (aka filestorage).
 - As soon as you want multiple application processes of Zope/Plone (horizontal scaling) you need to run a separate database server process and connect to it.
 
-  - We recommend to use a Postgresql database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
+  - We recommend to use a PostgreSQL database using the *RelStorage* implementation for ZODB with *psycopg2* driver as database server in production environments.
     RelStorage supports very well MySQL (and derivatives), Oracle and SQLite 3 as database servers.
   - Zope and ZODB comes with *ZEO* (Zope Enterprise Objects). This more lightweight storage server is supported here too. It is widely used in production environment.
 
@@ -311,7 +311,7 @@ Blobs Settings
 
 The blob settings are valid for all storages.
 
-``db_blobs_mode``
+``db_blob_mode``
     Set if blobs are stored *shared* within all clients or are they stored on the storage backend and the client only operates as temporary *cache*.
     For *direct* storage only *shared* applies (operates like shared with one single client).
     Attention: Do not forget to set this to *cache* if you use RelStorage!
@@ -320,23 +320,23 @@ The blob settings are valid for all storages.
 
     Default: ``shared``
 
-``db_blobs_location``
-    The name of the directory where the ZODB blob data or cache (depends on *db_blobs_mode*) will be stored.
+``db_blob_location``
+    The name of the directory where the ZODB blob data or cache (depends on *db_blob_mode*) will be stored.
 
     Default: ``{{ cookiecutter.location_clienthome }}/blobs``.
 
-``db_blobs_cache_size``
+``db_blob_cache_size``
     Set the maximum size of the blob cache, in bytes.
     With many blobs and enough disk space on the client hardware this should be increased.
     If not set, then the cache size isn't checked and the blob directory will grow without bound.
-    Only valid for *db_blobs_mode* *cache*.
+    Only valid for *db_blob_mode* *cache*.
 
     Default: ``6312427520`` (5GB).
 
-``db_blobs_cache_size_check``
-    Set the ZEO check size as percent of ``blobss_cache_size`` (for example, ``10`` for 10%).
+``db_blob_cache_size_check``
+    Set the ZEO check size as percent of ``blobs_cache_size`` (for example, ``10`` for 10%).
     The ZEO cache size will be checked when this many bytes have been loaded into the cache.
-    Only valid for *db_blobs_mode* *cache*.
+    Only valid for *db_blob_mode* *cache*.
 
     Defaults: ``10`` (10% of the blob cache size).
 
@@ -390,7 +390,7 @@ RelStorage
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
 
-Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blobs_mode`` to ``cache``. 
+Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blob_mode`` to ``cache``.
 Usually you will also have to set up the correct DSN for your database.
 
 General settings
@@ -526,14 +526,16 @@ The configuration for the scripts is generated as separate file:
 The file ``relstorage-pack.conf`` for the command line utility ``zobdpack`` is always generated for all RelStorage configurations.
 For usage information read `Packing Or Reference Checking A ZODB Storage: zodbpack <https://relstorage.readthedocs.io/en/latest/zodbpack.html>`_.
 
-The file ``relstorage-export.conf`` is generated if the two ``db_relstorage_export_*`` settings are given.
-The file ``relstorage-import.conf`` is generated if the two ``db_relstorage_import_*`` settings are given.
+The files
+- ``relstorage-export.conf`` is generated if the two ``db_relstorage_export_*`` settings are given, and
+- ``relstorage-import.conf`` is generated if the two ``db_relstorage_import_*`` settings are given.
+
 Both are for the command line utility ``zobdconvert``.
 For usage information read `Copying Data Between ZODB Storages: zodbconvert <https://relstorage.readthedocs.io/en/latest/zodbconvert.html>`_
 
 At the moment only the filestorage with blobs is supported.
 In future there may be more options, like converting from/to a ZEO-server or another RelStorage/Database.
-Latter would be useful to upgrade a database or convert MyQL to Postgresql or vice versa.
+Latter would be useful to upgrade a database or convert MySQL to PostgreSQL or vice versa.
 
 ``db_relstorage_import_filestorage_location``
     The filename of the filestorage to import from.
@@ -914,7 +916,7 @@ Then we set a bunch of environment variables for production:
     export INSTANCE_debug_mode=false
     export INSTANCE_verbose_security=false
     export INSTANCE_db_storage=relstorage
-    export INSTANCE_db_blobs_mode=cache
+    export INSTANCE_db_blob_mode=cache
     export INSTANCE_db_relstorage_keep_history=false
     export INSTANCE_db_relstorage=postgresql
     export INSTANCE_db_relstorage_postgresql_dsn="host='db' dbname='plone' user='plone' password='verysecret'"
@@ -927,7 +929,7 @@ all prefixed environment variables are transformed into a new configuration file
 .. code-block:: YAML
 
     default_context:
-        db_blobs_mode: cache
+        db_blob_mode: cache
         db_cache_size: '50000'
         db_cache_size_bytes: 1500MB
         db_relstorage: postgresql

@@ -1,5 +1,5 @@
 {
-  "_version": "2.1.0",
+  "_version": "2.1.1",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
@@ -48,8 +48,12 @@
   "db_large_record_size": "",
   "db_pool_size": "",
 
-  "db_blobs_mode": ["shared", "cache"],
-  "db_blobs_location": "{{ cookiecutter.location_clienthome }}/blobs",
+  "db_blob_mode": ["shared", "cache"],
+  "db_blobs_mode": ["","shared", "cache"],
+  "db_blob_location": "{{ cookiecutter.location_clienthome }}/blobs",
+  "db_blobs_location": "",
+  "db_blob_cache_size": "6312427520",
+  "db_blob_cache_size_check": "",
 
   "db_filestorage_location": "{{ cookiecutter.location_clienthome }}/filestorage/Data.fs",
   "db_filestorage_pack_keep_old": true,
@@ -63,7 +67,7 @@
   "db_relstorage_create_schema": true,
   "db_relstorage_commit_lock_timeout": "",
   "db_relstorage_commit_lock_id": "",
-  "db_relstorage_blob_cache_size_check_external": "",
+  "db_relstorage_blob_cache_size_check_external": false,
   "db_relstorage_blob_chunk_size": "",
   "db_relstorage_cache_local_mb": "",
   "db_relstorage_cache_local_object_max": "",
