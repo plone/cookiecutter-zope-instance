@@ -311,7 +311,7 @@ Blobs Settings
 
 The blob settings are valid for all storages.
 
-``db_blobs_mode``
+``db_blob_mode``
     Set if blobs are stored *shared* within all clients or are they stored on the storage backend and the client only operates as temporary *cache*.
     For *direct* storage only *shared* applies (operates like shared with one single client).
     Attention: Do not forget to set this to *cache* if you use RelStorage!
@@ -320,23 +320,23 @@ The blob settings are valid for all storages.
 
     Default: ``shared``
 
-``db_blobs_location``
-    The name of the directory where the ZODB blob data or cache (depends on *db_blobs_mode*) will be stored.
+``db_blob_location``
+    The name of the directory where the ZODB blob data or cache (depends on *db_blob_mode*) will be stored.
 
     Default: ``{{ cookiecutter.location_clienthome }}/blobs``.
 
-``db_blobs_cache_size``
+``db_blob_cache_size``
     Set the maximum size of the blob cache, in bytes.
     With many blobs and enough disk space on the client hardware this should be increased.
     If not set, then the cache size isn't checked and the blob directory will grow without bound.
-    Only valid for *db_blobs_mode* *cache*.
+    Only valid for *db_blob_mode* *cache*.
 
     Default: ``6312427520`` (5GB).
 
-``db_blobs_cache_size_check``
-    Set the ZEO check size as percent of ``blobss_cache_size`` (for example, ``10`` for 10%).
+``db_blob_cache_size_check``
+    Set the ZEO check size as percent of ``blobs_cache_size`` (for example, ``10`` for 10%).
     The ZEO cache size will be checked when this many bytes have been loaded into the cache.
-    Only valid for *db_blobs_mode* *cache*.
+    Only valid for *db_blob_mode* *cache*.
 
     Defaults: ``10`` (10% of the blob cache size).
 
@@ -390,7 +390,7 @@ RelStorage
 
 `RelStorage <https://pypi.org/project/RelStorage/>`_ is a storage implementation for ZODB that stores pickles in a relational database (RDBMS).
 
-Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blobs_mode`` to ``cache``. 
+Note: Please see `Database`_ and `Blobs Settings`_ , as you will have to set ``db_blob_mode`` to ``cache``.
 Usually you will also have to set up the correct DSN for your database.
 
 General settings
@@ -914,7 +914,7 @@ Then we set a bunch of environment variables for production:
     export INSTANCE_debug_mode=false
     export INSTANCE_verbose_security=false
     export INSTANCE_db_storage=relstorage
-    export INSTANCE_db_blobs_mode=cache
+    export INSTANCE_db_blob_mode=cache
     export INSTANCE_db_relstorage_keep_history=false
     export INSTANCE_db_relstorage=postgresql
     export INSTANCE_db_relstorage_postgresql_dsn="host='db' dbname='plone' user='plone' password='verysecret'"
@@ -927,7 +927,7 @@ all prefixed environment variables are transformed into a new configuration file
 .. code-block:: YAML
 
     default_context:
-        db_blobs_mode: cache
+        db_blob_mode: cache
         db_cache_size: '50000'
         db_cache_size_bytes: 1500MB
         db_relstorage: postgresql

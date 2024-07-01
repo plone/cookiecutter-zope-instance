@@ -36,7 +36,7 @@ if not inituser_filename.exists():
 with work_in(basedir):
     Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.db_blobs_location }}").mkdir(parents=True, exist_ok=True)
+    Path("{{ cookiecutter.db_blob_location }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.environment['CHAMELEON_CACHE'] }}").mkdir(
         parents=True, exist_ok=True
     )

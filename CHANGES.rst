@@ -1,6 +1,18 @@
 Changelog
 =========
 
+2.1.1
+-----
+
+- Fix broken handling of `blob-cache-size` and `blob-cache-size-check`.
+  [@jensens, 2024-07-01]
+
+- Fix: Introduce consistent naming of all `db_blob_*` and deprecate all `db_blobs_*`.
+  [@jensens, 2024-07-01]
+
+- Add a footer to all generated files to make clear where they come from, include version of `cookiecutter-zope-instance`.
+  [@jensens, 2024-07-01]
+
 2.1.0
 -----
 
