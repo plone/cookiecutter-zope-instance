@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.1.2 (unreleased)
+------------------
+
+- Fix typo in docs: it is not ``zcml_package_meta`` singular, but ``zcml_package_metas`` plural.
+  [@mauritsvanrees, 2024-08-29]
+
+- Fix typo in deprecation warning: there was never a ``zcml`` dict setting, only ``load_zcml`.
+  [@mauritsvanrees, 2024-08-29]
+
 2.1.1
 -----
 

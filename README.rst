@@ -178,7 +178,7 @@ Initial user
 ZCML
 ----
 
-``zcml_package_meta``
+``zcml_package_metas``
     A string with comma separated values of ``meta.zcml`` files from packages to include.
 
     Examples: "my.fancypackage" or "myns.mypackage, collective.example"
