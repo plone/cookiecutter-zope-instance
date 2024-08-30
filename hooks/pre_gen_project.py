@@ -32,7 +32,7 @@ load_zcml = {{ cookiecutter.load_zcml }}
 has_old_zcml = bool([value for value in load_zcml.values() if value])
 if has_old_zcml:
     upgrade_warnings.append(
-        "The 'zcml' dict setting is removed in 2.0, use 'zcml_' prefix variables instead!"
+        "The 'load_zcml' dict setting was deprecated in version 2.0. Instead use the name of its keys prefixed with 'zcml_' as the new variable names."
     )
 
 if "{{ cookiecutter.debug_mode in [True, False] }}" != "True":
