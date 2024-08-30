@@ -31,7 +31,7 @@ Changelog
 2.0.1
 -----
 
-- Fix: Implement a fallback to old zcml configurations Fixes #18.
+- Fix: Implement a fallback to use ``load_zcml`` dict configuration, effectively making the breaking change of its removal in 2.0.0 a deprecation instead. Fixes #18.
   [@ericof, 2024-03-01]
 
 2.0
