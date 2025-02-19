@@ -1,8 +1,13 @@
 Changelog
 =========
 
-2.1.2 (unreleased)
+2.1.3 (unreleased)
 ------------------
+
+- nothing yet
+
+2.1.2 
+-----
 
 - Fix typo in docs: it is not ``zcml_package_meta`` singular, but ``zcml_package_metas`` plural.
   [@mauritsvanrees, 2024-08-29]
