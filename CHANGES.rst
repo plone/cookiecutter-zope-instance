@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.3 (unreleased)
+2.1.3 (2025-03-03)
 ------------------
 
 - Feature: configurable `wsgi_app_entrypoint`.
