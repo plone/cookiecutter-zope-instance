@@ -10,6 +10,7 @@
   "wsgi_threads": "4",
   "wsgi_max_request_body_size": "1073741824",
   "wsgi_clear_untrusted_proxy_headers": false,
+  "wsgi_app_entrypoint": "egg:Zope#main",
 
   "environment": {
     "zope_i18n_compile_mo_files": "true",

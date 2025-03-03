@@ -4,9 +4,10 @@ Changelog
 2.1.3 (unreleased)
 ------------------
 
-- nothing yet
+- Feature: configurable `wsgi_app_entrypoint`.
+  [@jensens, 2025-03-03]
 
-2.1.2 
+2.1.2
 -----
 
 - Fix typo in docs: it is not ``zcml_package_meta`` singular, but ``zcml_package_metas`` plural.
