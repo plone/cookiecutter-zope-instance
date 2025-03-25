@@ -163,6 +163,7 @@ TODO: support all of https://docs.pylonsproject.org/projects/waitress/en/latest/
 
 ``enable_xmlrpc``
     Turn Zope's built-in XML-RPC support on or off.
+    Available starting with Zope 5.13.
 
     Zope has built-in support for XML-RPC requests.
     It will attempt to use XML-RPC for POST-requests with Content-Type header ``text/xml``.

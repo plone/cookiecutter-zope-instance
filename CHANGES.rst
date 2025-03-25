@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.2.1 (2025-03-25)
+------------------
+
+- Fix: For Zope versions below 5.13 the setting ``enable_xmlrpc`` should not be set since it does not exist.
+  It now renders only if set to false.
+  [@jensens, 2025-03-25]
+
 2.2.0 (2025-03-25)
 ------------------
 
