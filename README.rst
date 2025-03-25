@@ -161,6 +161,50 @@ TODO: support all of https://docs.pylonsproject.org/projects/waitress/en/latest/
 
     default: "4KB",
 
+``enable_xmlrpc``
+    Turn Zope's built-in XML-RPC support on or off.
+
+    Zope has built-in support for XML-RPC requests.
+    It will attempt to use XML-RPC for POST-requests with Content-Type header ``text/xml``.
+    By default the XML-RPC request support is enabled.
+
+    Due to the limited use of XML-RPC nowadays and its potential for abuse by malicious actors you can set this to false to turn off support for XML-RPC.
+    Incoming XML-RPC requests will be refused with a BadRequest (HTTP status 400) response.
+
+    Default: ``true``
+
+``enable_ms_public_header``
+    Set this directive to ``true`` to enable sending the ``Public`` header in response to an WebDAV OPTIONS request - but only those coming from Microsoft WebDAV clients.
+
+    Though recent WebDAV drafts mention this header, the original WebDAV RFC did not mention it as part of the standard.
+    Very few web servers out there include this header in their replies, most notably IIS and Netscape Enterprise 3.6.
+
+    Documentation about this header is sparse.
+    Some versions of Microsoft Web Folders after 2005 apparently require its presence, but most documentation links have expired.
+
+    Default: ``false``
+
+``webdav_source_port``
+    This value designates a network port number as WebDAV source port.
+
+    WebDAV requires special handling for GET requests.
+    A WebDAV client expects to receive the un-rendered source in the returned response body, not the rendered result a web browser would get.
+
+    If this value is set to a positive integer, any GET request coming into Zope via the designated port will be marked up to signal that this is a WebDAV request.
+    This request markup resembles what ZServer did for requests coming though its designated WebDAV source server port, so it is backwards-compatible for existing code that offers WebDAV handling under ZServer.
+
+    Please note that Zope itself has no server capabilities and cannot open network ports.
+    You need to configure your WSGI server to listen on the designated port.
+
+    Default: ``0``
+
+``http-realm``
+    The HTTP ``Realm`` header value sent by this Zope instance.
+    This value often shows up in basic authentication dialogs.
+
+    Default: ``Zope``
+
+
 Initial user
 ------------
 
@@ -305,6 +349,11 @@ TODO check here https://zodb.org/en/latest/reference/zodb.html#database-text-con
     Allowed values: integer
 
     Default: unset, empty string, database default of ``7`` is active.
+
+``max_conflict_retries``
+    The maximum number of retries on a conflict error.
+
+    Default: ``3``
 
 Blobs Settings
 ~~~~~~~~~~~~~~
@@ -815,6 +864,19 @@ Development
     Switches debug mode on or off.
 
     Allowed values boolean: ``true``, ``false``.
+
+    Default: ``false``
+
+``debug_exceptions``
+
+    This switch controls how exceptions are handled.
+    If it is set to `false`` (the default), Zope's own exception handling is active.
+    Exception views or a `standard_error_message` are used to handle them.
+
+    If set to `true`, exceptions are not handled by Zope and can propagate into the WSGI pipeline, where they may be handled by debugging middleware.
+
+    This setting should always be `false` in production.
+    It is useful for developers and while debugging site issues.
 
     Default: ``false``
 

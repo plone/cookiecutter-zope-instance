@@ -1,5 +1,5 @@
 {
-  "_version": "2.1.4.dev0",
+  "_version": "2.2.0",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
@@ -132,7 +132,13 @@
   "cors_expose_headers": "Content-Length",
   "cors_max_age": "3600",
 
+  "http_realm": "Zope",
+  "max_conflict_retries": "3",
+  "webdav_source_port": "0",
+  "enable_ms_public_header": false,
+  "enable_xmlrpc": true,
   "debug_mode": false,
+  "debug_exceptions": false,
   "verbose_security": false,
 
   "profile_repoze": false,

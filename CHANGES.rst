@@ -1,10 +1,11 @@
 Changelog
 =========
 
-2.1.4 (unreleased)
+2.2.0 (2025-03-25)
 ------------------
 
-- Nothing changed yet.
+- Feature: Introduce settings: http_realm, max_conflict_retries, webdav_source_port, enable_xmlrpc, enable_ms_public_header, debug_exceptions.
+  [@jensens, 2025-03-25]
 
 
 2.1.3 (2025-03-03)
@@ -19,7 +20,7 @@ Changelog
 - Fix typo in docs: it is not ``zcml_package_meta`` singular, but ``zcml_package_metas`` plural.
   [@mauritsvanrees, 2024-08-29]
 
-- Fix typo in deprecation warning: there was never a ``zcml`` dict setting, only ``load_zcml`.
+- Fix typo in deprecation warning: there was never a ``zcml`` dict setting, only ``load_zcml``.
   [@mauritsvanrees, 2024-08-29]
 
 2.1.1
