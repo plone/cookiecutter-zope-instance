@@ -9,6 +9,12 @@ if (
     print("Error: A 'direct' database must be configured with 'shared' db_blob_mode!")
     exit(1)
 
+# check s3blobstorage requires bucket-name
+if "{{ cookiecutter.db_storage }}" == "s3blobstorage":
+    if not "{{ cookiecutter.db_s3blobs_bucket_name }}":
+        print("Error: 's3blobstorage' requires 'db_s3blobs_bucket_name' to be set!")
+        exit(1)
+
 # check database mode not direct and blobs not shared
 db_blob_mode = "{{ cookiecutter.db_blobs_mode }}"
 if db_blob_mode == "":

@@ -29,7 +29,7 @@ if not inituser_filename.exists():
     with open(inituser_filename, "w") as fp:
         pw = b2a_base64(sha1(password.encode("utf-8")).digest())[:-1]
         fp.write("%s:{SHA}%s\n" % (username, pw.decode("ascii")))
-    inituser_filename.chmod(0o644)
+    inituser_filename.chmod(0o600)
 
 
 # post generation step 2: generate directories
@@ -46,6 +46,11 @@ with work_in(basedir):
     if "{{ cookiecutter.db_storage }}" == "direct":
         filepath = Path("{{ cookiecutter.db_filestorage_location }}")
         filepath.parent.mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_storage }}" == "s3blobstorage":
+        Path("{{ cookiecutter.db_s3blobs_cache_dir }}").mkdir(parents=True, exist_ok=True)
+        if "{{ cookiecutter.db_s3blobs_base_storage }}" == "direct":
+            filepath = Path("{{ cookiecutter.db_filestorage_location }}")
+            filepath.parent.mkdir(parents=True, exist_ok=True)
     if "{{ cookiecutter.db_storage }}" == "relstorage":
         # import
         db_relstorage_import_blobs_location = (

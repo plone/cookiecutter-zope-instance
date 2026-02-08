@@ -43,7 +43,7 @@
   "dos_protection_form_disk_limit": "1GB",
   "dos_protection_form_memfile_limit": "4KB",
 
-  "db_storage": ["direct", "relstorage", "zeo"],
+  "db_storage": ["direct", "relstorage", "zeo", "s3blobstorage"],
   "db_cache_size": "30000",
   "db_cache_size_bytes": "",
   "db_large_record_size": "",
@@ -55,6 +55,18 @@
   "db_blobs_location": "",
   "db_blob_cache_size": "6312427520",
   "db_blob_cache_size_check": "",
+
+  "db_s3blobs_base_storage": ["direct", "relstorage", "zeo"],
+  "db_s3blobs_bucket_name": "",
+  "db_s3blobs_s3_prefix": "",
+  "db_s3blobs_s3_endpoint_url": "",
+  "db_s3blobs_s3_region": "",
+  "db_s3blobs_s3_access_key": "",
+  "db_s3blobs_s3_secret_key": "",
+  "db_s3blobs_s3_use_ssl": true,
+  "db_s3blobs_s3_addressing_style": "auto",
+  "db_s3blobs_cache_dir": "{{ cookiecutter.location_clienthome }}/s3blobs-cache",
+  "db_s3blobs_cache_size": "1GB",
 
   "db_filestorage_location": "{{ cookiecutter.location_clienthome }}/filestorage/Data.fs",
   "db_filestorage_pack_keep_old": true,
