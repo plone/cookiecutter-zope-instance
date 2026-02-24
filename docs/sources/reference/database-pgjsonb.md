@@ -3,10 +3,12 @@
 <!-- diataxis: reference -->
 
 [zodb-pgjsonb](https://pypi.org/project/zodb-pgjsonb/) is a ZODB storage
-adapter that stores object state as PostgreSQL JSONB with binary blobs in
-PostgreSQL bytea (or optionally tiered to S3-compatible object storage). It
-uses [zodb-json-codec](https://pypi.org/project/zodb-json-codec/) for
-Rust-based pickle-to-JSON transcoding.
+adapter optimized for cloud-native environments. It stores object state as
+PostgreSQL JSONB with binary blobs in PostgreSQL bytea (or optionally tiered
+to S3-compatible object storage), making it a natural fit for managed
+PostgreSQL services (RDS, Cloud SQL, AlloyDB, etc.). It uses
+[zodb-json-codec](https://pypi.org/project/zodb-json-codec/) for Rust-based
+pickle-to-JSON transcoding.
 
 :::{note}
 Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
