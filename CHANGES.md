@@ -13,6 +13,11 @@
   Closes [#30](https://github.com/plone/cookiecutter-zope-instance/issues/30).
   [@jensens]
 
+- Feature: Migrate documentation from monolithic README.rst to Sphinx with
+  Diataxis framework (tutorials, how-to guides, reference, explanation).
+  Published via GitHub Pages with `llms.txt` for AI agent discovery.
+  [@jensens]
+
 ## 2.2.1 (2025-03-25)
 
 - Fix: For Zope versions below 5.13 the setting `enable_xmlrpc` should not be
