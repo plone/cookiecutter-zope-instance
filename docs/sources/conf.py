@@ -35,7 +35,7 @@ mermaid_output_format = "raw"
 html_theme = "shibuya"
 
 html_theme_options = {
-    "logo_target": "/",
+    "logo_target": "/cookiecutter-zope-instance/",
     "accent_color": "blue",
     "color_mode": "dark",
     "dark_code": True,
