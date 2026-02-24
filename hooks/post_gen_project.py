@@ -74,7 +74,14 @@ with work_in(basedir):
         if db_relstorage_export_filestorage_location:
             filepath = Path(db_relstorage_export_filestorage_location)
             filepath.parent.mkdir(parents=True, exist_ok=True)
-    else:
+    if "{{ cookiecutter.db_storage }}" == "pgjsonb":
+        blob_temp_dir = "{{ cookiecutter.db_pgjsonb_blob_temp_dir }}"
+        if blob_temp_dir:
+            Path(blob_temp_dir).mkdir(parents=True, exist_ok=True)
+        blob_cache_dir = "{{ cookiecutter.db_pgjsonb_blob_cache_dir }}"
+        if blob_cache_dir:
+            Path(blob_cache_dir).mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_storage }}" != "relstorage":
         # cleanup relstorage files if no relstorage is configured
         (etc / "relstorage-export.conf").unlink()
         (etc / "relstorage-import.conf").unlink()

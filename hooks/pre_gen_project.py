@@ -18,6 +18,14 @@ if (
 ):
     print("Warning: A 'relstorage' database is better used with 'cache' db_blob_mode!\n")
 
+# pgjsonb requires a DSN
+if (
+    "{{ cookiecutter.db_storage }}" == "pgjsonb"
+    and not "{{ cookiecutter.db_pgjsonb_dsn }}"
+):
+    print("Error: 'pgjsonb' storage requires 'db_pgjsonb_dsn' to be set!")
+    exit(1)
+
 # minimal sanity check for password
 password = "{{ cookiecutter.initial_user_password }}"
 if 0 < len(password) < 10:

@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.3.0 (unreleased)
+------------------
+
+- Feature: Add ``pgjsonb`` as a new database storage backend using
+  ``zodb-pgjsonb`` with PostgreSQL JSONB and optional S3 blob tiering.
+  Closes `#30 <https://github.com/plone/cookiecutter-zope-instance/issues/30>`_.
+  [@jensens]
+
 2.2.1 (2025-03-25)
 ------------------
 
