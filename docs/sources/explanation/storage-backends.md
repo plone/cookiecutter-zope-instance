@@ -14,7 +14,7 @@ page explains the four storage backends supported by
 | **direct** (filestorage) | Development, single-process | No (single process only) | Yes (built-in) | None |
 | **relstorage** (PostgreSQL, MySQL, Oracle, SQLite) | Production, horizontal scaling | Yes (multiple app processes) | Optional (history-preserving mode) | RDBMS server |
 | **zeo** | Production, moderate scaling | Yes (multiple app processes) | Yes (built-in) | ZEO server process |
-| **pgjsonb** | SQL-queryable ZODB, modern stacks | Yes (multiple app processes) | Optional (history-preserving mode) | PostgreSQL 14+ |
+| **pgjsonb** | Cloud-native, SQL-queryable ZODB | Yes (multiple app processes) | Optional (history-preserving mode) | PostgreSQL 14+ |
 
 ## Direct filestorage
 
@@ -101,6 +101,8 @@ between Python pickle format and JSON.
 
 **When to use it:**
 
+- Cloud-native deployments where a managed PostgreSQL service (RDS, Cloud SQL,
+  AlloyDB, etc.) replaces local filestorage and blob directories
 - When you want to query ZODB data directly with SQL/JSONB operators
 - Modern PostgreSQL-centric architectures
 - Integration with tools that consume JSON natively (analytics, reporting)
@@ -128,7 +130,7 @@ For most teams, the decision comes down to:
 1. **Development or single-process?** Use `direct`.
 2. **Need multi-process with an existing RDBMS?** Use `relstorage`.
 3. **Need multi-process, prefer ZODB-native simplicity?** Use `zeo`.
-4. **Want SQL-queryable ZODB data on PostgreSQL?** Use `pgjsonb`.
+4. **Cloud-native or want SQL-queryable ZODB data on PostgreSQL?** Use `pgjsonb`.
 
 All four backends support the same ZODB API, so switching between them is a
 configuration change (plus data migration). Your application code does not
