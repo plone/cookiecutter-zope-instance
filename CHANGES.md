@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1 (unreleased)
+
+- No changes yet.
+
 ## 2.3.0 (2026-02-24)
 
 - Feature: Add `zodb-s3blobs` support as an S3 blob storage wrapper for
