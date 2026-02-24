@@ -85,25 +85,13 @@ export INSTANCE_environment_DICT_zope_i18n_allowed_languages="de en"
 
 ## Docker integration pattern
 
-A typical Dockerfile pattern:
+See the {doc}`/tutorials/docker-deployment` tutorial for a complete example.
+The key points:
 
-```dockerfile
-FROM python:3.12-slim
-
-COPY instance.yaml /app/instance.yaml
-COPY transform_from_environment.py /app/transform_from_environment.py
-
-WORKDIR /app
-
-CMD python3 transform_from_environment.py && \
-    cookiecutter -f --no-input \
-        --config-file instance-from-environment.yaml \
-        gh:plone/cookiecutter-zope-instance && \
-    runwsgi instance/etc/zope.ini
-```
-
-In your `docker-compose.yml` or Kubernetes manifests, set `INSTANCE_*`
-environment variables to configure each deployment.
+- **Pin the template version** at build time (download the zip archive).
+- **Run the transform + cookiecutter in an entrypoint**, not at build time,
+  so that `INSTANCE_*` environment variables (secrets, DSNs) are available.
+- **No network at runtime** -- the entrypoint uses only local files.
 
 ## Next steps
 
