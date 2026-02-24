@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.3.0 (unreleased)
+## 2.3.0 (2026-02-24)
 
 - Feature: Add `zodb-s3blobs` support as an S3 blob storage wrapper for
   `direct`, `relstorage`, and `zeo` backends. Enable via
