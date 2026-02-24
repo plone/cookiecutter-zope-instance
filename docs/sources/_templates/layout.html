@@ -1,0 +1,11 @@
+{# Extend the theme's layout to inject Open Graph meta #}
+{% extends "!layout.html" %}
+
+{% block metatags %}
+{{ super() }}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="Cookiecutter template for Zope 5 WSGI instance configuration.">
+<meta property="og:url" content="https://plone.github.io/cookiecutter-zope-instance/">
+<meta name="twitter:card" content="summary">
+{% endblock %}
