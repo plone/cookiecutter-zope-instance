@@ -2,9 +2,49 @@
 
 ## 2.3.1 (unreleased)
 
+- Feature: Add `trusted_proxy` setting for reverse proxy IP configuration
+  (renders as `trusted-proxy` directives in `zope.conf`).
+  [@jensens]
+
+- Feature: Add `product_config` setting (dict of dicts) for Zope
+  `<product-config>` addon configuration sections.
+  [@jensens]
+
+- Feature: Add `datetime_format` setting for Zope `datetime-format` directive
+  (`us` or `international`).
+  [@jensens]
+
+- Feature: Add `dos_protection_form_part_limit` setting for the maximum number
+  of parts in multipart POST requests (Zope 5.10+).
+  [@jensens]
+
+- Feature: Add `db_pool_timeout` setting for ZODB connection pool idle timeout.
+  [@jensens]
+
+- Feature: Add `db_filestorage_create` and `db_filestorage_read_only` settings
+  for FileStorage.
+  [@jensens]
+
+- Feature: Add `db_relstorage_name` and `db_relstorage_pack_gc` settings
+  for RelStorage.
+  [@jensens]
+
+- Feature: Add `db_zeo_client_label`, `db_zeo_storage`, and `db_zeo_wait`
+  settings for ZEO client configuration.
+  [@jensens]
+
+- Feature: Add `wsgi_channel_timeout` setting for Waitress idle connection
+  timeout.
+  [@jensens]
+
 - Feature: Add optional `locale` setting to configure the Zope `locale`
   directive in `zope.conf`.
   Closes [#29](https://github.com/plone/cookiecutter-zope-instance/issues/29).
+  [@jensens]
+
+- Fix: Oracle RelStorage configuration was broken -- `db_relstorage_oracle_password`
+  had a typo (`oraclce`) in `cookiecutter.json` and `db_relstorage_oracle_driver`
+  was missing entirely.
   [@jensens]
 
 - Fix: Deprecated `db_blobs_location` was ignored for `direct` (filestorage)

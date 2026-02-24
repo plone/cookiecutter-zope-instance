@@ -12,6 +12,7 @@ See {doc}`/explanation/storage-backends` for a comparison.
 | `db_cache_size_bytes` | *(unset)* | byte-size (KB, MB, GB) |
 | `db_large_record_size` | *(unset, default `16MB`)* | byte-size (KB, MB, GB) |
 | `db_pool_size` | *(unset, default `7`)* | integer |
+| `db_pool_timeout` | *(unset)* | integer (seconds) |
 | `max_conflict_retries` | `3` | integer |
 
 **`db_cache_size`** -- ZODB cache target maximum number of non-ghost objects per connection. One cache is created for each active parallel running thread. A powerful tuning knob -- if in doubt, do not touch.
@@ -21,3 +22,5 @@ See {doc}`/explanation/storage-backends` for a comparison.
 **`db_large_record_size`** -- When object records exceed this size a warning is issued suggesting blobs should be used instead.
 
 **`db_pool_size`** -- Expected maximum number of simultaneously open connections. No hard limit; exceeding it logs a warning, exceeding 2x logs a critical message.
+
+**`db_pool_timeout`** -- The maximum time in seconds that an unused connection should be kept open. When set, idle connections older than this value are closed automatically. Useful for managing memory in deployments with many worker threads.
