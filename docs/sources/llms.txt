@@ -1,0 +1,102 @@
+# cookiecutter-zope-instance
+
+> Cookiecutter template for generating Zope 5 WSGI instance configuration files.
+
+cookiecutter-zope-instance is a [cookiecutter](https://cookiecutter.readthedocs.io)
+template that generates a complete Zope 5 WSGI instance directory with `zope.conf`,
+`zope.ini`, `site.zcml`, and initial user credentials from a declarative YAML
+configuration file.
+
+## Key Facts
+
+- Package: cookiecutter-zope-instance
+- License: GPL-2.0
+- Python: 3.10+
+- Repository: https://github.com/plone/cookiecutter-zope-instance
+- PyPI: https://pypi.org/project/cookiecutter-zope-instance/
+
+## Features
+
+- Creates `zope.conf`, `zope.ini`, `site.zcml` and initial user
+- Configures WSGI server (Waitress) settings
+- Supports four database backends: direct filestorage, RelStorage, ZEO, PGJsonb
+- CORS configuration for REST API usage
+- Development and profiling options
+- Environment-variable helper for containerized deployments
+
+## Database Backends
+
+Four ZODB storage backends are supported:
+
+| Backend | Use Case | Key Setting |
+|---|---|---|
+| `direct` | Development, single-process | `db_filestorage_location` |
+| `relstorage` | Production with PostgreSQL/MySQL/Oracle/SQLite | `db_relstorage_postgresql_dsn` |
+| `zeo` | Production with ZEO server | `db_zeo_server` |
+| `pgjsonb` | SQL-queryable ZODB on PostgreSQL JSONB | `db_pgjsonb_dsn` |
+
+Set via `db_storage` in `instance.yaml`.
+
+## Usage
+
+1. Create `instance.yaml`:
+
+```yaml
+default_context:
+    initial_user_name: admin
+    initial_user_password: admin
+    zcml_package_includes: my.addon
+    db_storage: direct
+```
+
+2. Run cookiecutter:
+
+```bash
+cookiecutter -f --no-input --config-file instance.yaml \
+    gh:plone/cookiecutter-zope-instance
+```
+
+3. Generated structure:
+
+```
+instance/
+├── etc/
+│   ├── zope.conf
+│   ├── zope.ini
+│   └── site.zcml
+└── inituser
+```
+
+## Configuration Variable Namespaces
+
+- `wsgi_*` — WSGI server (host, port, threads, body size)
+- `db_*` — Database common settings (storage type, cache, pool)
+- `db_blob_*` — Blob settings (mode, location, cache size)
+- `db_filestorage_*` — Direct filestorage settings
+- `db_relstorage_*` — RelStorage settings (driver, DSN, caching, replication)
+- `db_zeo_*` — ZEO client settings (server, cache, auth)
+- `db_pgjsonb_*` — PGJsonb settings (DSN, pool, S3 tiering)
+- `cors_*` — CORS settings (origins, methods, headers)
+- `zcml_*` — ZCML package includes, overrides, resources
+- `dos_protection_*` — DOS protection limits
+- `profile_repoze_*` — repoze.profile profiling
+
+## Environment Variable Override
+
+The `helpers/transform_from_environment.py` script transforms `INSTANCE_*`
+environment variables into cookiecutter YAML configuration. Use `_DICT_` as
+separator for nested dict values.
+
+## Blob Handling
+
+- **direct**: blobs in local filesystem (`db_blob_location`)
+- **relstorage**: `db_blob_mode: cache` (recommended) or `shared`
+- **zeo**: `db_blob_mode: shared` (recommended) or `cache`
+- **pgjsonb**: PostgreSQL bytea by default, optional S3 tiering (`db_pgjsonb_s3_*`)
+
+## Documentation Sections
+
+- [Tutorials](tutorials/index.md): First instance, Docker deployment
+- [How-To Guides](how-to/index.md): RelStorage, PGJsonb, ZEO, CORS, env vars, upgrading
+- [Reference](reference/index.md): All configuration variables documented
+- [Explanation](explanation/index.md): Storage backends, blob handling, rationale
