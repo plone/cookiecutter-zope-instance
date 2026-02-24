@@ -164,6 +164,7 @@
   "cors_expose_headers": "Content-Length",
   "cors_max_age": "3600",
 
+  "locale": "",
   "http_realm": "Zope",
   "max_conflict_retries": "3",
   "webdav_source_port": "0",

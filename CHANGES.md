@@ -2,7 +2,13 @@
 
 ## 2.3.1 (unreleased)
 
-- No changes yet.
+- Feature: Add optional `locale` setting to configure the Zope `locale`
+  directive in `zope.conf`.
+  Closes [#29](https://github.com/plone/cookiecutter-zope-instance/issues/29).
+  [@jensens]
+
+- Fix: Add `pythonpath = .` to `pytest.ini` so tests also work when running
+  `pytest` directly (not only via `tox`).
 
 ## 2.3.0 (2026-02-24)
 

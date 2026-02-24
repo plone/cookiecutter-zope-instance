@@ -270,6 +270,27 @@ def test_bake_with_z3blobs_no_cache_dir_fails(cookies):
         assert result.exit_code != 0
 
 
+def test_bake_with_locale(cookies):
+    """Setting locale should render in zope.conf."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "locale": "de_DE.UTF-8",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "locale de_DE.UTF-8" in zope_conf
+
+
+def test_bake_without_locale(cookies):
+    """Default bake should have no locale directive."""
+    with bake_in_temp_dir(cookies) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "locale " not in zope_conf
+
+
 def test_bake_with_z3blobs_pgjsonb_fails(cookies):
     """z3blobs + pgjsonb should fail (pgjsonb handles blobs natively)."""
     with bake_in_temp_dir(

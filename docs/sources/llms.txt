@@ -77,6 +77,7 @@ instance/
 - `db_zeo_*` — ZEO client settings (server, cache, auth)
 - `db_pgjsonb_*` — PGJsonb settings (DSN, pool, S3 tiering)
 - `db_z3blobs_*` — S3 blob wrapper settings (bucket, cache, S3 connection)
+- `locale` — Set the Zope locale (e.g. `de_DE.UTF-8`); empty by default
 - `cors_*` — CORS settings (origins, methods, headers)
 - `zcml_*` — ZCML package includes, overrides, resources
 - `dos_protection_*` — DOS protection limits

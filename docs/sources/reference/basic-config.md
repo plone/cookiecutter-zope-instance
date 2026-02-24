@@ -67,6 +67,14 @@ the value of the environment variable is not added or updated but replaced!
 
 **`webdav_source_port`** -- This value designates a network port number as WebDAV source port. If set to a positive integer, any GET request coming into Zope via the designated port will be marked up to signal that this is a WebDAV request. Please note that Zope itself has no server capabilities and cannot open network ports. You need to configure your WSGI server to listen on the designated port.
 
+## Locale
+
+| Setting | Default |
+|---|---|
+| `locale` | *(unset)* |
+
+**`locale`** -- Enable locale (internationalization) support by setting this to a locale string such as `de_DE.UTF-8`. When set, Zope will set the `locale` directive in `zope.conf`, which configures the locale used by the Python `locale` module. Leave empty to use the system default.
+
 ## HTTP Realm
 
 | Setting | Default |
