@@ -100,29 +100,80 @@ cookiecutter -f --no-input \
 
 ## Step 5: Use in a Dockerfile
 
-A typical Dockerfile pattern:
+The transform **must run at container startup**, not at image build time,
+because `INSTANCE_*` environment variables (database credentials, hostnames)
+are only available at runtime.
+
+The image bakes in the base YAML and the tools; the entrypoint generates the
+Zope configuration on every start.
+
+**Dockerfile**
 
 ```dockerfile
-FROM python:3.12-slim AS build
-
-COPY instance.yaml /app/instance.yaml
-COPY transform_from_environment.py /app/
+FROM python:3.12-slim
 
 WORKDIR /app
 
+# Install cookiecutter and your application
 RUN pip install cookiecutter
 
-ARG INSTANCE_db_storage=relstorage
-ARG INSTANCE_db_relstorage=postgresql
+# Copy base config and the transform helper
+COPY instance.yaml /app/instance.yaml
+COPY transform_from_environment.py /app/
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-RUN python transform_from_environment.py \
- && cookiecutter -f --no-input --config-file instance-from-environment.yaml \
-        gh:plone/cookiecutter-zope-instance
+# Sensible defaults (overridden at runtime via docker run -e / Compose)
+ENV INSTANCE_wsgi_listen=0.0.0.0:8080
+ENV INSTANCE_debug_mode=false
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["start"]
 ```
 
-For **runtime** overrides (secrets, DSN strings) prefer passing environment
-variables via `docker run -e` or a Compose `environment:` block and running
-the transform + cookiecutter as the container entrypoint.
+**entrypoint.sh**
+
+```bash
+#!/bin/bash
+set -e
+
+# Generate instance.yaml from INSTANCE_* environment variables
+python /app/transform_from_environment.py -o /app/instance-from-environment.yaml
+
+# Generate Zope instance configuration
+cookiecutter -f --no-input \
+    --config-file /app/instance-from-environment.yaml \
+    gh:plone/cookiecutter-zope-instance
+
+if [[ "$1" == "start" ]]; then
+    exec runwsgi instance/etc/zope.ini
+else
+    exec "$@"
+fi
+```
+
+Now start the container with runtime environment variables:
+
+```bash
+docker run -e INSTANCE_db_storage=relstorage \
+           -e INSTANCE_db_relstorage=postgresql \
+           -e INSTANCE_db_relstorage_postgresql_dsn="host='db' dbname='plone' user='plone' password='secret'" \
+           -p 8080:8080 my-zope-app
+```
+
+Or via Docker Compose:
+
+```yaml
+services:
+  zope:
+    build: .
+    environment:
+      INSTANCE_db_storage: relstorage
+      INSTANCE_db_relstorage: postgresql
+      INSTANCE_db_relstorage_postgresql_dsn: "host='db' dbname='plone' user='plone' password='secret'"
+    ports:
+      - "8080:8080"
+```
 
 ## Advanced: Dict values with `_DICT_`
 
@@ -150,5 +201,5 @@ environment:
 - Empty values clear a key -- useful for disabling features in production.
 - The `_DICT_` infix lets you set individual entries inside dict-typed
   variables.
-- Combining the transform with cookiecutter in a Dockerfile gives you
-  reproducible, secret-safe Zope instance generation.
+- The transform and cookiecutter must run in an **entrypoint**, not at build
+  time, so that runtime environment variables (secrets, DSNs) are available.
