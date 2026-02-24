@@ -291,6 +291,34 @@ def test_bake_without_locale(cookies):
         assert "locale " not in zope_conf
 
 
+def test_bake_with_deprecated_db_blobs_location(cookies):
+    """Deprecated db_blobs_location should still render in zope.conf."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_blobs_location": "/custom/blobs/path",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "blob-dir /custom/blobs/path" in zope_conf
+
+
+def test_bake_with_deprecated_db_blobs_mode(cookies):
+    """Deprecated db_blobs_mode should still render in zope.conf."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "relstorage",
+            "db_blobs_mode": "cache",
+            "db_relstorage_postgresql_dsn": "dbname=plone",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "shared-blob-dir false" in zope_conf
+
+
 def test_bake_with_z3blobs_pgjsonb_fails(cookies):
     """z3blobs + pgjsonb should fail (pgjsonb handles blobs natively)."""
     with bake_in_temp_dir(

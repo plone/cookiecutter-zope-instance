@@ -7,6 +7,12 @@
   Closes [#29](https://github.com/plone/cookiecutter-zope-instance/issues/29).
   [@jensens]
 
+- Fix: Deprecated `db_blobs_location` was ignored for `direct` (filestorage)
+  backend -- the macro call passed `cookiecutter.db_blob_location` directly
+  instead of the fallback variable. `relstorage` and `zeo` were not affected.
+  Closes [#25](https://github.com/plone/cookiecutter-zope-instance/issues/25).
+  [@jensens]
+
 - Fix: Add `pythonpath = .` to `pytest.ini` so tests also work when running
   `pytest` directly (not only via `tox`).
 
