@@ -9,6 +9,7 @@ Goal-oriented guides for common tasks.
 - {doc}`configure-relstorage`
 - {doc}`configure-pgjsonb`
 - {doc}`configure-zeo`
+- {doc}`configure-z3blobs`
 
 ## Web Layer
 
@@ -29,6 +30,7 @@ hidden: true
 configure-relstorage
 configure-pgjsonb
 configure-zeo
+configure-z3blobs
 configure-cors
 use-environment-variables
 upgrade-v1-to-v2

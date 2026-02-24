@@ -123,6 +123,33 @@ storage for large blob volumes.
 - Newer and less battle-tested than RelStorage or ZEO
 - Blob handling is fundamentally different from the other backends
 
+## S3 Blob Wrapper (z3blobs)
+
+[zodb-s3blobs](https://pypi.org/project/zodb-s3blobs/) is not a fifth storage
+backend but a **wrapper** that can be applied to any of the first three backends
+(`direct`, `relstorage`, or `zeo`). When enabled, it intercepts all blob
+operations and redirects them to S3-compatible object storage, maintaining a
+local LRU cache for performance.
+
+**When to use it:**
+
+- Deployments where local or shared filesystem blob storage is impractical
+- Containerized environments where blob data must survive container restarts
+- When you want to offload large blob volumes to object storage
+
+**How it works:**
+
+The selected backend (e.g. filestorage or RelStorage) handles all non-blob
+ZODB operations normally. The z3blobs wrapper takes over blob reads and writes,
+storing blobs in an S3 bucket and caching recently accessed blobs locally.
+The inner storage's own blob directives are suppressed automatically.
+
+**Not compatible with PGJsonb:**
+
+PGJsonb handles blobs natively via PostgreSQL `bytea` with optional S3 tiering.
+Wrapping PGJsonb with z3blobs is a configuration error and will be rejected
+during instance generation.
+
 ## Choosing a backend
 
 For most teams, the decision comes down to:
@@ -131,6 +158,7 @@ For most teams, the decision comes down to:
 2. **Need multi-process with an existing RDBMS?** Use `relstorage`.
 3. **Need multi-process, prefer ZODB-native simplicity?** Use `zeo`.
 4. **Cloud-native or want SQL-queryable ZODB data on PostgreSQL?** Use `pgjsonb`.
+5. **Need S3 blob storage with direct, relstorage, or zeo?** Enable `db_z3blobs_enabled`.
 
 All four backends support the same ZODB API, so switching between them is a
 configuration change (plus data migration). Your application code does not
