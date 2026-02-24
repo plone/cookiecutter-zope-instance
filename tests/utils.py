@@ -12,4 +12,5 @@ def bake_in_temp_dir(cookies, *args, **kwargs):
     try:
         yield result
     finally:
-        rmtree(str(result.project_path))
+        if result.project_path is not None:
+            rmtree(str(result.project_path))
