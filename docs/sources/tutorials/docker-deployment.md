@@ -104,8 +104,10 @@ The transform **must run at container startup**, not at image build time,
 because `INSTANCE_*` environment variables (database credentials, hostnames)
 are only available at runtime.
 
-The image bakes in the base YAML and the tools; the entrypoint generates the
-Zope configuration on every start.
+The image bakes in a **pinned version** of the cookiecutter template (downloaded
+at build time) plus the transform helper. The entrypoint generates the Zope
+configuration from environment variables on every container start -- no network
+access required at runtime.
 
 **Dockerfile**
 
@@ -114,12 +116,20 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+# Pin the cookiecutter-zope-instance version
+ENV COOKIECUTTER_ZOPE_INSTANCE_VERSION=2.3.0
+
 # Install cookiecutter and your application
 RUN pip install cookiecutter
 
-# Copy base config and the transform helper
+# Download pinned template + transform helper at build time (no network at runtime)
+RUN wget -O /app/cookiecutter-zope-instance.zip \
+      https://github.com/plone/cookiecutter-zope-instance/archive/refs/tags/${COOKIECUTTER_ZOPE_INSTANCE_VERSION}.zip \
+ && wget -O /app/transform_from_environment.py \
+      https://raw.githubusercontent.com/plone/cookiecutter-zope-instance/${COOKIECUTTER_ZOPE_INSTANCE_VERSION}/helpers/transform_from_environment.py
+
+# Copy base config and entrypoint
 COPY instance.yaml /app/instance.yaml
-COPY transform_from_environment.py /app/
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
@@ -140,10 +150,10 @@ set -e
 # Generate instance.yaml from INSTANCE_* environment variables
 python /app/transform_from_environment.py -o /app/instance-from-environment.yaml
 
-# Generate Zope instance configuration
+# Generate Zope instance configuration from local template (no network needed)
 cookiecutter -f --no-input \
     --config-file /app/instance-from-environment.yaml \
-    gh:plone/cookiecutter-zope-instance
+    /app/cookiecutter-zope-instance.zip
 
 if [[ "$1" == "start" ]]; then
     exec runwsgi instance/etc/zope.ini
@@ -151,6 +161,13 @@ else
     exec "$@"
 fi
 ```
+
+Key design choices:
+
+- The template zip and helper script are **downloaded at build time** and pinned
+  to a specific version -- no network access at container startup (stability +
+  security).
+- The entrypoint only runs the transform and cookiecutter against local files.
 
 Now start the container with runtime environment variables:
 
