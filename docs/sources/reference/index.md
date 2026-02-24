@@ -18,6 +18,7 @@ database-direct
 database-relstorage
 database-zeo
 database-pgjsonb
+database-z3blobs
 cors
 development
 helpers

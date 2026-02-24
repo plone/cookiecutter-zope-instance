@@ -81,6 +81,10 @@ with work_in(basedir):
         blob_cache_dir = "{{ cookiecutter.db_pgjsonb_blob_cache_dir }}"
         if blob_cache_dir:
             Path(blob_cache_dir).mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_z3blobs_enabled }}" in ("True", "true"):
+        z3blobs_cache_dir = "{{ cookiecutter.db_z3blobs_cache_dir }}"
+        if z3blobs_cache_dir:
+            Path(z3blobs_cache_dir).mkdir(parents=True, exist_ok=True)
     if "{{ cookiecutter.db_storage }}" != "relstorage":
         # cleanup relstorage files if no relstorage is configured
         (etc / "relstorage-export.conf").unlink()

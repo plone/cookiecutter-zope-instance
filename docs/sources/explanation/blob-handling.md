@@ -91,6 +91,25 @@ blobs to S3-compatible object storage:
 - Blobs exceeding the threshold are uploaded to S3
 - A local cache directory avoids repeated S3 downloads
 
+## S3 Blob Wrapper (z3blobs)
+
+The `zodb-s3blobs` wrapper can be applied to `direct`, `relstorage`, or `zeo`
+to redirect all blob operations to S3-compatible object storage. When enabled:
+
+- The inner storage's blob settings (`blob-dir`, `shared-blob-dir`, etc.) are
+  suppressed automatically
+- All blob reads and writes go through the z3blobs wrapper
+- A local LRU cache (`db_z3blobs_cache_dir`) avoids repeated S3 downloads
+- No shared filesystem is needed for blobs
+
+This is useful in containerized environments or when local/shared filesystem
+blob storage is impractical.
+
+:::{note}
+z3blobs is **not compatible with PGJsonb**. PGJsonb has its own S3 blob tiering
+via `db_pgjsonb_s3_*` settings.
+:::
+
 ## Summary
 
 | Backend | Default Blob Location | Modes | Shared FS Needed? |
@@ -99,3 +118,4 @@ blobs to S3-compatible object storage:
 | **relstorage** | RDBMS or shared FS | cache, shared | Only in shared mode |
 | **zeo** | ZEO server or shared FS | shared, cache | Only in shared mode |
 | **pgjsonb** | PostgreSQL bytea (+ optional S3) | N/A | No |
+| **z3blobs wrapper** | S3 (+ local LRU cache) | N/A | No |

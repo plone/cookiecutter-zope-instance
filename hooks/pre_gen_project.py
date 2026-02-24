@@ -26,6 +26,27 @@ if (
     print("Error: 'pgjsonb' storage requires 'db_pgjsonb_dsn' to be set!")
     exit(1)
 
+# z3blobs wrapper validation
+if "{{ cookiecutter.db_z3blobs_enabled }}" in ("True", "true"):
+    if "{{ cookiecutter.db_storage }}" == "pgjsonb":
+        print(
+            "Error: 'db_z3blobs_enabled' cannot be used with 'pgjsonb' storage!"
+            " PGJsonb handles blobs natively (bytea/S3)."
+        )
+        exit(1)
+    if not "{{ cookiecutter.db_z3blobs_bucket_name }}":
+        print("Error: 'db_z3blobs_enabled' requires 'db_z3blobs_bucket_name' to be set!")
+        exit(1)
+    if not "{{ cookiecutter.db_z3blobs_cache_dir }}":
+        print("Error: 'db_z3blobs_enabled' requires 'db_z3blobs_cache_dir' to be set!")
+        exit(1)
+    if (
+        "{{ cookiecutter.db_z3blobs_s3_sse_customer_key }}"
+        and "{{ cookiecutter.db_z3blobs_s3_use_ssl }}" in ("False", "false")
+    ):
+        print("Error: 'db_z3blobs_s3_sse_customer_key' requires 's3-use-ssl' to be true!")
+        exit(1)
+
 # minimal sanity check for password
 password = "{{ cookiecutter.initial_user_password }}"
 if 0 < len(password) < 10:

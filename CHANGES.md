@@ -2,6 +2,12 @@
 
 ## 2.3.0 (unreleased)
 
+- Feature: Add `zodb-s3blobs` support as an S3 blob storage wrapper for
+  `direct`, `relstorage`, and `zeo` backends. Enable via
+  `db_z3blobs_enabled: true`. Not compatible with `pgjsonb` (which handles
+  blobs natively).
+  [@jensens]
+
 - Feature: Add `pgjsonb` as a new database storage backend using
   `zodb-pgjsonb` with PostgreSQL JSONB and optional S3 blob tiering.
   Closes [#30](https://github.com/plone/cookiecutter-zope-instance/issues/30).

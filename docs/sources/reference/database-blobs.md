@@ -9,6 +9,12 @@ These settings are **not used** with PGJsonb, which manages blobs through its
 own settings. See {doc}`database-pgjsonb`.
 :::
 
+:::{note}
+When the z3blobs S3 wrapper is enabled (`db_z3blobs_enabled: true`), these
+blob settings are **automatically suppressed**. The wrapper handles all blob
+operations. See {doc}`database-z3blobs`.
+:::
+
 See {doc}`/explanation/blob-handling` for background on how blobs work across backends.
 
 | Setting | Default | Allowed Values |

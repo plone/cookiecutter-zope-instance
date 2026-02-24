@@ -76,6 +76,7 @@ instance/
 - `db_relstorage_*` — RelStorage settings (driver, DSN, caching, replication)
 - `db_zeo_*` — ZEO client settings (server, cache, auth)
 - `db_pgjsonb_*` — PGJsonb settings (DSN, pool, S3 tiering)
+- `db_z3blobs_*` — S3 blob wrapper settings (bucket, cache, S3 connection)
 - `cors_*` — CORS settings (origins, methods, headers)
 - `zcml_*` — ZCML package includes, overrides, resources
 - `dos_protection_*` — DOS protection limits
@@ -93,10 +94,11 @@ separator for nested dict values.
 - **relstorage**: `db_blob_mode: cache` (recommended) or `shared`
 - **zeo**: `db_blob_mode: shared` (recommended) or `cache`
 - **pgjsonb**: PostgreSQL bytea by default, optional S3 tiering (`db_pgjsonb_s3_*`)
+- **z3blobs wrapper**: S3-backed blobs for direct/relstorage/zeo (`db_z3blobs_*`)
 
 ## Documentation Sections
 
 - [Tutorials](tutorials/index.md): First instance, Docker deployment
-- [How-To Guides](how-to/index.md): RelStorage, PGJsonb, ZEO, CORS, env vars, upgrading
+- [How-To Guides](how-to/index.md): RelStorage, PGJsonb, ZEO, z3blobs, CORS, env vars, upgrading
 - [Reference](reference/index.md): All configuration variables documented
 - [Explanation](explanation/index.md): Storage backends, blob handling, rationale
