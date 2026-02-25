@@ -5,7 +5,7 @@
 project = "cookiecutter-zope-instance"
 copyright = "2022-2026, Plone Foundation"  # noqa: A001
 author = "Jens Klein and contributors"
-release = "2.3"
+release = "2.4"
 
 # -- General configuration ---------------------------------------------------
 
