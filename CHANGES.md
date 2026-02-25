@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.3.1 (unreleased)
+## 2.4.0 (unreleased)
 
 - Feature: Add `trusted_proxy` setting for reverse proxy IP configuration
   (renders as `trusted-proxy` directives in `zope.conf`).
