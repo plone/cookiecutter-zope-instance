@@ -18,13 +18,19 @@ you will need to set `db_blob_mode` to `cache` for RelStorage.
 | `db_relstorage_keep_history` | `true` | `true`, `false` |
 | `db_relstorage_read_only` | `false` | `true`, `false` |
 | `db_relstorage_create_schema` | `true` | `true`, `false` |
+| `db_relstorage_name` | *(unset)* | string |
 | `db_relstorage_commit_lock_timeout` | *(unset, default `30`s)* | integer (seconds) |
+| `db_relstorage_pack_gc` | *(unset, default `true`)* | `true`, `false` |
+
+**`db_relstorage_name`** -- The storage name, used for logging and storage identification. Useful when running multiple RelStorage instances in the same process.
 
 **`db_relstorage_keep_history`** -- If switched on, the adapter will create and use a history-preserving database schema (like FileStorage or ZEO). A history-preserving schema supports ZODB-level undo, but also grows more quickly and requires extensive packing on a regular basis. If switched off, the adapter will create and use a history-free database schema. Undo will not be supported, but the database will not grow as quickly.
 
 **`db_relstorage_create_schema`** -- Normally, RelStorage will create or update the database schema on start-up. Switch it off if you need to connect to a RelStorage database without automatic creation or updates.
 
 **`db_relstorage_commit_lock_timeout`** -- During commit, RelStorage acquires a database-wide lock. This option specifies how long to wait for the lock before failing the attempt to commit. Consult and understand the RelStorage documentation before using this setting.
+
+**`db_relstorage_pack_gc`** -- If switched off, garbage collection is not performed during packing. This can make packing significantly faster and avoids issues when objects are referenced only from other databases.
 
 ## Blob Caching
 
@@ -137,10 +143,13 @@ For details read [RelStorage: Oracle adapter options](https://relstorage.readthe
 
 | Setting | Default |
 |---|---|
+| `db_relstorage_oracle_driver` | `cx_Oracle` |
 | `db_relstorage_oracle_user` | *(unset)* |
 | `db_relstorage_oracle_password` | *(unset)* |
 | `db_relstorage_oracle_dsn` | *(unset)* |
 | `db_relstorage_commit_lock_id` | *(unset)* |
+
+**`db_relstorage_oracle_driver`** -- The Oracle database driver. Currently only `cx_Oracle` is supported by RelStorage.
 
 **`db_relstorage_oracle_dsn`** -- The Oracle data source name. The Oracle client library will normally expect to find the DSN in `/etc/oratab`.
 

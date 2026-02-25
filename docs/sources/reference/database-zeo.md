@@ -13,6 +13,7 @@ under `<zeoclient>`.
 |---|---|
 | `db_zeo_server` | `localhost:8100` |
 | `db_zeo_name` | `1` |
+| `db_zeo_storage` | *(unset, default `1`)* |
 
 ## Caching
 
@@ -52,7 +53,15 @@ the database server's socket can read and write arbitrary data.
 | `db_zeo_read_only_fallback` | `false` | `true`, `false` |
 | `db_zeo_read_only` | `false` | `true`, `false` |
 | `db_zeo_drop_cache_rather_verify` | `false` | `true`, `false` |
+| `db_zeo_client_label` | *(unset)* | string |
+| `db_zeo_wait` | *(unset, default `true`)* | `true`, `false` |
 
 **`db_zeo_read_only_fallback`** -- A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
 
 **`db_zeo_drop_cache_rather_verify`** -- Indicates that the cache should be dropped rather than verified when the verification optimization is not available (e.g. when the ZEO server restarted).
+
+**`db_zeo_storage`** -- The name of the server-side storage to use. Default is `1`. Only needed when the ZEO server exports multiple named storages.
+
+**`db_zeo_client_label`** -- A label for this ZEO client that is sent to the server for logging and monitoring purposes. Useful in multi-instance deployments to identify which client is connected.
+
+**`db_zeo_wait`** -- Whether to wait for a ZEO server connection at startup. Default is `true`. Set to `false` for testing or CI scenarios where the server may not be available.

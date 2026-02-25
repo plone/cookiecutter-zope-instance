@@ -69,18 +69,21 @@ instance/
 
 ## Configuration Variable Namespaces
 
-- `wsgi_*` — WSGI server (host, port, threads, body size)
-- `db_*` — Database common settings (storage type, cache, pool)
+- `wsgi_*` — WSGI server (host, port, threads, body size, channel timeout)
+- `db_*` — Database common settings (storage type, cache, pool, pool timeout)
 - `db_blob_*` — Blob settings (mode, location, cache size)
-- `db_filestorage_*` — Direct filestorage settings
-- `db_relstorage_*` — RelStorage settings (driver, DSN, caching, replication)
-- `db_zeo_*` — ZEO client settings (server, cache, auth)
+- `db_filestorage_*` — Direct filestorage settings (location, pack, create, read-only)
+- `db_relstorage_*` — RelStorage settings (name, driver, DSN, caching, replication, pack-gc)
+- `db_zeo_*` — ZEO client settings (server, cache, auth, client-label, storage, wait)
 - `db_pgjsonb_*` — PGJsonb settings (DSN, pool, S3 tiering)
 - `db_z3blobs_*` — S3 blob wrapper settings (bucket, cache, S3 connection)
+- `trusted_proxy` — Comma-separated list of trusted reverse proxy IPs
+- `product_config` — Dict-of-dicts for `<product-config>` addon sections
+- `datetime_format` — Date/time format: `us` (default) or `international`
 - `locale` — Set the Zope locale (e.g. `de_DE.UTF-8`); empty by default
 - `cors_*` — CORS settings (origins, methods, headers)
 - `zcml_*` — ZCML package includes, overrides, resources
-- `dos_protection_*` — DOS protection limits
+- `dos_protection_*` — DOS protection limits (memory, disk, memfile, part)
 - `profile_repoze_*` — repoze.profile profiling
 
 ## Environment Variable Override

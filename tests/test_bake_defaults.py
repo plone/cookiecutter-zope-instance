@@ -332,3 +332,244 @@ def test_bake_with_z3blobs_pgjsonb_fails(cookies):
         },
     ) as result:
         assert result.exit_code != 0
+
+
+# =============================================================================
+# Bug fix tests
+# =============================================================================
+
+
+def test_bake_with_relstorage_oracle(cookies):
+    """Oracle relstorage should render driver, user, password, dsn."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "relstorage",
+            "db_relstorage": "oracle",
+            "db_relstorage_oracle_user": "scott",
+            "db_relstorage_oracle_password": "tiger",
+            "db_relstorage_oracle_dsn": "orcl",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "<oracle>" in zope_conf
+        assert "driver cx_Oracle" in zope_conf
+        assert "user scott" in zope_conf
+        assert "password tiger" in zope_conf
+        assert "dsn orcl" in zope_conf
+
+
+def test_bake_with_form_part_limit(cookies):
+    """Default bake should include form-part-limit in dos_protection."""
+    with bake_in_temp_dir(cookies) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "form-part-limit 1024" in zope_conf
+
+
+# =============================================================================
+# Zope-level settings tests
+# =============================================================================
+
+
+def test_bake_with_trusted_proxy(cookies):
+    """trusted_proxy should render multiple trusted-proxy lines."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "trusted_proxy": "10.0.0.1,10.0.0.2",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "trusted-proxy 10.0.0.1" in zope_conf
+        assert "trusted-proxy 10.0.0.2" in zope_conf
+
+
+def test_bake_without_trusted_proxy(cookies):
+    """Default bake should have no trusted-proxy directive."""
+    with bake_in_temp_dir(cookies) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "trusted-proxy" not in zope_conf
+
+
+def test_bake_with_product_config(cookies):
+    """product_config dict should render <product-config> sections."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "product_config": {
+                "my_addon": {"setting1": "value1", "setting2": "value2"},
+            },
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "<product-config my_addon>" in zope_conf
+        assert "setting1 value1" in zope_conf
+        assert "setting2 value2" in zope_conf
+        assert "</product-config>" in zope_conf
+
+
+def test_bake_with_datetime_format(cookies):
+    """datetime_format should render datetime-format directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "datetime_format": "international",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "datetime-format international" in zope_conf
+
+
+# =============================================================================
+# Database common settings tests
+# =============================================================================
+
+
+def test_bake_with_pool_timeout(cookies):
+    """db_pool_timeout should render pool-timeout in zodb_db."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_pool_timeout": "600",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "pool-timeout 600" in zope_conf
+
+
+# =============================================================================
+# FileStorage settings tests
+# =============================================================================
+
+
+def test_bake_with_filestorage_create_false(cookies):
+    """db_filestorage_create should render create directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_filestorage_create": "false",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "create false" in zope_conf
+
+
+def test_bake_with_filestorage_read_only(cookies):
+    """db_filestorage_read_only should render read-only directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_filestorage_read_only": "true",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "read-only true" in zope_conf
+
+
+# =============================================================================
+# RelStorage settings tests
+# =============================================================================
+
+
+def test_bake_with_relstorage_name(cookies):
+    """db_relstorage_name should render name directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "relstorage",
+            "db_relstorage_name": "main",
+            "db_relstorage_postgresql_dsn": "dbname=plone",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "name main" in zope_conf
+
+
+def test_bake_with_relstorage_pack_gc(cookies):
+    """db_relstorage_pack_gc should render pack-gc directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "relstorage",
+            "db_relstorage_pack_gc": "false",
+            "db_relstorage_postgresql_dsn": "dbname=plone",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "pack-gc false" in zope_conf
+
+
+# =============================================================================
+# ZEO settings tests
+# =============================================================================
+
+
+def test_bake_with_zeo_client_label(cookies):
+    """db_zeo_client_label should render client-label directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "zeo",
+            "db_zeo_client_label": "web1",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "client-label web1" in zope_conf
+
+
+def test_bake_with_zeo_storage(cookies):
+    """db_zeo_storage should render storage directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "zeo",
+            "db_zeo_storage": "main",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "storage main" in zope_conf
+
+
+def test_bake_with_zeo_wait(cookies):
+    """db_zeo_wait should render wait directive."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "zeo",
+            "db_zeo_wait": "false",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_conf = (result.project_path / "etc" / "zope.conf").read_text()
+        assert "wait false" in zope_conf
+
+
+# =============================================================================
+# WSGI settings tests
+# =============================================================================
+
+
+def test_bake_with_wsgi_channel_timeout(cookies):
+    """wsgi_channel_timeout should render channel_timeout in zope.ini."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "wsgi_channel_timeout": "60",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        zope_ini = (result.project_path / "etc" / "zope.ini").read_text()
+        assert "channel_timeout = 60" in zope_ini
