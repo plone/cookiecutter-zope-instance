@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.1 (unreleased)
+
+- No changes yet.
+
 ## 2.4.0 (2026-02-25)
 
 - Feature: Add `trusted_proxy` setting for reverse proxy IP configuration
