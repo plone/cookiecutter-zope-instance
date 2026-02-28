@@ -98,6 +98,8 @@ used** with PGJsonb. PGJsonb manages blob storage through its own settings
 
 ## Next steps
 
+- {doc}`migrate-storage` -- Migrate data from an existing storage backend
+  into PGJsonb using `zodb-convert`.
 - {doc}`/reference/database-pgjsonb` -- Full reference for all PGJsonb
   options including connection pool, cache, and S3 settings.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.

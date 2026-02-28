@@ -104,8 +104,18 @@ for RelStorage command-line utilities:
   settings are provided. Used with `zodbconvert` to import data from a
   filestorage.
 
+:::{tip}
+For migrating data between storage backends, the generic
+[zodb-convert](https://pypi.org/project/zodb-convert/) tool is now the
+recommended approach. It works with all storage backends and can read storage
+configuration directly from `zope.conf` files.
+See {doc}`migrate-storage` for a step-by-step guide.
+:::
+
 ## Next steps
 
+- {doc}`migrate-storage` -- Migrate data between any storage backends using
+  `zodb-convert`.
 - {doc}`/reference/database-relstorage` -- Full reference for all RelStorage
   options including caching, replication, MySQL, Oracle, and SQLite settings.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.

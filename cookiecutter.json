@@ -154,6 +154,11 @@
   "db_pgjsonb_blob_cache_dir": "",
   "db_pgjsonb_blob_cache_size": "",
 
+  "db_convert_import_filestorage_location": "",
+  "db_convert_import_blobs_location": "",
+  "db_convert_export_filestorage_location": "",
+  "db_convert_export_blobs_location": "",
+
   "db_z3blobs_enabled": false,
   "db_z3blobs_bucket_name": "",
   "db_z3blobs_s3_prefix": "",

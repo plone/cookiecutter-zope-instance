@@ -558,6 +558,113 @@ def test_bake_with_zeo_wait(cookies):
 
 
 # =============================================================================
+# Generic zodb-convert config tests
+# =============================================================================
+
+
+def test_bake_default_no_convert_files(cookies):
+    """Default bake (filestorage) should NOT have convert-*.conf files."""
+    with bake_in_temp_dir(cookies) as result:
+        assert result.exit_code == 0
+        assert not (result.project_path / "etc" / "convert-import.conf").exists()
+        assert not (result.project_path / "etc" / "convert-export.conf").exists()
+
+
+def test_bake_pgjsonb_has_convert_files(cookies):
+    """PGJsonb with db_convert_* settings should generate convert configs."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "pgjsonb",
+            "db_pgjsonb_dsn": "dbname=zodb host=localhost port=5433",
+            "db_convert_import_filestorage_location": "var/import/Data.fs",
+            "db_convert_import_blobs_location": "var/import/blobs",
+            "db_convert_export_filestorage_location": "var/export/Data.fs",
+            "db_convert_export_blobs_location": "var/export/blobs",
+        },
+    ) as result:
+        assert result.exit_code == 0
+
+        import_conf = (result.project_path / "etc" / "convert-import.conf").read_text()
+        assert "<filestorage source>" in import_conf
+        assert "<pgjsonb destination>" in import_conf
+        assert "</pgjsonb destination>" in import_conf
+        assert "dsn dbname=zodb host=localhost port=5433" in import_conf
+
+        export_conf = (result.project_path / "etc" / "convert-export.conf").read_text()
+        assert "<pgjsonb source>" in export_conf
+        assert "</pgjsonb source>" in export_conf
+        assert "<filestorage destination>" in export_conf
+
+
+def test_bake_relstorage_has_both_convert_and_legacy(cookies):
+    """RelStorage should have BOTH old relstorage-*.conf AND new convert-*.conf."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "relstorage",
+            "db_relstorage_postgresql_dsn": "dbname=plone",
+            "db_relstorage_import_filestorage_location": "var/rs-import/Data.fs",
+            "db_relstorage_import_blobs_location": "var/rs-import/blobs",
+            "db_convert_import_filestorage_location": "var/import/Data.fs",
+            "db_convert_import_blobs_location": "var/import/blobs",
+            "db_convert_export_filestorage_location": "var/export/Data.fs",
+            "db_convert_export_blobs_location": "var/export/blobs",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        # Legacy relstorage files should exist
+        assert (result.project_path / "etc" / "relstorage-import.conf").exists()
+        assert (result.project_path / "etc" / "relstorage-pack.conf").exists()
+        # New generic convert files should also exist
+        import_conf = (result.project_path / "etc" / "convert-import.conf").read_text()
+        assert "<relstorage destination>" in import_conf
+        export_conf = (result.project_path / "etc" / "convert-export.conf").read_text()
+        assert "<relstorage source>" in export_conf
+
+
+def test_bake_zeo_has_convert_files(cookies):
+    """ZEO with db_convert_* settings should generate convert configs."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "zeo",
+            "db_convert_import_filestorage_location": "var/import/Data.fs",
+            "db_convert_import_blobs_location": "var/import/blobs",
+            "db_convert_export_filestorage_location": "var/export/Data.fs",
+            "db_convert_export_blobs_location": "var/export/blobs",
+        },
+    ) as result:
+        assert result.exit_code == 0
+
+        import_conf = (result.project_path / "etc" / "convert-import.conf").read_text()
+        assert "<filestorage source>" in import_conf
+        assert "<zeoclient destination>" in import_conf
+        assert "</zeoclient destination>" in import_conf
+
+        export_conf = (result.project_path / "etc" / "convert-export.conf").read_text()
+        assert "<zeoclient source>" in export_conf
+        assert "</zeoclient source>" in export_conf
+        assert "<filestorage destination>" in export_conf
+
+
+def test_bake_pgjsonb_no_convert_settings(cookies):
+    """PGJsonb without db_convert_* settings should have fallback comment."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "db_storage": "pgjsonb",
+            "db_pgjsonb_dsn": "dbname=zodb",
+        },
+    ) as result:
+        assert result.exit_code == 0
+        # Files should exist but with the "missing settings" fallback
+        import_conf = (result.project_path / "etc" / "convert-import.conf").read_text()
+        assert "Missing db_convert_import_*" in import_conf
+        assert "<pgjsonb" not in import_conf
+
+
+# =============================================================================
 # WSGI settings tests
 # =============================================================================
 

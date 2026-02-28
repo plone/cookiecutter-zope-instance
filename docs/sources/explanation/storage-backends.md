@@ -161,5 +161,12 @@ For most teams, the decision comes down to:
 5. **Need S3 blob storage with direct, relstorage, or zeo?** Enable `db_z3blobs_enabled`.
 
 All four backends support the same ZODB API, so switching between them is a
-configuration change (plus data migration). Your application code does not
-need to change.
+configuration change plus a one-time data migration. The
+[zodb-convert](https://pypi.org/project/zodb-convert/) tool handles this
+migration generically -- it can copy data between any two ZODB-compatible
+storages. Because `cookiecutter-zope-instance` generates a complete
+`zope.conf` for each backend, `zodb-convert` can read the storage
+configuration directly from these files. See {doc}`/how-to/migrate-storage`
+for a step-by-step guide.
+
+Your application code does not need to change.

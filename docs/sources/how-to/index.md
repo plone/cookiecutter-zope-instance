@@ -11,6 +11,10 @@ Goal-oriented guides for common tasks.
 - {doc}`configure-zeo`
 - {doc}`configure-z3blobs`
 
+## Storage Migration
+
+- {doc}`migrate-storage`
+
 ## Web Layer
 
 - {doc}`configure-cors`
@@ -31,6 +35,7 @@ configure-relstorage
 configure-pgjsonb
 configure-zeo
 configure-z3blobs
+migrate-storage
 configure-cors
 use-environment-variables
 upgrade-v1-to-v2
