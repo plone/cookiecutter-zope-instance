@@ -2,7 +2,12 @@
 
 ## 2.4.1 (unreleased)
 
-- No changes yet.
+- Feature: Generate generic `convert-import.conf` and `convert-export.conf`
+  for all non-filestorage backends (RelStorage, PGJsonb, ZEO) using the
+  storage-agnostic [zodb-convert](https://pypi.org/project/zodb-convert/)
+  tool. Deprecate RelStorage-specific `zodbconvert` configuration in favor
+  of `zodb-convert`. Add migration how-to guide.
+  [@jensens]
 
 ## 2.4.0 (2026-02-25)
 

@@ -83,6 +83,20 @@ replications. For details read
 RelStorage provides helper scripts for packing (`zodbpack`) and
 import/export from filestorage (`zodbconvert`).
 
+:::{deprecated} 2.5
+The RelStorage-specific `zodbconvert` import/export configuration files
+(`relstorage-import.conf`, `relstorage-export.conf`) and their corresponding
+`db_relstorage_import_*` / `db_relstorage_export_*` settings are deprecated
+in favor of the generic
+[zodb-convert](https://pypi.org/project/zodb-convert/) tool, which works
+with any ZODB storage backend. Use the new `db_convert_*` settings and the
+generated `convert-import.conf` / `convert-export.conf` files instead.
+See {doc}`/how-to/migrate-storage` for details.
+
+The existing settings and generated files continue to work but may be
+removed in a future major version.
+:::
+
 The file `relstorage-pack.conf` for the command line utility `zodbpack` is
 always generated for all RelStorage configurations. For usage information
 read [Packing Or Reference Checking A ZODB Storage: zodbpack](https://relstorage.readthedocs.io/en/latest/zodbpack.html).
