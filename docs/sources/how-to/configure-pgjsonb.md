@@ -1,4 +1,4 @@
-# Configure PGJsonb Storage
+# Configure PGJsonb storage
 
 <!-- diataxis: how-to -->
 
@@ -12,7 +12,7 @@ standard SQL operators.
 - The `zodb-pgjsonb` and `zodb-json-codec` Python packages installed
 - A PostgreSQL database created for your Zope instance
 
-## Step 1: Set the storage type
+## Step 1: set the storage type
 
 In your `instance.yaml`, set the storage backend to `pgjsonb`:
 
@@ -21,7 +21,7 @@ default_context:
     db_storage: pgjsonb
 ```
 
-## Step 2: Configure the connection string
+## Step 2: configure the connection string
 
 Provide the PostgreSQL DSN so the storage can connect to your database:
 
@@ -38,7 +38,7 @@ default_context:
     db_pgjsonb_dsn: "postgresql://zodb:zodb@localhost:5433/zodb"
 ```
 
-## Step 3: Choose history mode
+## Step 3: choose history mode
 
 By default, PGJsonb uses a history-free schema (no undo, better performance).
 To enable ZODB-level undo support:

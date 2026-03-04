@@ -4,7 +4,7 @@
 
 Settings for debug mode, verbose security, and profiling.
 
-## Debug Settings
+## Debug settings
 
 | Setting | Default | Allowed Values |
 |---|---|---|

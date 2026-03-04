@@ -1,4 +1,4 @@
-# Database: Direct Filestorage
+# Database: direct filestorage
 
 <!-- diataxis: reference -->
 

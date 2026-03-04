@@ -61,7 +61,7 @@ All non-ancient features of [plone.recipe.zope2instance](https://pypi.org/projec
 
 ::::
 
-## Quick Start
+## Quick start
 
 1. Install cookiecutter: `pip install cookiecutter`
 2. Create an `instance.yaml` with your settings

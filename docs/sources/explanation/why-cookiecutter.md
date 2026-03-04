@@ -1,4 +1,4 @@
-# Why Cookiecutter for Zope Configuration?
+# Why Cookiecutter for Zope configuration?
 
 <!-- diataxis: explanation -->
 

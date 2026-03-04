@@ -1,4 +1,4 @@
-# Initial User
+# Initial user
 
 <!-- diataxis: reference -->
 

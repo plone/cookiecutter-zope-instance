@@ -1,4 +1,4 @@
-# How Blob Storage Works
+# How blob storage works
 
 <!-- diataxis: explanation -->
 
@@ -91,7 +91,7 @@ blobs to S3-compatible object storage:
 - Blobs exceeding the threshold are uploaded to S3
 - A local cache directory avoids repeated S3 downloads
 
-## S3 Blob Wrapper (z3blobs)
+## S3 blob wrapper (z3blobs)
 
 The `zodb-s3blobs` wrapper can be applied to `direct`, `relstorage`, or `zeo`
 to redirect all blob operations to S3-compatible object storage. When enabled:

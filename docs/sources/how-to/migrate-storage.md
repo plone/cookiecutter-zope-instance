@@ -1,4 +1,4 @@
-# Migrate Data Between Storage Backends
+# Migrate data between storage backends
 
 <!-- diataxis: how-to -->
 
@@ -12,7 +12,7 @@ using the generic [zodb-convert](https://pypi.org/project/zodb-convert/) tool.
   (e.g. `ZODB` for filestorage, `RelStorage` for relstorage, `zodb-pgjsonb`
   for pgjsonb)
 
-## Approach 1: Generated configuration files
+## Approach 1: generated configuration files
 
 When your instance uses a non-filestorage backend (RelStorage, PGJsonb, or
 ZEO), the cookiecutter generates `convert-import.conf` and
@@ -20,7 +20,7 @@ ZEO), the cookiecutter generates `convert-import.conf` and
 configuration files for `zodb-convert` that convert between your configured
 backend and a FileStorage.
 
-### Step 1: Set the conversion paths
+### Step 1: set the conversion paths
 
 In your `instance.yaml`, provide the FileStorage paths for the "other side"
 of the conversion:
@@ -39,7 +39,7 @@ default_context:
 
 These settings work with all non-filestorage backends.
 
-### Step 2: Import data from FileStorage
+### Step 2: import data from FileStorage
 
 Place your `Data.fs` and blobs at the import locations, then run:
 
@@ -47,7 +47,7 @@ Place your `Data.fs` and blobs at the import locations, then run:
 zodb-convert etc/convert-import.conf
 ```
 
-### Step 3: Export data to FileStorage
+### Step 3: export data to FileStorage
 
 To create a portable FileStorage backup:
 
@@ -55,13 +55,13 @@ To create a portable FileStorage backup:
 zodb-convert etc/convert-export.conf
 ```
 
-## Approach 2: Using existing zope.conf files
+## Approach 2: using existing zope.conf files
 
 If you have two Zope instances with different storage backends, `zodb-convert`
 can read storage configuration directly from their `zope.conf` files. No
 extra configuration files are needed.
 
-### Step 1: Generate the destination instance
+### Step 1: generate the destination instance
 
 Create a second instance configured for the new storage backend:
 
@@ -79,7 +79,7 @@ cookiecutter -f --no-input --config-file instance-new.yaml \
     gh:plone/cookiecutter-zope-instance
 ```
 
-### Step 2: Run the conversion
+### Step 2: run the conversion
 
 ```bash
 zodb-convert \

@@ -1,4 +1,4 @@
-# Configure ZEO Client
+# Configure ZEO client
 
 <!-- diataxis: how-to -->
 
@@ -11,7 +11,7 @@ Zope application processes to share a single database.
 - A running ZEO server (see ZODB/ZEO documentation for server setup)
 - The `ZEO` Python package installed
 
-## Step 1: Set the storage type
+## Step 1: set the storage type
 
 In your `instance.yaml`, set the storage backend to `zeo`:
 
@@ -20,7 +20,7 @@ default_context:
     db_storage: zeo
 ```
 
-## Step 2: Configure the server address
+## Step 2: configure the server address
 
 Tell the client where to find the ZEO server:
 
@@ -37,7 +37,7 @@ default_context:
     db_zeo_server: "primary.example.com:8100 secondary.example.com:8100"
 ```
 
-## Step 3: Configure blob storage
+## Step 3: configure blob storage
 
 For ZEO, shared blob storage is recommended. All ZEO clients and the ZEO
 server share a common blob directory (which may be on a network filesystem
@@ -61,7 +61,7 @@ default_context:
     db_blob_cache_size: 10737418240  # 10 GB
 ```
 
-## Optional: Enable persistent client cache
+## Optional: enable persistent client cache
 
 To persist the cache across restarts (reducing startup time and ZEO server
 load), set a client name:

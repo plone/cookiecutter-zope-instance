@@ -1,4 +1,4 @@
-# Use Environment Variables for Configuration
+# Use environment variables for configuration
 
 <!-- diataxis: how-to -->
 
@@ -6,7 +6,7 @@ This guide shows how to use the `transform_from_environment.py` helper script
 to override `instance.yaml` settings with environment variables. This pattern
 is essential for containerized (Docker/Kubernetes) deployments.
 
-## Step 1: Copy the helper script
+## Step 1: copy the helper script
 
 The `transform_from_environment.py` script is located in the `helpers/`
 directory of the cookiecutter-zope-instance repository. Copy it into your
@@ -19,7 +19,7 @@ cp cookiecutter-zope-instance/helpers/transform_from_environment.py .
 The script requires Python 3 with
 [PyYAML](https://pypi.org/project/PyYAML/) installed.
 
-## Step 2: Prepare a base development configuration
+## Step 2: prepare a base development configuration
 
 Create your base `instance.yaml` for local development:
 
@@ -34,7 +34,7 @@ default_context:
     db_storage: direct
 ```
 
-## Step 3: Set environment variables for production
+## Step 3: set environment variables for production
 
 Every environment variable with the `INSTANCE_` prefix (configurable) is
 picked up by the transform script. The prefix is stripped and the remaining
@@ -57,7 +57,7 @@ export INSTANCE_db_cache_size_bytes=1500MB
 
 Setting a variable to an empty string effectively clears that value.
 
-## Step 4: Run the transform script
+## Step 4: run the transform script
 
 ```bash
 python3 transform_from_environment.py
@@ -66,7 +66,7 @@ python3 transform_from_environment.py
 This produces `instance-from-environment.yaml` that merges the base file with
 all `INSTANCE_*` overrides.
 
-## Step 5: Use the generated file with cookiecutter
+## Step 5: use the generated file with cookiecutter
 
 ```bash
 cookiecutter -f --no-input --config-file instance-from-environment.yaml \

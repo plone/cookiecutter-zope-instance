@@ -15,7 +15,7 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 `db_blob_location` settings are **not used** with PGJsonb.
 :::
 
-## Core Settings
+## Core settings
 
 | Setting | Default | Allowed Values |
 |---|---|---|
@@ -27,7 +27,7 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 
 **`db_pgjsonb_history_preserving`** -- Enable history-preserving mode with undo support. A history-preserving schema supports ZODB-level undo, but grows more quickly and requires regular packing. If switched off (the default), the storage uses a history-free schema -- faster, but no undo support.
 
-## Connection Pool
+## Connection pool
 
 | Setting | Default |
 |---|---|
@@ -41,7 +41,7 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 
 **`db_pgjsonb_pool_timeout`** -- Connection pool acquisition timeout in seconds. Raises a `StorageError` if a connection cannot be acquired within this time.
 
-## Object Cache
+## Object cache
 
 | Setting | Default |
 |---|---|
@@ -49,7 +49,7 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 
 **`db_pgjsonb_cache_local_mb`** -- Per-instance object cache size in megabytes. Caches `load()` results (pickle bytes) to avoid repeated PostgreSQL round-trips and JSONB transcoding. Set to `0` to disable.
 
-## Blob Settings
+## Blob settings
 
 | Setting | Default |
 |---|---|
@@ -57,7 +57,7 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 
 **`db_pgjsonb_blob_temp_dir`** -- Directory for temporary blob files during transactions. Auto-created in system temp directory if omitted.
 
-## S3 Tiered Blob Storage
+## S3 tiered blob storage
 
 These settings enable tiered blob storage: blobs exceeding the threshold are
 stored in S3-compatible object storage instead of PostgreSQL bytea. Requires

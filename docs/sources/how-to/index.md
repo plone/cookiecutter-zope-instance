@@ -1,21 +1,21 @@
-# How-To Guides
+# How-to guides
 
 <!-- diataxis: how-to -->
 
 Goal-oriented guides for common tasks.
 
-## Database Backends
+## Database backends
 
 - {doc}`configure-relstorage`
 - {doc}`configure-pgjsonb`
 - {doc}`configure-zeo`
 - {doc}`configure-z3blobs`
 
-## Storage Migration
+## Storage migration
 
 - {doc}`migrate-storage`
 
-## Web Layer
+## Web layer
 
 - {doc}`configure-cors`
 

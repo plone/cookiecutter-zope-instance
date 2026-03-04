@@ -1,10 +1,10 @@
-# Basic Configuration
+# Basic configuration
 
 <!-- diataxis: reference -->
 
 Core WSGI server, environment, and request-handling settings.
 
-## WSGI Server
+## WSGI server
 
 | Setting | Default | Allowed Values |
 |---|---|---|
@@ -42,7 +42,7 @@ the value of the environment variable is not added or updated but replaced!
 
 **`environment_paths`** -- Since all relative paths are turned into absolute ones, we need to tell the cookiecutter which environment variables are paths. When customizing, always include `CHAMELEON_CACHE`.
 
-## DOS Protection
+## DOS protection
 
 | Setting | Default |
 |---|---|
@@ -62,7 +62,7 @@ the value of the environment variable is not added or updated but replaced!
 
 **`dos_protection_form_part_limit`** -- The maximum number of parts (fields + files) in a multipart POST request. Available starting with Zope 5.10.
 
-## Product Configuration
+## Product configuration
 
 | Setting | Default |
 |---|---|

@@ -10,7 +10,7 @@ Please see {doc}`database-common` and {doc}`database-blobs` as well --
 you will need to set `db_blob_mode` to `cache` for RelStorage.
 :::
 
-## General Settings
+## General settings
 
 | Setting | Default | Allowed Values |
 |---|---|---|
@@ -32,7 +32,7 @@ you will need to set `db_blob_mode` to `cache` for RelStorage.
 
 **`db_relstorage_pack_gc`** -- If switched off, garbage collection is not performed during packing. This can make packing significantly faster and avoids issues when objects are referenced only from other databases.
 
-## Blob Caching
+## Blob caching
 
 RelStorage provides advanced blob caching options. For details read
 [RelStorage: Blobs](https://relstorage.readthedocs.io/en/latest/relstorage-options.html#blobs).
@@ -42,7 +42,7 @@ RelStorage provides advanced blob caching options. For details read
 | `db_relstorage_blob_cache_size_check_external` | `false` | `true`, `false` |
 | `db_relstorage_blob_chunk_size` | *(unset, default `1048576`)* | byte-size |
 
-## RAM and Persistent Caching
+## RAM and persistent caching
 
 For details about caching read
 [RelStorage: Database Caching](https://relstorage.readthedocs.io/en/latest/relstorage-options.html#database-caching).
@@ -78,7 +78,7 @@ replications. For details read
 | `db_relstorage_replica_timeout` | *(unset)* |
 | `db_relstorage_replica_revert_when_stale` | *(unset)* |
 
-## Command Line Utilities
+## Command line utilities
 
 RelStorage provides helper scripts for packing (`zodbpack`) and
 import/export from filestorage (`zodbconvert`).

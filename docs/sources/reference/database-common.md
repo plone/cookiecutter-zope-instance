@@ -1,4 +1,4 @@
-# Database: Common Settings
+# Database: common settings
 
 <!-- diataxis: reference -->
 

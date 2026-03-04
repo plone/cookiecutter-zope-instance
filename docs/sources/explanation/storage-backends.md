@@ -1,4 +1,4 @@
-# Understanding Storage Backends
+# Understanding storage backends
 
 <!-- diataxis: explanation -->
 
@@ -65,7 +65,7 @@ preservation.
   cached locally) or *shared* mode (blobs on a shared filesystem)
 - History-free mode gives better performance but disables ZODB-level undo
 
-## ZEO (Zope Enterprise Objects)
+## ZEO (Zope enterprise objects)
 
 [ZEO](https://zeo.readthedocs.io/) is the original client-server protocol
 for ZODB. A dedicated ZEO server process manages the filestorage, and
@@ -123,7 +123,7 @@ storage for large blob volumes.
 - Newer and less battle-tested than RelStorage or ZEO
 - Blob handling is fundamentally different from the other backends
 
-## S3 Blob Wrapper (z3blobs)
+## S3 blob wrapper (z3blobs)
 
 [zodb-s3blobs](https://pypi.org/project/zodb-s3blobs/) is not a fifth storage
 backend but a **wrapper** that can be applied to any of the first three backends
