@@ -1,3 +1,10 @@
 */__pycache__/*
 venv
 .tox.ini
+
+# Docs
+docs/html/
+docs/.mxmake/
+docs/.venv/
+docs/.vale/styles/Microsoft/
+docs/.vale/styles/write-good/
