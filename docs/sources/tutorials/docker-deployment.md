@@ -28,12 +28,14 @@ default_context:
     db_storage: direct
 ```
 
-This is your *base* configuration. Environment variables will override
+This is your *base* configuration.
+Environment variables will override
 individual values at build time.
 
 ## Step 2: set production environment variables
 
-The transform script recognizes variables prefixed with `INSTANCE_`. Each
+The transform script recognizes variables prefixed with `INSTANCE_`.
+Each
 variable name maps to a key in `default_context` -- the prefix is stripped
 and the remainder becomes the key.
 
@@ -105,7 +107,8 @@ because `INSTANCE_*` environment variables (database credentials, hostnames)
 are only available at runtime.
 
 The image bakes in a **pinned version** of the cookiecutter template (downloaded
-at build time) plus the transform helper. The entrypoint generates the Zope
+at build time) plus the transform helper.
+The entrypoint generates the Zope
 configuration from environment variables on every container start -- no network
 access required at runtime.
 
@@ -194,7 +197,8 @@ services:
 
 ## Advanced: dict values with `_DICT_`
 
-Some template variables are dictionaries. The transform script supports a
+Some template variables are dictionaries.
+The transform script supports a
 special `_DICT_` infix to set individual keys inside a dict:
 
 ```bash
@@ -220,3 +224,4 @@ environment:
   variables.
 - The transform and cookiecutter must run in an **entrypoint**, not at build
   time, so that runtime environment variables (secrets, DSNs) are available.
+

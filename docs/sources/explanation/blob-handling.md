@@ -3,23 +3,28 @@
 <!-- diataxis: explanation -->
 
 Blobs (Binary Large Objects) in ZODB represent large binary data such as
-files, images, and documents. Because blobs can be very large, they are
-handled differently from regular ZODB objects. Each storage backend has its
+files, images, and documents.
+Because blobs can be very large, they are
+handled differently from regular ZODB objects.
+Each storage backend has its
 own approach to blob management.
 
 ## What are ZODB blobs?
 
 ZODB blobs are persistent objects that store binary data in the filesystem
-rather than in the main object database. When your Plone site stores an
-uploaded file or image, the binary content is managed as a blob. The ZODB
+rather than in the main object database.
+When your Plone site stores an
+uploaded file or image, the binary content is managed as a blob.
+The ZODB
 object graph holds a reference to the blob, but the actual bytes live
 outside the main pickle storage.
 
 ## Direct filestorage
 
 With direct filestorage, blobs are stored in a dedicated directory on the
-local filesystem. There is only one application process, so there is no
-sharing concern.
+local filesystem.
+Only one application process runs, so no
+sharing concern arises.
 
 - **Mode:** Always behaves as `shared` (single process)
 - **Location:** Configured via `db_blob_location`
@@ -30,7 +35,8 @@ sharing concern.
 
 ### Cache mode (`db_blob_mode: cache`)
 
-Blobs are stored **inside the relational database** as binary data. Each
+Blobs are stored **inside the relational database** as binary data.
+Each
 Zope application process maintains a local cache directory where blob files
 are downloaded on demand.
 
@@ -62,23 +68,27 @@ different:
 
 ### Shared mode (`db_blob_mode: shared`) -- recommended for ZEO
 
-All ZEO clients and the ZEO server share a common blob directory. This is
+All ZEO clients and the ZEO server share a common blob directory.
+This is
 the traditional and most common ZEO blob setup.
 
 ### Cache mode (`db_blob_mode: cache`)
 
-Blobs are stored on the ZEO server and cached locally by each client. Useful
+Blobs are stored on the ZEO server and cached locally by each client.
+Useful
 when a shared filesystem is not available.
 
 ## PGJsonb: a different model
 
-PGJsonb handles blobs differently from the other backends. The generic
+PGJsonb handles blobs differently from the other backends.
+The generic
 `db_blob_mode` and `db_blob_location` settings are **not used**.
 
 ### Default: PostgreSQL bytea
 
 By default, blob data is stored directly in PostgreSQL `bytea` columns
-alongside the JSONB object state. This keeps everything in a single database
+alongside the JSONB object state.
+This keeps everything in a single database
 with no filesystem dependencies.
 
 ### Optional: S3 tiered storage
@@ -94,7 +104,8 @@ blobs to S3-compatible object storage:
 ## S3 blob wrapper (z3blobs)
 
 The `zodb-s3blobs` wrapper can be applied to `direct`, `relstorage`, or `zeo`
-to redirect all blob operations to S3-compatible object storage. When enabled:
+to redirect all blob operations to S3-compatible object storage.
+When enabled:
 
 - The inner storage's blob settings (`blob-dir`, `shared-blob-dir`, etc.) are
   suppressed automatically
@@ -106,7 +117,8 @@ This is useful in containerized environments or when local/shared filesystem
 blob storage is impractical.
 
 :::{note}
-z3blobs is **not compatible with PGJsonb**. PGJsonb has its own S3 blob tiering
+z3blobs is **not compatible with PGJsonb**.
+PGJsonb has its own S3 blob tiering
 via `db_pgjsonb_s3_*` settings.
 :::
 
@@ -119,3 +131,4 @@ via `db_pgjsonb_s3_*` settings.
 | **zeo** | ZEO server or shared FS | shared, cache | Only in shared mode |
 | **pgjsonb** | PostgreSQL bytea (+ optional S3) | N/A | No |
 | **z3blobs wrapper** | S3 (+ local LRU cache) | N/A | No |
+

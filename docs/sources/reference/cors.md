@@ -17,4 +17,5 @@ different domain than the one Plone is running on.
 | `cors_expose_headers` | `Content-Length` | comma-separated list |
 | `cors_max_age` | `3600` | integer (seconds) |
 
-**`cors_allow_origin`** -- Origins that are allowed access to the resource. Either a comma separated list of origins, e.g. `https://example.com,https://otherexample.com`, or `*` for all.
+**`cors_allow_origin`** -- Origins that are allowed access to the resource. Either a comma separated list of origins, for example `https://example.com,https://otherexample.com`, or `*` for all.
+

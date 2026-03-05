@@ -3,13 +3,15 @@
 <!-- diataxis: how-to -->
 
 This guide shows how to use the `transform_from_environment.py` helper script
-to override `instance.yaml` settings with environment variables. This pattern
+to override `instance.yaml` settings with environment variables.
+This pattern
 is essential for containerized (Docker/Kubernetes) deployments.
 
 ## Step 1: copy the helper script
 
 The `transform_from_environment.py` script is located in the `helpers/`
-directory of the cookiecutter-zope-instance repository. Copy it into your
+directory of the cookiecutter-zope-instance repository.
+Copy it into your
 project:
 
 ```bash
@@ -37,7 +39,8 @@ default_context:
 ## Step 3: set environment variables for production
 
 Every environment variable with the `INSTANCE_` prefix (configurable) is
-picked up by the transform script. The prefix is stripped and the remaining
+picked up by the transform script.
+The prefix is stripped and the remaining
 name becomes the configuration key:
 
 ```bash
@@ -96,3 +99,4 @@ The key points:
 ## Next steps
 
 - {doc}`/reference/helpers` -- Reference documentation for helper scripts.
+

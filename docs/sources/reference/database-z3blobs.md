@@ -4,18 +4,22 @@
 
 [zodb-s3blobs](https://pypi.org/project/zodb-s3blobs/) is a storage **wrapper**
 that intercepts blob operations and redirects them to S3-compatible object
-storage. It wraps any ZODB storage backend (`direct`, `relstorage`, or `zeo`)
+storage.
+It wraps any ZODB storage backend (`direct`, `relstorage`, or `zeo`)
 and replaces its blob handling with S3-backed blob storage plus a local LRU
 cache.
 
 :::{note}
-z3blobs is a wrapper, not a standalone storage backend. You still choose a
-backend via `db_storage`. The wrapper is enabled by setting
+z3blobs is a wrapper, not a standalone storage backend.
+You still choose a
+backend via `db_storage`.
+The wrapper is enabled by setting
 `db_z3blobs_enabled: true`.
 :::
 
 :::{important}
-z3blobs **cannot** be used with `pgjsonb` storage. PGJsonb handles blobs
+z3blobs **cannot** be used with `pgjsonb` storage.
+PGJsonb handles blobs
 natively via PostgreSQL bytea and optional S3 tiering through its own
 `db_pgjsonb_s3_*` settings.
 :::
@@ -52,10 +56,11 @@ natively via PostgreSQL bytea and optional S3 tiering through its own
 
 **`db_z3blobs_s3_prefix`** -- Key prefix within the bucket. Useful for sharing a bucket across multiple deployments.
 
-**`db_z3blobs_s3_endpoint_url`** -- S3 endpoint URL for MinIO, Ceph, or other S3-compatible stores (e.g. `http://localhost:9000`). Uses AWS S3 if omitted.
+**`db_z3blobs_s3_endpoint_url`** -- S3 endpoint URL for MinIO, Ceph, or other S3-compatible stores (for example `http://localhost:9000`). Uses AWS S3 if omitted.
 
 **`db_z3blobs_s3_access_key`** / **`db_z3blobs_s3_secret_key`** -- AWS credentials. Uses boto3 credential chain (IAM role, `~/.aws/credentials`, environment variables) if omitted.
 
 **`db_z3blobs_s3_addressing_style`** -- S3 URL addressing style. Use `path` for MinIO and other S3-compatible stores that don't support virtual-hosted-style addressing.
 
 **`db_z3blobs_s3_sse_customer_key`** -- Customer-provided encryption key for S3 Server-Side Encryption (SSE-C). Must be a base64-encoded 256-bit key. **Requires `s3_use_ssl: true`** (enforced by pre-generation validation).
+

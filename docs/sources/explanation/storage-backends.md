@@ -3,7 +3,8 @@
 <!-- diataxis: explanation -->
 
 Zope and Plone use ZODB (the Zope Object Database) to persist Python objects.
-ZODB is storage-agnostic -- the actual persistence layer is pluggable. This
+ZODB is storage-agnostic -- the actual persistence layer is pluggable.
+This
 page explains the four storage backends supported by
 `cookiecutter-zope-instance`, when to use each, and the trade-offs involved.
 
@@ -18,8 +19,10 @@ page explains the four storage backends supported by
 
 ## Direct filestorage
 
-Direct filestorage is the simplest backend. It stores all object data in a
-single `Data.fs` file on the local filesystem. No external database server is
+Direct filestorage is the simplest backend.
+It stores all object data in a
+single `Data.fs` file on the local filesystem.
+No external database server is
 required.
 
 **When to use it:**
@@ -30,18 +33,21 @@ required.
 
 **Limitations:**
 
-Only one operating system process can open a filestorage at a time. If you
+Only one operating system process can open a filestorage at a time.
+If you
 need to run multiple Zope application processes for load balancing, you must
 use one of the other backends.
 
 Filestorage is history-preserving by nature: every transaction is appended to
-the file. The file grows over time and must be packed periodically to reclaim
+the file.
+The file grows over time and must be packed periodically to reclaim
 space from old revisions.
 
 ## RelStorage
 
 [RelStorage](https://relstorage.readthedocs.io/) stores ZODB object pickles
-in a relational database. PostgreSQL is the recommended RDBMS, but MySQL,
+in a relational database.
+PostgreSQL is the recommended RDBMS, but MySQL,
 Oracle, and SQLite are also supported.
 
 **When to use it:**
@@ -54,7 +60,8 @@ Oracle, and SQLite are also supported.
 **Architecture:**
 
 Each Zope application process connects directly to the relational database.
-Object pickles are stored as binary data in database rows. RelStorage handles
+Object pickles are stored as binary data in database rows.
+RelStorage handles
 conflict resolution, garbage collection, and (optionally) history
 preservation.
 
@@ -68,7 +75,8 @@ preservation.
 ## ZEO (Zope enterprise objects)
 
 [ZEO](https://zeo.readthedocs.io/) is the original client-server protocol
-for ZODB. A dedicated ZEO server process manages the filestorage, and
+for ZODB.
+A dedicated ZEO server process manages the filestorage, and
 multiple Zope client processes connect to it over TCP.
 
 **When to use it:**
@@ -80,9 +88,11 @@ multiple Zope client processes connect to it over TCP.
 
 **Architecture:**
 
-The ZEO server holds the actual filestorage and mediates access. Each Zope
+The ZEO server holds the actual filestorage and mediates access.
+Each Zope
 client maintains a local object cache (in memory and optionally on disk) for
-performance. Invalidation messages keep client caches consistent.
+performance.
+Invalidation messages keep client caches consistent.
 
 **Trade-offs:**
 
@@ -95,7 +105,8 @@ performance. Invalidation messages keep client caches consistent.
 
 [zodb-pgjsonb](https://pypi.org/project/zodb-pgjsonb/) is a newer storage
 adapter that stores ZODB object state as PostgreSQL JSONB columns rather than
-opaque binary pickles. A Rust-based codec
+opaque binary pickles.
+A Rust-based codec
 ([zodb-json-codec](https://pypi.org/project/zodb-json-codec/)) transcodes
 between Python pickle format and JSON.
 
@@ -110,8 +121,10 @@ between Python pickle format and JSON.
 **Architecture:**
 
 Object state is transcoded from pickle to JSON on write, and from JSON back
-to pickle on read. The JSON representation is stored in a PostgreSQL JSONB
-column, making it indexable and queryable. Blobs are stored in PostgreSQL
+to pickle on read.
+The JSON representation is stored in a PostgreSQL JSONB
+column, making it indexable and queryable.
+Blobs are stored in PostgreSQL
 `bytea` columns by default, with optional tiering to S3-compatible object
 storage for large blob volumes.
 
@@ -139,8 +152,9 @@ local LRU cache for performance.
 
 **How it works:**
 
-The selected backend (e.g. filestorage or RelStorage) handles all non-blob
-ZODB operations normally. The z3blobs wrapper takes over blob reads and writes,
+The selected backend (for example filestorage or RelStorage) handles all non-blob
+ZODB operations normally.
+The z3blobs wrapper takes over blob reads and writes,
 storing blobs in an S3 bucket and caching recently accessed blobs locally.
 The inner storage's own blob directives are suppressed automatically.
 
@@ -161,12 +175,16 @@ For most teams, the decision comes down to:
 5. **Need S3 blob storage with direct, relstorage, or zeo?** Enable `db_z3blobs_enabled`.
 
 All four backends support the same ZODB API, so switching between them is a
-configuration change plus a one-time data migration. The
+configuration change plus a one-time data migration.
+The
 [zodb-convert](https://pypi.org/project/zodb-convert/) tool handles this
 migration generically -- it can copy data between any two ZODB-compatible
-storages. Because `cookiecutter-zope-instance` generates a complete
+storages.
+Because `cookiecutter-zope-instance` generates a complete
 `zope.conf` for each backend, `zodb-convert` can read the storage
-configuration directly from these files. See {doc}`/how-to/migrate-storage`
+configuration directly from these files.
+See {doc}`/how-to/migrate-storage`
 for a step-by-step guide.
 
 Your application code does not need to change.
+

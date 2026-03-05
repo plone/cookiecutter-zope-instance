@@ -3,7 +3,8 @@
 <!-- diataxis: reference -->
 
 If you have only one application process, it can open a direct filestorage
-database file directly without running a database server process. For details
+database file directly without running a database server process.
+For details
 read the [Zope configuration reference](https://zope.readthedocs.io/en/latest/operation.html#zope-configuration-reference).
 
 | Setting | Default | Allowed Values |
@@ -29,3 +30,4 @@ read the [Zope configuration reference](https://zope.readthedocs.io/en/latest/op
 **`db_filestorage_create`** -- Whether to create the database file if it does not exist. Default is `true`. Set to `false` to prevent accidental creation of empty databases -- Zope will fail to start if the file is missing.
 
 **`db_filestorage_read_only`** -- Open the storage in read-only mode. No modifications can be made. Useful for analysis, debugging, or serving read-only replicas.
+

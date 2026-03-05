@@ -24,3 +24,4 @@ See {doc}`/explanation/storage-backends` for a comparison.
 **`db_pool_size`** -- Expected maximum number of simultaneously open connections. No hard limit; exceeding it logs a warning, exceeding 2x logs a critical message.
 
 **`db_pool_timeout`** -- The maximum time in seconds that an unused connection should be kept open. When set, idle connections older than this value are closed automatically. Useful for managing memory in deployments with many worker threads.
+

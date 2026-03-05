@@ -30,7 +30,7 @@ Core WSGI server, environment, and request-handling settings.
 
 | Setting | Default |
 |---|---|
-| `environment` | `{"zope_i18n_compile_mo_files": "true", "CHAMELEON_CACHE": "..."}` |
+| `environment` | `{"zope_i18n_compile_mo_files:" "true," "CHAMELEON_CACHE:" "..."}` |
 | `environment_paths` | `["CHAMELEON_CACHE"]` |
 
 **`environment`** -- The environment set in `zope.conf`. Values: a dictionary with key/value pairs. Default includes `zope_i18n_compile_mo_files` set to `true` and `CHAMELEON_CACHE` set to `{{ cookiecutter.location_clienthome }}/cache`.
@@ -122,3 +122,4 @@ This generates:
 | `http_realm` | `Zope` |
 
 **`http_realm`** -- The HTTP `Realm` header value sent by this Zope instance. This value often shows up in basic authentication dialogs.
+

@@ -12,7 +12,8 @@ CORS support is provided by
 
 ## Step 1: enable CORS
 
-By default, CORS is disabled. Enable it in your `instance.yaml`:
+By default, CORS is disabled.
+Enable it in your `instance.yaml`:
 
 ```yaml
 default_context:
@@ -47,7 +48,8 @@ default_context:
 
 When developing with [Volto](https://github.com/plone/volto) (the default
 Plone 6 frontend), the React dev server typically runs on
-`http://localhost:3000`. The default CORS origin settings already cover this:
+`http://localhost:3000`.
+The default CORS origin settings already cover this:
 
 ```yaml
 default_context:
@@ -87,3 +89,4 @@ default_context:
 ## Next steps
 
 - {doc}`/reference/cors` -- Full reference for all CORS configuration options.
+

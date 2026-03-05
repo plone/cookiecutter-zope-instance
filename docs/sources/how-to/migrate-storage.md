@@ -9,14 +9,15 @@ using the generic [zodb-convert](https://pypi.org/project/zodb-convert/) tool.
 
 - The `zodb-convert` package installed in your virtual environment
 - The storage-specific packages for both source and destination installed
-  (e.g. `ZODB` for filestorage, `RelStorage` for relstorage, `zodb-pgjsonb`
+  (for example `ZODB` for filestorage, `RelStorage` for relstorage, `zodb-pgjsonb`
   for pgjsonb)
 
 ## Approach 1: generated configuration files
 
 When your instance uses a non-filestorage backend (RelStorage, PGJsonb, or
 ZEO), the cookiecutter generates `convert-import.conf` and
-`convert-export.conf` files in the `etc/` directory. These are ready-made
+`convert-export.conf` files in the `etc/` directory.
+These are ready-made
 configuration files for `zodb-convert` that convert between your configured
 backend and a FileStorage.
 
@@ -58,7 +59,8 @@ zodb-convert etc/convert-export.conf
 ## Approach 2: using existing zope.conf files
 
 If you have two Zope instances with different storage backends, `zodb-convert`
-can read storage configuration directly from their `zope.conf` files. No
+can read storage configuration directly from their `zope.conf` files.
+No
 extra configuration files are needed.
 
 ### Step 1: generate the destination instance
@@ -128,8 +130,10 @@ All combinations work -- `zodb-convert` is storage-agnostic.
 | `db_convert_export_blobs_location` | *(unset)* | Path for the destination blob directory on export |
 
 The `convert-import.conf` file is generated when both `db_convert_import_*`
-settings are provided. The `convert-export.conf` file is generated when both
-`db_convert_export_*` settings are provided. Neither file is generated for
+settings are provided.
+The `convert-export.conf` file is generated when both
+`db_convert_export_*` settings are provided.
+Neither file is generated for
 the `direct` (filestorage) backend since it *is* the portable format.
 
 ## Next steps
@@ -138,3 +142,4 @@ the `direct` (filestorage) backend since it *is* the portable format.
   documentation and source code
 - {doc}`/explanation/storage-backends` -- Understanding the trade-offs
   between backends
+

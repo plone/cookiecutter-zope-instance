@@ -34,7 +34,8 @@ you will need to set `db_blob_mode` to `cache` for RelStorage.
 
 ## Blob caching
 
-RelStorage provides advanced blob caching options. For details read
+RelStorage provides advanced blob caching options.
+For details read
 [RelStorage: Blobs](https://relstorage.readthedocs.io/en/latest/relstorage-options.html#blobs).
 
 | Setting | Default | Allowed Values |
@@ -68,7 +69,8 @@ For details about caching read
 ## Replication
 
 If your database runs replicated, RelStorage supports handling of
-replications. For details read
+replications.
+For details read
 [RelStorage: Replication](https://relstorage.readthedocs.io/en/latest/relstorage-options.html#replication).
 
 | Setting | Default |
@@ -89,7 +91,8 @@ The RelStorage-specific `zodbconvert` import/export configuration files
 `db_relstorage_import_*` / `db_relstorage_export_*` settings are deprecated
 in favor of the generic
 [zodb-convert](https://pypi.org/project/zodb-convert/) tool, which works
-with any ZODB storage backend. Use the new `db_convert_*` settings and the
+with any ZODB storage backend.
+Use the new `db_convert_*` settings and the
 generated `convert-import.conf` / `convert-export.conf` files instead.
 See {doc}`/how-to/migrate-storage` for details.
 
@@ -98,7 +101,8 @@ removed in a future major version.
 :::
 
 The file `relstorage-pack.conf` for the command line utility `zodbpack` is
-always generated for all RelStorage configurations. For usage information
+always generated for all RelStorage configurations.
+For usage information
 read [Packing Or Reference Checking A ZODB Storage: zodbpack](https://relstorage.readthedocs.io/en/latest/zodbpack.html).
 
 The files:
@@ -108,7 +112,8 @@ The files:
 - `relstorage-import.conf` is generated if the two `db_relstorage_import_*`
   settings are given.
 
-Both are for the command line utility `zodbconvert`. For usage information
+Both are for the command line utility `zodbconvert`.
+For usage information
 read [Copying Data Between ZODB Storages: zodbconvert](https://relstorage.readthedocs.io/en/latest/zodbconvert.html).
 
 | Setting | Default |
@@ -185,3 +190,4 @@ For details read [RelStorage: SQLite adapter options](https://relstorage.readthe
 **`db_relstorage_sqlite3_gevent_yield_interval`** -- Only used if the driver is `gevent sqlite3`.
 
 **`db_relstorage_sqlite3_pragma`** -- For advanced tuning, nearly the entire set of SQLite PRAGMAs are available.
+

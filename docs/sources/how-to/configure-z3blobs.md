@@ -91,9 +91,12 @@ All blob operations are handled by the z3blobs wrapper instead.
 
 ## Important: not compatible with PGJsonb
 
-z3blobs **cannot** be combined with `pgjsonb` storage. PGJsonb handles blobs
-natively through its own `db_pgjsonb_s3_*` settings. If you need S3 blob
-storage with PGJsonb, use the built-in S3 tiering instead. See
+z3blobs **cannot** be combined with `pgjsonb` storage.
+PGJsonb handles blobs
+natively through its own `db_pgjsonb_s3_*` settings.
+If you need S3 blob
+storage with PGJsonb, use the built-in S3 tiering instead.
+See
 {doc}`configure-pgjsonb`.
 
 ## Next steps
@@ -101,3 +104,4 @@ storage with PGJsonb, use the built-in S3 tiering instead. See
 - {doc}`/reference/database-z3blobs` -- Full reference for all z3blobs settings.
 - {doc}`/explanation/blob-handling` -- How blobs work across different backends.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.
+

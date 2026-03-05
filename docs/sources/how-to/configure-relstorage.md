@@ -3,7 +3,8 @@
 <!-- diataxis: how-to -->
 
 This guide walks you through setting up RelStorage with PostgreSQL as your
-ZODB storage backend. RelStorage stores pickles in a relational database and
+ZODB storage backend.
+RelStorage stores pickles in a relational database and
 is the recommended backend for production Plone deployments that need
 horizontal scaling.
 
@@ -24,8 +25,10 @@ default_context:
 
 ## Step 2: set the blob mode
 
-RelStorage stores blobs in the database. Your Zope client needs a local cache
-directory for blob data. Set the blob mode to `cache`:
+RelStorage stores blobs in the database.
+Your Zope client needs a local cache
+directory for blob data.
+Set the blob mode to `cache`:
 
 ```yaml
 default_context:
@@ -40,7 +43,8 @@ The default value `shared` is only appropriate for direct filestorage.
 
 ## Step 3: choose the database backend
 
-Set the relational database type. PostgreSQL is the recommended choice:
+Set the relational database type.
+PostgreSQL is the recommended choice:
 
 ```yaml
 default_context:
@@ -98,16 +102,19 @@ for RelStorage command-line utilities:
 - **`relstorage-pack.conf`** -- Always generated. Used with the `zodbpack`
   command for database packing and garbage collection.
 - **`relstorage-export.conf`** -- Generated when `db_relstorage_export_*`
-  settings are provided. Used with `zodbconvert` to export data to a
+  settings are provided.
+  Used with `zodbconvert` to export data to a
   filestorage.
 - **`relstorage-import.conf`** -- Generated when `db_relstorage_import_*`
-  settings are provided. Used with `zodbconvert` to import data from a
+  settings are provided.
+  Used with `zodbconvert` to import data from a
   filestorage.
 
 :::{tip}
 For migrating data between storage backends, the generic
 [zodb-convert](https://pypi.org/project/zodb-convert/) tool is now the
-recommended approach. It works with all storage backends and can read storage
+recommended approach.
+It works with all storage backends and can read storage
 configuration directly from `zope.conf` files.
 See {doc}`migrate-storage` for a step-by-step guide.
 :::
@@ -119,3 +126,4 @@ See {doc}`migrate-storage` for a step-by-step guide.
 - {doc}`/reference/database-relstorage` -- Full reference for all RelStorage
   options including caching, replication, MySQL, Oracle, and SQLite settings.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.
+

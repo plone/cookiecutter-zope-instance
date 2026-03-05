@@ -63,9 +63,12 @@ All non-ancient features of [plone.recipe.zope2instance](https://pypi.org/projec
 
 ## Quick start
 
-1. Install cookiecutter: `pip install cookiecutter`
-2. Create an `instance.yaml` with your settings
-3. Run: `cookiecutter -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance`
+1.
+Install cookiecutter: `pip install cookiecutter`
+2.
+Create an `instance.yaml` with your settings
+3.
+Run: `cookiecutter -f --no-input --config-file instance.yaml gh:plone/cookiecutter-zope-instance`
 
 See {doc}`tutorials/first-zope-instance` for a complete walkthrough.
 
@@ -81,3 +84,4 @@ how-to/index
 reference/index
 explanation/index
 ```
+

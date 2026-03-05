@@ -3,15 +3,18 @@
 <!-- diataxis: reference -->
 
 [zodb-pgjsonb](https://pypi.org/project/zodb-pgjsonb/) is a ZODB storage
-adapter optimized for cloud-native environments. It stores object state as
+adapter optimized for cloud-native environments.
+It stores object state as
 PostgreSQL JSONB with binary blobs in PostgreSQL bytea (or optionally tiered
 to S3-compatible object storage), making it a natural fit for managed
-PostgreSQL services (RDS, Cloud SQL, AlloyDB, etc.). It uses
+PostgreSQL services (RDS, Cloud SQL, AlloyDB, etc.).
+It uses
 [zodb-json-codec](https://pypi.org/project/zodb-json-codec/) for Rust-based
 pickle-to-JSON transcoding.
 
 :::{note}
-Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
+Blobs are handled differently from RelStorage and ZEO.
+The `db_blob_mode` and
 `db_blob_location` settings are **not used** with PGJsonb.
 :::
 
@@ -55,12 +58,13 @@ Blobs are handled differently from RelStorage and ZEO. The `db_blob_mode` and
 |---|---|
 | `db_pgjsonb_blob_temp_dir` | *(unset)* |
 
-**`db_pgjsonb_blob_temp_dir`** -- Directory for temporary blob files during transactions. Auto-created in system temp directory if omitted.
+**`db_pgjsonb_blob_temp_dir`** -- Directory for temporary blob files during transactions. Autocreated in system temp directory if omitted.
 
 ## S3 tiered blob storage
 
 These settings enable tiered blob storage: blobs exceeding the threshold are
-stored in S3-compatible object storage instead of PostgreSQL bytea. Requires
+stored in S3-compatible object storage instead of PostgreSQL bytea.
+Requires
 the `zodb-pgjsonb[s3]` extra to be installed.
 
 | Setting | Default | Allowed Values |
@@ -78,7 +82,7 @@ the `zodb-pgjsonb[s3]` extra to be installed.
 
 **`db_pgjsonb_s3_bucket_name`** -- S3 bucket name for large blob storage. If omitted, all blobs are stored in PostgreSQL bytea.
 
-**`db_pgjsonb_s3_endpoint_url`** -- S3 endpoint URL for MinIO, Ceph, or other S3-compatible stores (e.g. `http://localhost:9000`). Uses AWS S3 if omitted.
+**`db_pgjsonb_s3_endpoint_url`** -- S3 endpoint URL for MinIO, Ceph, or other S3-compatible stores (for example `http://localhost:9000`). Uses AWS S3 if omitted.
 
 **`db_pgjsonb_s3_access_key`** / **`db_pgjsonb_s3_secret_key`** -- AWS credentials. Uses boto3 credential chain (IAM role, `~/.aws/credentials`, environment variables) if omitted.
 
@@ -87,3 +91,4 @@ the `zodb-pgjsonb[s3]` extra to be installed.
 **`db_pgjsonb_blob_cache_dir`** -- Local cache directory for S3 blobs. Recommended for production to avoid repeated S3 downloads. Falls back to `db_pgjsonb_blob_temp_dir` if omitted.
 
 **`db_pgjsonb_blob_cache_size`** -- Maximum size of local blob cache.
+

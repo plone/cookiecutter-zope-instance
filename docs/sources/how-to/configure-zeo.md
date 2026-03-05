@@ -3,7 +3,8 @@
 <!-- diataxis: how-to -->
 
 This guide walks you through setting up a ZEO (Zope Enterprise Objects)
-client. ZEO is a mature client-server storage for ZODB that allows multiple
+client.
+ZEO is a mature client-server storage for ZODB that allows multiple
 Zope application processes to share a single database.
 
 ## Prerequisites
@@ -39,7 +40,8 @@ default_context:
 
 ## Step 3: configure blob storage
 
-For ZEO, shared blob storage is recommended. All ZEO clients and the ZEO
+For ZEO, shared blob storage is recommended.
+All ZEO clients and the ZEO
 server share a common blob directory (which may be on a network filesystem
 such as NFS):
 
@@ -110,3 +112,4 @@ default_context:
 - {doc}`/reference/database-zeo` -- Full reference for all ZEO options
   including authentication, read-only mode, and advanced cache settings.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.
+

@@ -11,7 +11,8 @@ engine for Zope instances, replacing the older buildout-based approach.
 For many years, the Plone and Zope community used
 [buildout](https://www.buildout.org/) with the
 [plone.recipe.zope2instance](https://pypi.org/project/plone.recipe.zope2instance/)
-recipe to generate Zope instance configurations. While functional, this
+recipe to generate Zope instance configurations.
+While functional, this
 approach had drawbacks:
 
 - Buildout is a complex tool with a steep learning curve
@@ -25,7 +26,8 @@ approach had drawbacks:
 
 [Cookiecutter](https://cookiecutter.readthedocs.io) is a widely used,
 well-maintained utility for creating text-based file-system structures from
-templates. It uses Jinja2 templating and accepts configuration via YAML
+templates.
+It uses Jinja2 templating and accepts configuration via YAML
 files, making it a natural fit for generating Zope configuration files.
 
 The `cookiecutter-zope-instance` template wraps cookiecutter with the
@@ -52,14 +54,16 @@ Variables are grouped by prefix:
 
 ### Sentry integration
 
-The old recipe included built-in Sentry configuration. This has been removed
+The old recipe included built-in Sentry configuration.
+This has been removed
 in favor of using
 [collective.sentry](https://pypi.org/project/collective.sentry/), which
 provides a much better integration as a standalone package.
 
 ### The `ctl.py` script
 
-The old recipe generated a control script. For modern workflows, consider
+The old recipe generated a control script.
+For modern workflows, consider
 using [mxmake](https://pypi.org/project/mxmake/), which already has built-in
 support for `cookiecutter-zope-instance`.
 
@@ -73,3 +77,4 @@ donated to the Plone Foundation and is maintained by the Plone community.
 See the
 [contributors graph](https://github.com/plone/cookiecutter-zope-instance/graphs/contributors)
 for all contributors.
+

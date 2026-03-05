@@ -29,7 +29,8 @@ cookiecutter --version
 
 ## Step 2: create a configuration file
 
-Cookiecutter reads its input from a YAML configuration file. Create a file
+Cookiecutter reads its input from a YAML configuration file.
+Create a file
 called `instance.yaml` with the following content:
 
 ```yaml
@@ -58,7 +59,7 @@ cookiecutter -f --no-input --config-file instance.yaml \
 The flags used here:
 
 - `-f` overwrites an existing `instance` directory if present.
-- `--no-input` skips the interactive prompts — all values come from the YAML file.
+- `--no-input` skips the interactive prompts—all values come from the YAML file.
 - `--config-file instance.yaml` provides the configuration.
 
 Cookiecutter will clone the template and render the output into a directory
@@ -81,13 +82,14 @@ instance/
 |---|---|
 | `etc/zope.conf` | Database connection, debug mode, security settings |
 | `etc/zope.ini` | WSGI server (waitress) host, port, pipeline |
-| `etc/site.zcml` | Component architecture — which packages are loaded |
+| `etc/site.zcml` | Component architecture—which packages are loaded |
 | `inituser` | One-time admin user created on first startup |
 
 ## Step 5: start the instance
 
 To start the instance you need a WSGI server such as **waitress** and the
-Zope application itself installed in your Python environment. Then run:
+Zope application itself installed in your Python environment.
+Then run:
 
 ```bash
 runwsgi instance/etc/zope.ini
@@ -106,3 +108,4 @@ The server will listen on the address configured in `zope.ini`
   iterate quickly on the configuration.
 
 Next, learn how to adapt this workflow for {doc}`docker-deployment`.
+

@@ -6,13 +6,16 @@ Blob settings valid for `direct`, `relstorage`, and `zeo` storage backends.
 
 :::{note}
 These settings are **not used** with PGJsonb, which manages blobs through its
-own settings. See {doc}`database-pgjsonb`.
+own settings.
+See {doc}`database-pgjsonb`.
 :::
 
 :::{note}
 When the z3blobs S3 wrapper is enabled (`db_z3blobs_enabled: true`), these
-blob settings are **automatically suppressed**. The wrapper handles all blob
-operations. See {doc}`database-z3blobs`.
+blob settings are **automatically suppressed**.
+The wrapper handles all blob
+operations.
+See {doc}`database-z3blobs`.
 :::
 
 See {doc}`/explanation/blob-handling` for background on how blobs work across backends.
@@ -34,4 +37,5 @@ Do not forget to set `db_blob_mode` to `cache` if you use RelStorage!
 
 **`db_blob_cache_size`** -- Set the maximum size of the blob cache, in bytes. With many blobs and enough disk space on the client hardware this should be increased. If not set, then the cache size isn't checked and the blob directory will grow without bound. Only valid for `db_blob_mode` `cache`.
 
-**`db_blob_cache_size_check`** -- Set the ZEO check size as percent of `db_blob_cache_size` (for example, `10` for 10%). The ZEO cache size will be checked when this many bytes have been loaded into the cache. Only valid for `db_blob_mode` `cache`.
+**`db_blob_cache_size_check`** -- Set the ZEO check size as a percentage of `db_blob_cache_size` (for example, `10` for 10%). The ZEO cache size will be checked when this many bytes have been loaded into the cache. Only valid for `db_blob_mode` `cache`.
+

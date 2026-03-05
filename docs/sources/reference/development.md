@@ -35,3 +35,4 @@ Settings for debug mode, verbose security, and profiling.
 **`profile_repoze_cachegrind_filename`** -- If the package `pyprof2calltree` is installed, another file is written. It is meant for consumption with any cachegrind compatible application.
 
 **`profile_repoze_path`** -- The path for through-the-web access to the last profiled request. See [repoze.profile docs](https://repozeprofile.readthedocs.io/en/latest/#configuration-via-python) for details.
+

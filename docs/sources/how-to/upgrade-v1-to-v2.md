@@ -30,7 +30,8 @@ default_context:
 ## ZCML configuration: dict to flat variables
 
 In version 1.x, ZCML settings were grouped under a single `load_zcml`
-dictionary. Since version 2.x, each setting is a separate variable prefixed
+dictionary.
+Since version 2.x, each setting is a separate variable prefixed
 with `zcml_`.
 
 **Before (v1):**
@@ -68,3 +69,4 @@ cookiecutter -c 1.0.1 -f --no-input --config-file instance.yaml \
 Check the
 [releases page](https://github.com/plone/cookiecutter-zope-instance/releases)
 for the latest 1-series version number.
+

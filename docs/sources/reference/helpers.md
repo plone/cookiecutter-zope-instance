@@ -2,20 +2,24 @@
 
 <!-- diataxis: reference -->
 
-Helper scripts for copy-paste usage in projects. Located in the `helpers/`
+Helper scripts for copy-paste usage in projects.
+Located in the `helpers/`
 directory of the cookiecutter-zope-instance repository.
 
 ## `transform_from_environment.py`
 
-Creates configuration from prefixed environment variables. This is useful for
+Creates configuration from prefixed environment variables.
+This is useful for
 containerized deployments.
 
 **Precondition:** Python 3 with [PyYAML](https://pypi.org/project/PyYAML/)
 installed.
 
 The script takes a YAML configuration file as input and outputs a YAML
-configuration file. Any environment variable with a given prefix (`INSTANCE_`
-by default) is transformed into a configuration variable. The prefix is
+configuration file.
+Any environment variable with a given prefix (`INSTANCE_`
+by default) is transformed into a configuration variable.
+The prefix is
 stripped and the rest of the environment variable name either adds or replaces
 the configuration variable name.
 
@@ -76,7 +80,8 @@ default_context:
 ### Dict convention with `_DICT_`
 
 To set dictionary/mapping values, the helper script supports `_DICT_` as a
-separator. The environment variables:
+separator.
+The environment variables:
 
 ```bash
 export INSTANCE_a_DICT_b="value b"
@@ -101,3 +106,4 @@ export INSTANCE_environment_DICT_zope_i18n_allowed_languages="de en"
 ```
 
 See {doc}`/how-to/use-environment-variables` for a step-by-step guide.
+

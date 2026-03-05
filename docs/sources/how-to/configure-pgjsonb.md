@@ -93,7 +93,8 @@ Set the threshold to `0` to send all blobs to S3.
 ## Important: blob settings not used with PGJsonb
 
 The generic blob settings `db_blob_mode` and `db_blob_location` are **not
-used** with PGJsonb. PGJsonb manages blob storage through its own settings
+used** with PGJsonb.
+PGJsonb manages blob storage through its own settings
 (`db_pgjsonb_blob_*` and `db_pgjsonb_s3_*`).
 
 ## Next steps
@@ -105,3 +106,4 @@ used** with PGJsonb. PGJsonb manages blob storage through its own settings
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.
 - {doc}`/explanation/blob-handling` -- How blobs work across different
   backends.
+

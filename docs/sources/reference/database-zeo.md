@@ -3,7 +3,8 @@
 <!-- diataxis: reference -->
 
 ZEO is a mature client-server storage created for ZODB for sharing a single
-storage among many clients. All options can be found in the
+storage among many clients.
+All options can be found in the
 [Zope Configuration Reference](https://zope.readthedocs.io/en/latest/operation.html#zope-configuration-reference)
 under `<zeoclient>`.
 
@@ -18,7 +19,8 @@ under `<zeoclient>`.
 ## Caching
 
 `db_cache_size` and `db_cache_size_bytes` from {doc}`database-common` are
-taken into account. Additional persistent caching is possible.
+taken into account.
+Additional persistent caching is possible.
 
 | Setting | Default |
 |---|---|
@@ -34,8 +36,10 @@ taken into account. Additional persistent caching is possible.
 
 ## Authentication
 
-ZEO supports authentication. You need to activate ZEO authentication on the
-server side as well for this to work. Without this anyone that can connect to
+ZEO supports authentication.
+You need to activate ZEO authentication on the
+server side as well for this to work.
+Without this anyone that can connect to
 the database server's socket can read and write arbitrary data.
 
 | Setting | Default |
@@ -58,10 +62,11 @@ the database server's socket can read and write arbitrary data.
 
 **`db_zeo_read_only_fallback`** -- A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available.
 
-**`db_zeo_drop_cache_rather_verify`** -- Indicates that the cache should be dropped rather than verified when the verification optimization is not available (e.g. when the ZEO server restarted).
+**`db_zeo_drop_cache_rather_verify`** -- Indicates that the cache should be dropped rather than verified when the verification optimization is not available (for example when the ZEO server restarted).
 
 **`db_zeo_storage`** -- The name of the server-side storage to use. Default is `1`. Only needed when the ZEO server exports multiple named storages.
 
 **`db_zeo_client_label`** -- A label for this ZEO client that is sent to the server for logging and monitoring purposes. Useful in multi-instance deployments to identify which client is connected.
 
 **`db_zeo_wait`** -- Whether to wait for a ZEO server connection at startup. Default is `true`. Set to `false` for testing or CI scenarios where the server may not be available.
+

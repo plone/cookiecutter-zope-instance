@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/errata-ai/vale
+    rev: v3.9.6
+    hooks:
+      - id: vale
+        name: vale sync
+        pass_filenames: false
+        args: [--config=docs/.vale.ini, sync]
+        files: ^docs/sources/.*\.md$
+      - id: vale
+        args: [--config=docs/.vale.ini, --output=line, --minAlertLevel=error]
+        files: ^docs/sources/.*\.md$
