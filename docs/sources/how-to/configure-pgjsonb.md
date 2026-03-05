@@ -82,7 +82,7 @@ default_context:
     db_pgjsonb_s3_region: us-east-1
     db_pgjsonb_s3_access_key: minio-access-key
     db_pgjsonb_s3_secret_key: minio-secret-key
-    db_pgjsonb_blob_threshold: 1MB
+    db_pgjsonb_blob_threshold: 100KB
     db_pgjsonb_blob_cache_dir: /var/cache/zodb-blobs
     db_pgjsonb_blob_cache_size: 2GB
 ```

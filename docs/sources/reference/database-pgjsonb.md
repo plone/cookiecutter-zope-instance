@@ -72,7 +72,7 @@ the `zodb-pgjsonb[s3]` extra to be installed.
 | `db_pgjsonb_s3_access_key` | *(unset)* | string |
 | `db_pgjsonb_s3_secret_key` | *(unset)* | string |
 | `db_pgjsonb_s3_use_ssl` | `true` | `true`, `false` |
-| `db_pgjsonb_blob_threshold` | *(unset, default `1MB`)* | byte-size (KB, MB, GB) |
+| `db_pgjsonb_blob_threshold` | *(unset, default `100KB`)* | byte-size (KB, MB, GB) |
 | `db_pgjsonb_blob_cache_dir` | *(unset)* | path |
 | `db_pgjsonb_blob_cache_size` | *(unset, default `1GB`)* | byte-size (KB, MB, GB) |
 

@@ -86,7 +86,7 @@ with no filesystem dependencies.
 For deployments with large or numerous blobs, PGJsonb supports tiering
 blobs to S3-compatible object storage:
 
-- Blobs smaller than `db_pgjsonb_blob_threshold` (default: 1 MB) stay in
+- Blobs smaller than `db_pgjsonb_blob_threshold` (default: 100 KB) stay in
   PostgreSQL `bytea`
 - Blobs exceeding the threshold are uploaded to S3
 - A local cache directory avoids repeated S3 downloads
