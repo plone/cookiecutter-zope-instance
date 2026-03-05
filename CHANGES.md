@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.1 (unreleased)
+## 2.4.1 (2026-03-05)
 
 - Docs: Update PGJsonb default `blob-threshold` from 1MB to 100KB in docs
   (matching zodb-pgjsonb 1.4.0).
