@@ -13,7 +13,7 @@ horizontal scaling.
 - The `RelStorage` and `psycopg2` Python packages installed
 - A PostgreSQL database created for your Zope instance
 
-## Step 1: Set the storage type
+## Step 1: set the storage type
 
 In your `instance.yaml`, set the storage backend to `relstorage`:
 
@@ -22,7 +22,7 @@ default_context:
     db_storage: relstorage
 ```
 
-## Step 2: Set the blob mode
+## Step 2: set the blob mode
 
 RelStorage stores blobs in the database. Your Zope client needs a local cache
 directory for blob data. Set the blob mode to `cache`:
@@ -38,7 +38,7 @@ You **must** set `db_blob_mode` to `cache` when using RelStorage.
 The default value `shared` is only appropriate for direct filestorage.
 ```
 
-## Step 3: Choose the database backend
+## Step 3: choose the database backend
 
 Set the relational database type. PostgreSQL is the recommended choice:
 
@@ -51,7 +51,7 @@ default_context:
 
 Other supported values are `mysql`, `oracle`, and `sqlite3`.
 
-## Step 4: Configure the connection string
+## Step 4: configure the connection string
 
 Provide the PostgreSQL DSN (Data Source Name) so RelStorage can connect to
 your database:
@@ -104,8 +104,18 @@ for RelStorage command-line utilities:
   settings are provided. Used with `zodbconvert` to import data from a
   filestorage.
 
+:::{tip}
+For migrating data between storage backends, the generic
+[zodb-convert](https://pypi.org/project/zodb-convert/) tool is now the
+recommended approach. It works with all storage backends and can read storage
+configuration directly from `zope.conf` files.
+See {doc}`migrate-storage` for a step-by-step guide.
+:::
+
 ## Next steps
 
+- {doc}`migrate-storage` -- Migrate data between any storage backends using
+  `zodb-convert`.
 - {doc}`/reference/database-relstorage` -- Full reference for all RelStorage
   options including caching, replication, MySQL, Oracle, and SQLite settings.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.

@@ -74,6 +74,29 @@ with work_in(basedir):
         if db_relstorage_export_filestorage_location:
             filepath = Path(db_relstorage_export_filestorage_location)
             filepath.parent.mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_storage }}" != "direct":
+        # generic convert import directories
+        db_convert_import_blobs = (
+            "{{ cookiecutter.db_convert_import_blobs_location | abspath }}"
+        )
+        if db_convert_import_blobs:
+            Path(db_convert_import_blobs).mkdir(parents=True, exist_ok=True)
+        db_convert_import_fs = (
+            "{{ cookiecutter.db_convert_import_filestorage_location | abspath }}"
+        )
+        if db_convert_import_fs:
+            Path(db_convert_import_fs).parent.mkdir(parents=True, exist_ok=True)
+        # generic convert export directories
+        db_convert_export_blobs = (
+            "{{ cookiecutter.db_convert_export_blobs_location | abspath }}"
+        )
+        if db_convert_export_blobs:
+            Path(db_convert_export_blobs).mkdir(parents=True, exist_ok=True)
+        db_convert_export_fs = (
+            "{{ cookiecutter.db_convert_export_filestorage_location | abspath }}"
+        )
+        if db_convert_export_fs:
+            Path(db_convert_export_fs).parent.mkdir(parents=True, exist_ok=True)
     if "{{ cookiecutter.db_storage }}" == "pgjsonb":
         blob_temp_dir = "{{ cookiecutter.db_pgjsonb_blob_temp_dir }}"
         if blob_temp_dir:
@@ -85,6 +108,10 @@ with work_in(basedir):
         z3blobs_cache_dir = "{{ cookiecutter.db_z3blobs_cache_dir }}"
         if z3blobs_cache_dir:
             Path(z3blobs_cache_dir).mkdir(parents=True, exist_ok=True)
+    if "{{ cookiecutter.db_storage }}" == "direct":
+        # cleanup convert files — filestorage doesn't need conversion configs
+        (etc / "convert-import.conf").unlink()
+        (etc / "convert-export.conf").unlink()
     if "{{ cookiecutter.db_storage }}" != "relstorage":
         # cleanup relstorage files if no relstorage is configured
         (etc / "relstorage-export.conf").unlink()

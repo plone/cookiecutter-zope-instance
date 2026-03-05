@@ -1,4 +1,4 @@
-# Base Locations
+# Base locations
 
 <!-- diataxis: reference -->
 

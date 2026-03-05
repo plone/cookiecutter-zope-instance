@@ -7,7 +7,7 @@ storage among many clients. All options can be found in the
 [Zope Configuration Reference](https://zope.readthedocs.io/en/latest/operation.html#zope-configuration-reference)
 under `<zeoclient>`.
 
-## Main Settings
+## Main settings
 
 | Setting | Default |
 |---|---|
@@ -46,7 +46,7 @@ the database server's socket can read and write arbitrary data.
 
 **`db_zeo_username`** -- Enable ZEO authentication and use the given username when accessing the ZEO server. It is obligatory to also specify a `db_zeo_password`.
 
-## Advanced Options
+## Advanced options
 
 | Setting | Default | Allowed Values |
 |---|---|---|

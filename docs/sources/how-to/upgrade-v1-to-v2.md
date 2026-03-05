@@ -1,4 +1,4 @@
-# Upgrade from Version 1 to Version 2
+# Upgrade from version 1 to version 2
 
 <!-- diataxis: how-to -->
 

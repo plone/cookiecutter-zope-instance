@@ -1,4 +1,4 @@
-# Understanding Storage Backends
+# Understanding storage backends
 
 <!-- diataxis: explanation -->
 
@@ -65,7 +65,7 @@ preservation.
   cached locally) or *shared* mode (blobs on a shared filesystem)
 - History-free mode gives better performance but disables ZODB-level undo
 
-## ZEO (Zope Enterprise Objects)
+## ZEO (Zope enterprise objects)
 
 [ZEO](https://zeo.readthedocs.io/) is the original client-server protocol
 for ZODB. A dedicated ZEO server process manages the filestorage, and
@@ -123,7 +123,7 @@ storage for large blob volumes.
 - Newer and less battle-tested than RelStorage or ZEO
 - Blob handling is fundamentally different from the other backends
 
-## S3 Blob Wrapper (z3blobs)
+## S3 blob wrapper (z3blobs)
 
 [zodb-s3blobs](https://pypi.org/project/zodb-s3blobs/) is not a fifth storage
 backend but a **wrapper** that can be applied to any of the first three backends
@@ -161,5 +161,12 @@ For most teams, the decision comes down to:
 5. **Need S3 blob storage with direct, relstorage, or zeo?** Enable `db_z3blobs_enabled`.
 
 All four backends support the same ZODB API, so switching between them is a
-configuration change (plus data migration). Your application code does not
-need to change.
+configuration change plus a one-time data migration. The
+[zodb-convert](https://pypi.org/project/zodb-convert/) tool handles this
+migration generically -- it can copy data between any two ZODB-compatible
+storages. Because `cookiecutter-zope-instance` generates a complete
+`zope.conf` for each backend, `zodb-convert` can read the storage
+configuration directly from these files. See {doc}`/how-to/migrate-storage`
+for a step-by-step guide.
+
+Your application code does not need to change.

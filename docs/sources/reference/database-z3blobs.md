@@ -1,4 +1,4 @@
-# Database: S3 Blob Wrapper (z3blobs)
+# Database: S3 blob wrapper (z3blobs)
 
 <!-- diataxis: reference -->
 
@@ -20,7 +20,7 @@ natively via PostgreSQL bytea and optional S3 tiering through its own
 `db_pgjsonb_s3_*` settings.
 :::
 
-## Core Settings
+## Core settings
 
 | Setting | Default | Allowed Values |
 |---|---|---|
@@ -37,7 +37,7 @@ natively via PostgreSQL bytea and optional S3 tiering through its own
 
 **`db_z3blobs_cache_size`** -- Maximum size of the local blob cache. When exceeded, least recently used blobs are evicted.
 
-## S3 Connection Settings
+## S3 connection settings
 
 | Setting | Default | Allowed Values |
 |---|---|---|

@@ -1,4 +1,4 @@
-# Your First Zope Instance
+# Your first Zope instance
 
 <!-- diataxis: tutorial -->
 
@@ -13,7 +13,7 @@ with sensible default settings, ready to start and serve requests.
 - **cookiecutter** (installed in a later step)
 - A basic understanding of the command line
 
-## Step 1: Install cookiecutter
+## Step 1: install cookiecutter
 
 Install `cookiecutter` into your Python environment:
 
@@ -27,7 +27,7 @@ Verify the installation:
 cookiecutter --version
 ```
 
-## Step 2: Create a configuration file
+## Step 2: create a configuration file
 
 Cookiecutter reads its input from a YAML configuration file. Create a file
 called `instance.yaml` with the following content:
@@ -46,7 +46,7 @@ This tells cookiecutter to:
 - include the ZCML of the package `my.awesome.addon`, and
 - use a direct (FileStorage) ZODB database.
 
-## Step 3: Run cookiecutter
+## Step 3: run cookiecutter
 
 Generate the instance by pointing cookiecutter at the upstream template:
 
@@ -64,7 +64,7 @@ The flags used here:
 Cookiecutter will clone the template and render the output into a directory
 called `instance/`.
 
-## Step 4: Explore the generated files
+## Step 4: explore the generated files
 
 After the command finishes you will find the following structure:
 
@@ -84,7 +84,7 @@ instance/
 | `etc/site.zcml` | Component architecture — which packages are loaded |
 | `inituser` | One-time admin user created on first startup |
 
-## Step 5: Start the instance
+## Step 5: start the instance
 
 To start the instance you need a WSGI server such as **waitress** and the
 Zope application itself installed in your Python environment. Then run:

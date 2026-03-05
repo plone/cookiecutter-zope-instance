@@ -2,7 +2,16 @@
 
 ## 2.4.1 (unreleased)
 
-- No changes yet.
+- Docs: Update PGJsonb default `blob-threshold` from 1MB to 100KB in docs
+  (matching zodb-pgjsonb 1.4.0).
+  [@jensens]
+
+- Feature: Generate generic `convert-import.conf` and `convert-export.conf`
+  for all non-filestorage backends (RelStorage, PGJsonb, ZEO) using the
+  storage-agnostic [zodb-convert](https://pypi.org/project/zodb-convert/)
+  tool. Deprecate RelStorage-specific `zodbconvert` configuration in favor
+  of `zodb-convert`. Add migration how-to guide.
+  [@jensens]
 
 ## 2.4.0 (2026-02-25)
 

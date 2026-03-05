@@ -1,4 +1,4 @@
-# Docker Deployment
+# Docker deployment
 
 <!-- diataxis: tutorial -->
 
@@ -16,7 +16,7 @@ deployments where secrets and runtime settings must not be baked into images.
   directory of the cookiecutter template).
 - Python 3.10+
 
-## Step 1: Start with a development config
+## Step 1: start with a development config
 
 Use the same `instance.yaml` you created earlier:
 
@@ -31,7 +31,7 @@ default_context:
 This is your *base* configuration. Environment variables will override
 individual values at build time.
 
-## Step 2: Set production environment variables
+## Step 2: set production environment variables
 
 The transform script recognizes variables prefixed with `INSTANCE_`. Each
 variable name maps to a key in `default_context` -- the prefix is stripped
@@ -61,7 +61,7 @@ Notable choices:
 - **`db_relstorage_postgresql_dsn`** points at a `db` host -- the typical
   name for a database service in Docker Compose.
 
-## Step 3: Run the transform
+## Step 3: run the transform
 
 ```bash
 python transform_from_environment.py
@@ -70,7 +70,7 @@ python transform_from_environment.py
 The script reads `instance.yaml`, merges the `INSTANCE_*` variables on top,
 and writes `instance-from-environment.yaml`.
 
-## Step 4: Examine the output
+## Step 4: examine the output
 
 The effective context will look like:
 
@@ -98,7 +98,7 @@ cookiecutter -f --no-input \
     gh:plone/cookiecutter-zope-instance
 ```
 
-## Step 5: Use in a Dockerfile
+## Step 5: use in a Dockerfile
 
 The transform **must run at container startup**, not at image build time,
 because `INSTANCE_*` environment variables (database credentials, hostnames)
@@ -192,7 +192,7 @@ services:
       - "8080:8080"
 ```
 
-## Advanced: Dict values with `_DICT_`
+## Advanced: dict values with `_DICT_`
 
 Some template variables are dictionaries. The transform script supports a
 special `_DICT_` infix to set individual keys inside a dict:

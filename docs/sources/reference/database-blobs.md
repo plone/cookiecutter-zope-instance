@@ -1,4 +1,4 @@
-# Database: Blob Settings
+# Database: blob settings
 
 <!-- diataxis: reference -->
 

@@ -1,4 +1,4 @@
-# Configure S3 Blob Storage (z3blobs)
+# Configure S3 blob storage (z3blobs)
 
 <!-- diataxis: how-to -->
 
@@ -11,7 +11,7 @@ This guide walks you through enabling S3-backed blob storage using
 - An S3-compatible storage service (AWS S3, MinIO, Ceph, etc.)
 - A bucket created for your blob data
 
-## Step 1: Enable the wrapper
+## Step 1: enable the wrapper
 
 In your `instance.yaml`, enable the z3blobs wrapper alongside your existing
 storage backend:
@@ -22,7 +22,7 @@ default_context:
     db_z3blobs_enabled: true
 ```
 
-## Step 2: Configure the S3 bucket
+## Step 2: configure the S3 bucket
 
 Provide the bucket name and a local cache directory:
 
@@ -34,7 +34,7 @@ default_context:
     db_z3blobs_cache_dir: var/s3cache
 ```
 
-## Step 3: Configure S3 connection (if not AWS)
+## Step 3: configure S3 connection (if not AWS)
 
 For MinIO or other S3-compatible stores, set the endpoint URL and credentials:
 

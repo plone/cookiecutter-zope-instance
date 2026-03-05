@@ -1,4 +1,4 @@
-# Configure CORS for REST API Access
+# Configure CORS for REST API access
 
 <!-- diataxis: how-to -->
 
@@ -10,7 +10,7 @@ CORS support is provided by
 [plone.rest](https://pypi.org/project/plone.rest/) and is configured through
 `cookiecutter-zope-instance` settings.
 
-## Step 1: Enable CORS
+## Step 1: enable CORS
 
 By default, CORS is disabled. Enable it in your `instance.yaml`:
 
@@ -19,7 +19,7 @@ default_context:
     cors_enabled: true
 ```
 
-## Step 2: Configure allowed origins
+## Step 2: configure allowed origins
 
 Specify which origins may access your Plone site:
 
@@ -71,7 +71,7 @@ The default value for `cors_allow_origin` is already
 you only need to set `cors_enabled: true`.
 ```
 
-## Example: Production with specific domains
+## Example: production with specific domains
 
 ```yaml
 default_context:
