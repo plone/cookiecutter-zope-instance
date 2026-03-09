@@ -2,6 +2,11 @@
 
 ## 2.4.1 (2026-03-05)
 
+- Security: Stop logging environment variable values in `transform_from_environment.py`
+  to avoid leaking passwords and other secrets. Now only logs which env var
+  was used and which config key it maps to.
+  [@jensens]
+
 - Docs: Update PGJsonb default `blob-threshold` from 1MB to 100KB in docs
   (matching zodb-pgjsonb 1.4.0).
   [@jensens]
