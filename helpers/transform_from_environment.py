@@ -81,7 +81,7 @@ def handle_dict(key, value, cfg):
         cfg[main_key] = {}
     if _DICT_DELIMITER in sub_key:
         value = handle_dict(sub_key, value, cfg[main_key])
-    print(f"Set from dict {envkey}: {key}={value}")
+    print(f"Set from env {envkey} -> {main_key}.{sub_key}")
     cfg[main_key][sub_key] = handle_value(value)
 
 
@@ -94,7 +94,7 @@ for envkey, value in os.environ.items():
         handle_dict(key, value, cfg)
         continue
     key = key.lower()
-    print(f"Set from env {envkey}: {key}={value}")
+    print(f"Set from env {envkey} -> {key}")
     cfg[key] = handle_value(value)
 
 # write file
