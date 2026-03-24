@@ -17,6 +17,18 @@ def test_bake_with_defaults(cookies):
         assert 'zope.ini' in etc_files
         assert 'site.zcml' in etc_files
 
+        # Verify default logging config
+        zope_ini = (etc_path / "zope.ini").read_text()
+        # Default: stdout to stderr, text format
+        assert "[handler_console]" in zope_ini
+        assert "args = (sys.stderr,)" in zope_ini
+        assert "[formatter_generic]" in zope_ini
+        # Default: no file handlers
+        assert "[handler_eventlog]" not in zope_ini
+        # Default: access log enabled
+        assert "[logger_wsgi]" in zope_ini
+        assert "translogger" in zope_ini
+
 
 def test_bake_with_pgjsonb(cookies):
     """Bake with pgjsonb storage and verify generated zope.conf."""

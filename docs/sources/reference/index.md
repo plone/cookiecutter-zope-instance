@@ -10,6 +10,7 @@ maxdepth: 2
 ---
 base-locations
 basic-config
+logging
 initial-user
 zcml
 database-common

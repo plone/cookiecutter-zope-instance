@@ -1,9 +1,29 @@
 {
-  "_version": "2.4.1.dev0",
+  "_version": "3.0.0.dev0",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
   "location_log": "{{ cookiecutter.location_clienthome }}/log",
+
+  "log_format": "text",
+  "log_format_class": "",
+  "log_format_string": "",
+  "log_level": "INFO",
+  "log_stdout": true,
+  "log_stdout_stream": "stderr",
+  "log_file": false,
+  "log_file_path": "",
+  "log_syslog": false,
+  "log_syslog_host": "localhost",
+  "log_syslog_port": 514,
+  "log_syslog_facility": 1,
+  "log_syslog_protocol": "udp",
+  "access_log_enabled": true,
+  "logging_loggers": {
+    "plone": "INFO",
+    "waitress.queue": "INFO",
+    "waitress": "INFO"
+  },
 
   "wsgi_listen": "localhost:8080",
   "wsgi_fast_listen": "",

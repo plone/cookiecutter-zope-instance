@@ -35,7 +35,33 @@ if not inituser_filename.exists():
 # post generation step 2: generate directories
 with work_in(basedir):
     Path("{{ cookiecutter.location_clienthome }}").mkdir(parents=True, exist_ok=True)
-    Path("{{ cookiecutter.location_log }}").mkdir(parents=True, exist_ok=True)
+    # Handle log directory — deprecation of location_log
+    log_file_path = "{{ cookiecutter.log_file_path }}"
+    location_log = "{{ cookiecutter.location_log }}"
+    log_file_enabled = "{{ cookiecutter.log_file }}" == "True"
+
+    if log_file_enabled:
+        if log_file_path:
+            # log_file_path is explicitly set — use it, create parent dir
+            log_dir = Path(log_file_path).parent
+        elif location_log:
+            # Deprecated fallback
+            print(
+                f"Warning: 'location_log' is deprecated and will be removed "
+                f"in the next major version.\n"
+                f"         Use 'log_file_path' instead.\n"
+                f"         Falling back to '{location_log}/instance.log'.\n"
+            )
+            log_dir = Path(location_log)
+        else:
+            # Computed default
+            log_dir = Path("{{ cookiecutter.target }}", "var", "log")
+        log_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        # Even when file logging is off, location_log dir may be needed
+        # by profile_repoze settings
+        if location_log:
+            Path(location_log).mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.db_blob_location }}").mkdir(parents=True, exist_ok=True)
     Path("{{ cookiecutter.environment['CHAMELEON_CACHE'] }}").mkdir(
         parents=True, exist_ok=True

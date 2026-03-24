@@ -19,6 +19,10 @@ Goal-oriented guides for common tasks.
 
 - {doc}`configure-cors`
 
+## Logging
+
+- {doc}`configure-logging`
+
 ## Operations
 
 - {doc}`use-environment-variables`
@@ -37,6 +41,7 @@ configure-zeo
 configure-z3blobs
 migrate-storage
 configure-cors
+configure-logging
 use-environment-variables
 upgrade-v1-to-v2
 ```

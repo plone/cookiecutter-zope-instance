@@ -84,6 +84,34 @@ if "{{ cookiecutter.db_blobs_location }}" != "":
         "The 'db_blobs_location' setting was renamed to 'db_blob_location', please fix your configuration!"
     )
 
+# logging configuration validation
+log_format = "{{ cookiecutter.log_format }}".lower()
+if log_format not in ("text", "json"):
+    print(f"Error: 'log_format' must be 'text' or 'json', got '{log_format}'!")
+    exit(1)
+
+log_stdout = "{{ cookiecutter.log_stdout }}"
+log_file = "{{ cookiecutter.log_file }}"
+log_syslog = "{{ cookiecutter.log_syslog }}"
+if log_stdout == "False" and log_file == "False" and log_syslog == "False":
+    print("Error: At least one log handler must be enabled (log_stdout, log_file, or log_syslog)!")
+    exit(1)
+
+log_stdout_stream = "{{ cookiecutter.log_stdout_stream }}"
+if log_stdout_stream not in ("stdout", "stderr"):
+    print(f"Error: 'log_stdout_stream' must be 'stdout' or 'stderr', got '{log_stdout_stream}'!")
+    exit(1)
+
+log_syslog_protocol = "{{ cookiecutter.log_syslog_protocol }}"
+if log_syslog_protocol not in ("udp", "tcp"):
+    print(f"Error: 'log_syslog_protocol' must be 'udp' or 'tcp', got '{log_syslog_protocol}'!")
+    exit(1)
+
+log_syslog_facility = {{ cookiecutter.log_syslog_facility }}
+if not (0 <= log_syslog_facility <= 23):
+    print(f"Error: 'log_syslog_facility' must be 0-23, got {log_syslog_facility}!")
+    exit(1)
+
 if upgrade_errors:
     print("The following errors prevent cookiecutter-zope-instance from continuing, please fix them:")
     for error_msg in upgrade_errors:
