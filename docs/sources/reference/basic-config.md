@@ -8,7 +8,7 @@ Core WSGI server, environment, and request-handling settings.
 
 | Setting | Default | Allowed Values |
 |---|---|---|
-| `location_log` | `{{ cookiecutter.location_clienthome }}/log` | path |
+| `location_log` | `{{ cookiecutter.location_clienthome }}/log` | path — **deprecated**, use {doc}`logging` `log_file_path` instead |
 | `wsgi_listen` | `localhost:8080` | host:port |
 | `wsgi_fast_listen` | *(unset)* | host:port |
 | `wsgi_threads` | `4` | integer |

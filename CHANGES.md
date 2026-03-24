@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.5.0 (unreleased)
+
+- Feature: Configurable logging — stdout/file/syslog handlers, text/JSON
+  format, per-package log levels, access log toggle. Default is now stdout
+  to stderr (12-factor). File logging is opt-in via `log_file: true`.
+  JSON format requires `python-json-logger`.
+  `location_log` is deprecated in favor of `log_file_path`.
+  [@jensens]
+
 ## 2.4.1 (2026-03-05)
 
 - Docs: Update PGJsonb default `blob-threshold` from 1MB to 100KB in docs
