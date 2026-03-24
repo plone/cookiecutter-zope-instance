@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1 (unreleased)
+
+- No changes yet.
+
 ## 3.0.0 (2026-03-24)
 
 - Feature: Configurable logging — stdout/file/syslog handlers, text/JSON
