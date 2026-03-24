@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.5.0 (unreleased)
+## 3.0.0 (unreleased)
 
 - Feature: Configurable logging — stdout/file/syslog handlers, text/JSON
   format, per-package log levels, access log toggle. Default is now stdout

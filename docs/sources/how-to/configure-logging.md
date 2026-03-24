@@ -101,7 +101,7 @@ The custom class must be importable in the Zope instance's Python environment.
 
 ## Migrate from `location_log`
 
-```{deprecated} 2.5
+```{deprecated} 3.0
 The `location_log` setting is deprecated.
 Use `log_file_path` instead for explicit control over the log file location.
 ```

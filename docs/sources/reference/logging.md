@@ -4,7 +4,7 @@
 
 Complete reference for logging configuration variables.
 
-```{versionchanged} 2.5
+```{versionchanged} 3.0
 Logging is now fully configurable. The default changed from file-based logging to stdout (12-factor pattern). If you relied on file logging, add `log_file: true` to your configuration.
 ```
 
