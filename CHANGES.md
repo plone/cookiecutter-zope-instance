@@ -2,7 +2,9 @@
 
 ## 3.0.1 (unreleased)
 
-- No changes yet.
+- Fix: `transform_from_environment.py` no longer logs variable values by
+  default (security). Add `--debug` flag for verbose output.
+  [@jensens]
 
 ## 3.0.0 (2026-03-24)
 

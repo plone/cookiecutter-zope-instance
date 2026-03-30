@@ -40,6 +40,13 @@ parser.add_argument(
     type=str,
     default="instance-from-environment.yaml",
 )
+parser.add_argument(
+    "-d",
+    "--debug",
+    help="Print each variable name and value (DO NOT use in production!)",
+    action="store_true",
+    default=False,
+)
 args = parser.parse_args()
 
 # load base instance.yaml
@@ -81,24 +88,29 @@ def handle_dict(key, value, cfg):
         cfg[main_key] = {}
     if _DICT_DELIMITER in sub_key:
         value = handle_dict(sub_key, value, cfg[main_key])
-    print(f"Set from dict {envkey}: {key}={value}")
+    if args.debug:
+        print(f"Set from dict {envkey}: {key}={value}")
     cfg[main_key][sub_key] = handle_value(value)
 
 
 # set values from environment
+count = 0
 for envkey, value in os.environ.items():
     if not envkey.startswith(args.prefix):
         continue
     key = envkey[len(args.prefix) :]
     if _DICT_DELIMITER in key:
         handle_dict(key, value, cfg)
+        count += 1
         continue
     key = key.lower()
-    print(f"Set from env {envkey}: {key}={value}")
+    if args.debug:
+        print(f"Set from env {envkey}: {key}={value}")
     cfg[key] = handle_value(value)
+    count += 1
 
 # write file
 with open(args.outfile, "w") as fio:
     yaml.dump(instance, fio)
 
-print(f"{args.outfile} written, done!")
+print(f"{args.outfile} written, {count} variables applied.")
