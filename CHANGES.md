@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2 (unreleased)
+
+- No changes yet.
+
 ## 3.0.1 (2026-03-30)
 
 - Fix: `transform_from_environment.py` no longer logs variable values by
