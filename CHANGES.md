@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.3 (unreleased)
+
+- No changes yet.
+
 ## 3.0.2 (2026-04-03)
 
 - Fix: Add `profile` filter to WSGI pipeline when `profile_repoze` is enabled.

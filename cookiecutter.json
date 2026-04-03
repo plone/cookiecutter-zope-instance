@@ -1,5 +1,5 @@
 {
-  "_version": "3.0.2",
+  "_version": "3.0.3.dev0",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
