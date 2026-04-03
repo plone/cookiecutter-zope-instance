@@ -2,7 +2,11 @@
 
 ## 3.0.2 (unreleased)
 
-- No changes yet.
+- Fix: Add `profile` filter to WSGI pipeline when `profile_repoze` is enabled.
+  Previously the `[filter:profile]` section was generated but never wired into
+  the pipeline.
+  [Fixes #42]
+  [@jensens]
 
 ## 3.0.1 (2026-03-30)
 
