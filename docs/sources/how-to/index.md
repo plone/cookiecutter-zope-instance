@@ -26,6 +26,8 @@ Goal-oriented guides for common tasks.
 ## Operations
 
 - {doc}`use-environment-variables`
+- {doc}`pack-and-gc`
+- {doc}`backup-and-restore`
 
 ## Upgrading
 
@@ -43,5 +45,7 @@ migrate-storage
 configure-cors
 configure-logging
 use-environment-variables
+pack-and-gc
+backup-and-restore
 upgrade-v1-to-v2
 ```
