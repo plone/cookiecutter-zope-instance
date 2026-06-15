@@ -151,6 +151,47 @@ default_context:
 
 See {doc}`database-pgjsonb` and {doc}`database-common`.
 
+(sample-pgjsonb-s3-prod)=
+
+## PGJsonb with S3 blob tiering (production)
+
+The same backend, with blobs larger than the threshold tiered to
+S3-compatible object storage instead of PostgreSQL `bytea`.
+Requires the `zodb-pgjsonb[s3]` extra.
+This is PGJsonb's own S3 tiering and does not use the z3blobs wrapper.
+
+```yaml
+default_context:
+    # Serving (bind to localhost when behind a reverse proxy)
+    wsgi_listen: 127.0.0.1:8080
+
+    # Initial admin user (override the password from the environment)
+    initial_user_name: admin
+    initial_user_password: admin
+
+    # Add-ons
+    zcml_package_includes: my.awesome.addon
+
+    # Storage
+    db_storage: pgjsonb
+    db_pgjsonb_dsn: "dbname='zodb' user='zodb' host='db' port='5432'"
+    db_pgjsonb_history_preserving: false
+
+    # S3 tiered blob storage (credentials via the boto3 chain when omitted)
+    db_pgjsonb_s3_bucket_name: zodb-blobs
+    db_pgjsonb_s3_region: eu-west-1
+    db_pgjsonb_blob_threshold: 100KB
+    db_pgjsonb_blob_cache_dir: /var/cache/zodb-blobs
+    db_pgjsonb_blob_cache_size: 2GB
+
+    # Object cache
+    db_cache_size: 50000
+    db_pgjsonb_cache_local_mb: 64
+```
+
+Set `db_pgjsonb_s3_endpoint_url` for MinIO or other S3-compatible stores.
+See {doc}`database-pgjsonb` and {doc}`/explanation/blob-handling`.
+
 ## S3 blob storage (z3blobs wrapper)
 
 The z3blobs wrapper redirects blob handling to S3-compatible object storage.
