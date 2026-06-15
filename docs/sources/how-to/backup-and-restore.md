@@ -66,6 +66,19 @@ database, so `pg_dump` captures them.
 When PGJsonb tiers blobs to S3 (`db_pgjsonb_s3_bucket_name`), back up that
 bucket as well; the database alone does not contain the tiered blobs.
 
+## ZEO
+
+A ZEO client holds no authoritative data of its own, so there is nothing to
+back up on the client.
+Back up on the ZEO server host instead: the server runs its own storage --
+usually a FileStorage or RelStorage -- so use the matching method above
+(cold copy of `Data.fs`, or `pg_dump`) against that storage.
+
+If the deployment uses a shared blob directory, also back it up as described
+below.
+ZEO server administration is otherwise outside the scope of this template;
+consult the ZODB/ZEO documentation.
+
 ## Shared blob directories
 
 When blobs are stored on the filesystem in `shared` mode rather than in the
