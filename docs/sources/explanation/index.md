@@ -10,5 +10,6 @@ hidden: true
 ---
 storage-backends
 blob-handling
+configuration-workflow
 why-cookiecutter
 ```
