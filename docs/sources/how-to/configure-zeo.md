@@ -8,6 +8,7 @@ Zope application processes to share a single database.
 
 ## Prerequisites
 
+- New to this template? Start with {doc}`/tutorials/first-zope-instance`.
 - A running ZEO server (see ZODB/ZEO documentation for server setup)
 - The `ZEO` Python package installed
 
@@ -82,6 +83,9 @@ Each client in a multi-instance deployment should have a unique
 
 ```yaml
 default_context:
+    # Serving (bind to localhost when behind a reverse proxy)
+    wsgi_listen: 127.0.0.1:8080
+
     initial_user_name: admin
     initial_user_password: admin
 
@@ -104,6 +108,9 @@ default_context:
     # ZODB object cache
     db_cache_size: 30000
 ```
+
+For the full set of annotated sample configurations, including development and
+other backend variants, see {doc}`/reference/sample-configurations`.
 
 ## Next steps
 

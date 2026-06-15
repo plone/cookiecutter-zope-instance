@@ -9,6 +9,7 @@ horizontal scaling.
 
 ## Prerequisites
 
+- New to this template? Start with {doc}`/tutorials/first-zope-instance`.
 - A running PostgreSQL server
 - The `RelStorage` and `psycopg2` Python packages installed
 - A PostgreSQL database created for your Zope instance
@@ -66,10 +67,13 @@ default_context:
 
 ## Complete example
 
-Here is a production-ready `instance.yaml` with commonly tuned settings:
+Here is a complete, runnable `instance.yaml` with commonly tuned settings:
 
 ```yaml
 default_context:
+    # Serving (bind to localhost when behind a reverse proxy)
+    wsgi_listen: 127.0.0.1:8080
+
     initial_user_name: admin
     initial_user_password: admin
 
@@ -89,6 +93,9 @@ default_context:
     # Blob cache
     db_blob_cache_size: 10737418240  # 10 GB
 ```
+
+For the full set of annotated sample configurations, including development and
+other backend variants, see {doc}`/reference/sample-configurations`.
 
 ## Generated helper files
 
