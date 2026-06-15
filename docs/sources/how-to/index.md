@@ -23,6 +23,14 @@ Goal-oriented guides for common tasks.
 
 - {doc}`configure-logging`
 
+## Production
+
+- {doc}`run-behind-reverse-proxy`
+
+## Development
+
+- {doc}`enable-debug-profiling`
+
 ## Operations
 
 - {doc}`use-environment-variables`
@@ -41,6 +49,8 @@ configure-zeo
 configure-z3blobs
 migrate-storage
 configure-cors
+run-behind-reverse-proxy
+enable-debug-profiling
 configure-logging
 use-environment-variables
 upgrade-v1-to-v2
