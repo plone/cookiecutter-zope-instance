@@ -44,10 +44,6 @@ html_theme_options = {
             "title": "GitHub",
             "url": "https://github.com/plone/cookiecutter-zope-instance",
         },
-        {
-            "title": "PyPI",
-            "url": "https://pypi.org/project/cookiecutter-zope-instance/",
-        },
     ],
 }
 
