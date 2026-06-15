@@ -4,8 +4,13 @@
 
 Goal-oriented guides for common tasks.
 
+## Server
+
+- {doc}`set-listen-host-port`
+
 ## Database backends
 
+- {doc}`configure-filestorage`
 - {doc}`configure-relstorage`
 - {doc}`configure-pgjsonb`
 - {doc}`configure-zeo`
@@ -35,6 +40,8 @@ Goal-oriented guides for common tasks.
 ---
 hidden: true
 ---
+set-listen-host-port
+configure-filestorage
 configure-relstorage
 configure-pgjsonb
 configure-zeo
