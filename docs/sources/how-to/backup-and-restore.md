@@ -101,11 +101,17 @@ authoritative storage.
 ## Portable backup with zodb-convert
 
 To create a storage-agnostic snapshot, export the database to a FileStorage
-with `zodb-convert`.
-This works for every backend and produces a portable `Data.fs` you can
-restore into any other backend.
+and keep the resulting `Data.fs` as a portable backup you can restore into any
+backend.
+
+Use [zodb-convert](https://pypi.org/project/zodb-convert/), which works with
+every backend.
 See {doc}`migrate-storage` for the step-by-step procedure using the generated
 `convert-export.conf` and `convert-import.conf` files.
+
+With RelStorage you can instead use its bundled
+[zodbconvert](https://relstorage.readthedocs.io/en/latest/zodbconvert.html)
+command.
 
 ## Next steps
 
