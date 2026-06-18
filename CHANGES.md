@@ -2,7 +2,12 @@
 
 ## 3.0.3 (unreleased)
 
-- No changes yet.
+- Feature: Generic `wsgi_filters` option to inject arbitrary WSGI/PasteDeploy
+  filters into the pipeline (e.g. `plone.observability`). Each filter has a
+  `use`, optional `options`, and optional `position` (`outer`/`inner`). The
+  built-in `profile` and `translogger` filters now render through the same
+  unified pipeline path.
+  [@jensens]
 
 ## 3.0.2 (2026-04-03)
 
