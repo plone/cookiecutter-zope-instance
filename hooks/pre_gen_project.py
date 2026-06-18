@@ -123,3 +123,23 @@ elif upgrade_warnings:
     for warning_msg in upgrade_warnings:
         print(f" - Warning: {warning_msg}")
     print()
+
+# wsgi_filters validation
+RESERVED_FILTERS = {"zope", "profile", "translogger", "httpexceptions", "main"}
+VALID_POSITIONS = {"outer", "inner"}
+
+wsgi_filters = {{ cookiecutter.wsgi_filters }}
+for name, _f in wsgi_filters.items():
+    if name in RESERVED_FILTERS:
+        print(f"Error: wsgi_filter name '{name}' is reserved!")
+        exit(1)
+    if not isinstance(_f, dict):
+        print(f"Error: wsgi_filter '{name}' must be a mapping, got {_f!r}!")
+        exit(1)
+    if not _f.get("use"):
+        print(f"Error: wsgi_filter '{name}' is missing required 'use'!")
+        exit(1)
+    position = _f.get("position", "outer")
+    if position not in VALID_POSITIONS:
+        print(f"Error: wsgi_filter '{name}' has invalid position '{position}' (outer|inner)!")
+        exit(1)

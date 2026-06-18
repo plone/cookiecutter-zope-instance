@@ -72,3 +72,27 @@ def test_generic_filter_options_rendered_verbatim(cookies):
         assert "use = egg:foo#bar" in zope_ini
         assert "threshold = 5" in zope_ini
         assert "mode = fast" in zope_ini
+
+
+def test_reserved_filter_name_fails(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={"wsgi_filters": {"zope": {"use": "egg:foo#bar"}}},
+    ) as result:
+        assert result.exit_code != 0
+
+
+def test_missing_use_fails(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={"wsgi_filters": {"x": {"position": "outer"}}},
+    ) as result:
+        assert result.exit_code != 0
+
+
+def test_invalid_position_fails(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={"wsgi_filters": {"x": {"use": "egg:foo#bar", "position": "sideways"}}},
+    ) as result:
+        assert result.exit_code != 0
