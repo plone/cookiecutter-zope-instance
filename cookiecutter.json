@@ -32,6 +32,7 @@
   "wsgi_channel_timeout": "",
   "wsgi_clear_untrusted_proxy_headers": false,
   "wsgi_app_entrypoint": "egg:Zope#main",
+  "wsgi_filters": {},
 
   "environment": {
     "zope_i18n_compile_mo_files": "true",
