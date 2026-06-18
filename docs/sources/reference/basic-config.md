@@ -16,6 +16,7 @@ Core WSGI server, environment, and request-handling settings.
 | `wsgi_clear_untrusted_proxy_headers` | `false` | `true`, `false` |
 | `wsgi_channel_timeout` | *(unset, default `120`)* | integer (seconds) |
 | `wsgi_app_entrypoint` | `egg:Zope#main` | entrypoint |
+| `wsgi_filters` | `{}` (empty dict) | mapping `name → {use, options?, position?}` |
 | `trusted_proxy` | *(unset)* | comma-separated IPs/hostnames |
 
 **`wsgi_fast_listen`** -- Like `wsgi_listen`, but uses [waitress_fastlisten](https://pypi.org/project/waitress-fastlisten/). Needs the latter package to be installed (add it to *requirements.txt*).
@@ -23,6 +24,8 @@ Core WSGI server, environment, and request-handling settings.
 **`wsgi_clear_untrusted_proxy_headers`** -- Tells Waitress (WSGI server) to remove any untrusted proxy headers (`Forwarded`, `X-Forwarded-For`, `X-Forwarded-By`, `X-Forwarded-Host`, `X-Forwarded-Port`, `X-Forwarded-Proto`) not explicitly allowed by `trusted_proxy_headers`.
 
 **`wsgi_channel_timeout`** -- Maximum time in seconds to receive a complete request from a client. If the client does not send a complete request within this time, the connection is closed. Default is 120 seconds.
+
+**`wsgi_filters`** -- A mapping of WSGI/PasteDeploy filters to inject into the pipeline. Each key is the filter name and renders a `[filter:<name>]` section wired into `[pipeline:main]`. Each value supports `use` (required, the PasteDeploy entry point), `options` (optional mapping of additional `key = value` lines rendered verbatim into the filter section), and `position` (`outer`, the default — placed ahead of the built-in `profile`/`translogger` filters so it wraps the whole request; or `inner` — placed closest to the application, just before `egg:Zope#httpexceptions`). Reserved names that cannot be used: `zope`, `profile`, `translogger`, `httpexceptions`, `main`. See {doc}`/how-to/add-wsgi-middleware`.
 
 **`trusted_proxy`** -- A comma-separated list of IP addresses or hostnames of trusted reverse proxies. When set, Zope will trust proxy-related headers (such as `X-Forwarded-For`) from these sources. Each value becomes a separate `trusted-proxy` directive in `zope.conf`. Example: `"10.0.0.1,10.0.0.2"`.
 

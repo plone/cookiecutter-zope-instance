@@ -27,6 +27,7 @@ New to the template? Start with the {doc}`/tutorials/index`.
 - {doc}`configure-cors`
 - {doc}`configure-logging`
 - {doc}`set-product-config`
+- {doc}`add-wsgi-middleware`
 
 ## Deploy to production
 
@@ -60,6 +61,7 @@ configure-z3blobs
 configure-cors
 configure-logging
 set-product-config
+add-wsgi-middleware
 run-behind-reverse-proxy
 use-environment-variables
 enable-debug-profiling

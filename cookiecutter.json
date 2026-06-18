@@ -1,5 +1,5 @@
 {
-  "_version": "3.0.3.dev0",
+  "_version": "3.1.0.dev0",
   "_extensions": ["local_extensions.ZopeExtensions"],
   "target": "instance",
   "location_clienthome": "{{ cookiecutter.target }}/var",
@@ -32,6 +32,7 @@
   "wsgi_channel_timeout": "",
   "wsgi_clear_untrusted_proxy_headers": false,
   "wsgi_app_entrypoint": "egg:Zope#main",
+  "wsgi_filters": {},
 
   "environment": {
     "zope_i18n_compile_mo_files": "true",
