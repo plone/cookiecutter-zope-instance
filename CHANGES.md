@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1 (unreleased)
+
+- No changes yet.
+
 ## 3.1.0 (2026-06-18)
 
 - Feature: Generic `wsgi_filters` option to inject arbitrary WSGI/PasteDeploy
