@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.3 (unreleased)
+## 3.1.0 (unreleased)
 
 - Feature: Generic `wsgi_filters` option to inject arbitrary WSGI/PasteDeploy
   filters into the pipeline (e.g. `plone.observability`). Each filter has a
