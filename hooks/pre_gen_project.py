@@ -1,4 +1,88 @@
 from collections import OrderedDict
+from pathlib import Path
+
+import json
+import os
+
+try:
+    import yaml
+except ImportError:  # pragma: no cover — cookiecutter depends on PyYAML
+    yaml = None
+
+
+# Up-front validation of cookiecutter config overrides.
+#
+# cookiecutter.generate.apply_overwrites_to_context short-circuits on the
+# first invalid override (e.g. an empty string for a boolean, or an unknown
+# choice). The exception is caught as a UserWarning and ALL remaining
+# overrides in default_context are silently dropped, leaving the project
+# partially configured — incomplete etc/* files. See issue #43.
+#
+# We re-read the cookiecutter config file and validate every override
+# against the declared types in cookiecutter.json, aborting loudly before
+# cookiecutter can silently fry things.
+_YES_NO = {
+    "1", "true", "t", "yes", "y", "on",
+    "0", "false", "f", "no", "n", "off",
+}
+
+
+def _validate_default_context():
+    if yaml is None:
+        return []
+    config_path = os.environ.get("COOKIECUTTER_CONFIG") or os.path.expanduser(
+        "~/.cookiecutterrc"
+    )
+    if not os.path.isfile(config_path):
+        return []
+    try:
+        cfg = yaml.safe_load(Path(config_path).read_text()) or {}
+    except Exception as exc:
+        return [f"could not parse cookiecutter config {config_path}: {exc}"]
+    default_ctx = cfg.get("default_context") or {}
+    if not isinstance(default_ctx, dict):
+        return []
+    template_dir = Path(r"{{ cookiecutter._template }}")
+    cc_json = template_dir / "cookiecutter.json"
+    if not cc_json.is_file():
+        return []
+    try:
+        defaults = json.loads(cc_json.read_text())
+    except Exception:
+        return []
+    errors = []
+    for var, val in default_ctx.items():
+        declared = defaults.get(var)
+        if isinstance(declared, bool):
+            if isinstance(val, bool):
+                continue
+            if not isinstance(val, str) or val.strip().lower() not in _YES_NO:
+                errors.append(
+                    f"{var}={val!r} cannot be parsed as boolean "
+                    f"(use true/false/yes/no/on/off/0/1)"
+                )
+        elif isinstance(declared, list) and declared:
+            # Choice variable. Also treat lists of dicts (nested) as free-form.
+            if all(isinstance(c, (str, int, float, bool)) for c in declared):
+                if val not in declared:
+                    errors.append(
+                        f"{var}={val!r} is not in allowed choices {declared}"
+                    )
+    return errors
+
+
+_override_errors = _validate_default_context()
+if _override_errors:
+    print(
+        "Error: invalid override(s) in cookiecutter default_context detected.\n"
+        "Cookiecutter would silently drop these (and every subsequent override)\n"
+        "via UserWarning, producing incomplete etc/* files.\n"
+        "See https://github.com/plone/cookiecutter-zope-instance/issues/43\n"
+    )
+    for err in _override_errors:
+        print(f"  - {err}")
+    exit(1)
+
 
 # invariant checks
 # check database mode direct and blobs not cache

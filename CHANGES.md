@@ -2,7 +2,15 @@
 
 ## 3.1.1 (unreleased)
 
-- No changes yet.
+- Fix: Validate cookiecutter config overrides before project generation.
+  Cookiecutter silently discards every remaining `default_context` override
+  after the first invalid one (e.g. an unparseable boolean from
+  `INSTANCE_log_syslog=""`), producing incomplete `etc/*` files. The
+  pre-generation hook now re-reads `$COOKIECUTTER_CONFIG` (or
+  `~/.cookiecutterrc`), validates each override against the types declared
+  in `cookiecutter.json`, and aborts with an actionable error.
+  [Fixes #43]
+  [@jensens]
 
 ## 3.1.0 (2026-06-18)
 
