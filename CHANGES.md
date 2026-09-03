@@ -2,7 +2,12 @@
 
 ## 3.1.1 (unreleased)
 
-- No changes yet.
+- Fix: Declare the `plone:` and `i18n:` namespace prefixes on `<configure>` in
+  the `site.zcml` template. Setting `zcml_resources_directory_location` renders
+  `<plone:static/>` and `zcml_locales_directory_location` renders
+  `<i18n:registerTranslations/>`, neither of which had its prefix bound, so the
+  generated file was not well-formed XML and Zope refused to start.
+  [@kunalKumar-13]
 
 ## 3.1.0 (2026-06-18)
 
