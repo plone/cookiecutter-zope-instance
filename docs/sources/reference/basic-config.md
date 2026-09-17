@@ -93,6 +93,14 @@ This generates:
 </product-config>
 ```
 
+## Arbitrary zope.conf settings
+
+| Setting | Default |
+|---|---|
+| `zope_conf_include_file_location` | `""` (empty, no include) |
+
+**`zope_conf_include_file_location`** -- Path to a ZConfig file included at the end of the generated `zope.conf` via ZConfig's `%include` directive. Use it for configuration this template has no option for, e.g. an additional `<zodb_db>` mount. A relative path is anchored at the cookiecutter output directory (the parent of the instance directory); an absolute path is used as-is. The file has to exist when Zope starts, not when the configuration is generated. Default: empty (no include). See {doc}`/how-to/add-arbitrary-zope-conf`.
+
 ## XML-RPC and WebDAV
 
 | Setting | Default | Allowed Values |
