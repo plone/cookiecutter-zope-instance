@@ -143,3 +143,40 @@ for name, _f in wsgi_filters.items():
     if position not in VALID_POSITIONS:
         print(f"Error: wsgi_filter '{name}' has invalid position '{position}' (outer|inner)!")
         exit(1)
+
+# wsgi_server validation
+wsgi_server_use = "{{ cookiecutter.wsgi_server_use }}"
+wsgi_server_options = {{ cookiecutter.wsgi_server_options }}
+if wsgi_server_options and not wsgi_server_use:
+    print("Error: 'wsgi_server_options' requires 'wsgi_server_use' to be set!")
+    exit(1)
+if wsgi_server_use:
+    if "{{ cookiecutter.wsgi_fast_listen }}":
+        print("Error: 'wsgi_server_use' cannot be combined with 'wsgi_fast_listen'!")
+        exit(1)
+    if not isinstance(wsgi_server_options, dict):
+        print("Error: 'wsgi_server_options' must be a mapping!")
+        exit(1)
+    if "use" in wsgi_server_options:
+        print(
+            "Error: 'use' is not allowed in 'wsgi_server_options',"
+            " set 'wsgi_server_use' instead!"
+        )
+        exit(1)
+    # defaults below mirror cookiecutter.json; keep in sync when they change
+    ignored = []
+    if "{{ cookiecutter.wsgi_listen }}" != "localhost:8080":
+        ignored.append("wsgi_listen")
+    if "{{ cookiecutter.wsgi_threads }}" != "4":
+        ignored.append("wsgi_threads")
+    if "{{ cookiecutter.wsgi_max_request_body_size }}" != "1073741824":
+        ignored.append("wsgi_max_request_body_size")
+    if "{{ cookiecutter.wsgi_channel_timeout }}":
+        ignored.append("wsgi_channel_timeout")
+    if "{{ cookiecutter.wsgi_clear_untrusted_proxy_headers }}" in ("True", "true"):
+        ignored.append("wsgi_clear_untrusted_proxy_headers")
+    if ignored:
+        print(
+            "Warning: 'wsgi_server_use' is set, waitress-specific options are"
+            " ignored: " + ", ".join(ignored) + "\n"
+        )
