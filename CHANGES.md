@@ -2,6 +2,11 @@
 
 ## 3.1.1 (unreleased)
 
+- Feature: `zope_conf_include_file_location` renders a ZConfig `%include` at the end
+  of the generated `zope.conf`, as an escape hatch for configuration without a
+  dedicated option (e.g. an additional `<zodb_db>` mount). Part of #64.
+  [@jensens, 2026-09-18]
+
 - Fix: Declare the `plone:` and `i18n:` namespace prefixes on `<configure>` in
   the `site.zcml` template. Setting `zcml_resources_directory_location` renders
   `<plone:static/>` and `zcml_locales_directory_location` renders
