@@ -59,3 +59,47 @@ def test_generic_server_without_options_renders_only_use(cookies):
         assert result.exit_code == 0, result.exception
         block = _server_block(_zope_ini(result))
         assert block.strip() == "use = egg:gunicorn#main"
+
+
+def test_options_without_use_fail(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={"wsgi_server_options": {"socket": "localhost:8080"}},
+    ) as result:
+        assert result.exit_code != 0
+
+
+def test_use_with_fast_listen_fails(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "wsgi_server_use": "egg:pyruvate#main",
+            "wsgi_fast_listen": "localhost:8080",
+        },
+    ) as result:
+        assert result.exit_code != 0
+
+
+def test_use_key_inside_options_fails(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "wsgi_server_use": "egg:pyruvate#main",
+            "wsgi_server_options": {"use": "egg:waitress#main"},
+        },
+    ) as result:
+        assert result.exit_code != 0
+
+
+def test_waitress_options_are_ignored_with_warning(cookies):
+    """Setting waitress options alongside wsgi_server_use warns but bakes."""
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={
+            "wsgi_server_use": "egg:pyruvate#main",
+            "wsgi_threads": "8",
+        },
+    ) as result:
+        assert result.exit_code == 0, result.exception
+        block = _server_block(_zope_ini(result))
+        assert "threads" not in block
