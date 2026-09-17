@@ -17,6 +17,8 @@ Core WSGI server, environment, and request-handling settings.
 | `wsgi_channel_timeout` | *(unset, default `120`)* | integer (seconds) |
 | `wsgi_app_entrypoint` | `egg:Zope#main` | entrypoint |
 | `wsgi_filters` | `{}` (empty dict) | mapping `name → {use, options?, position?}` |
+| `wsgi_server_use` | *(unset)* | PasteDeploy entry point |
+| `wsgi_server_options` | `{}` (empty dict) | mapping `key → value` |
 | `trusted_proxy` | *(unset)* | comma-separated IPs/hostnames |
 
 **`wsgi_fast_listen`** -- Like `wsgi_listen`, but uses [waitress_fastlisten](https://pypi.org/project/waitress-fastlisten/). Needs the latter package to be installed (add it to *requirements.txt*).
@@ -26,6 +28,10 @@ Core WSGI server, environment, and request-handling settings.
 **`wsgi_channel_timeout`** -- Maximum time in seconds to receive a complete request from a client. If the client does not send a complete request within this time, the connection is closed. Default is 120 seconds.
 
 **`wsgi_filters`** -- A mapping of WSGI/PasteDeploy filters to inject into the pipeline. Each key is the filter name and renders a `[filter:<name>]` section wired into `[pipeline:main]`. Each value supports `use` (required, the PasteDeploy entry point), `options` (optional mapping of additional `key = value` lines rendered verbatim into the filter section), and `position` (`outer`, the default — placed ahead of the built-in `profile`/`translogger` filters so it wraps the whole request; or `inner` — placed closest to the application, just before `egg:Zope#httpexceptions`). Reserved names that cannot be used: `zope`, `profile`, `translogger`, `httpexceptions`, `main`. See {doc}`/how-to/add-wsgi-middleware`.
+
+**`wsgi_server_use`** -- PasteDeploy entry point of an alternative WSGI server for `[server:main]`, e.g. `egg:pyruvate#main`. Default empty: the built-in waitress wiring (`wsgi_listen`, `wsgi_threads`, ...) is used. When set, the waitress-specific options are ignored (a warning is printed if any is set) and combining it with `wsgi_fast_listen` is an error. See {doc}`/how-to/use-alternative-wsgi-server`.
+
+**`wsgi_server_options`** -- A mapping of additional `key = value` lines rendered verbatim into `[server:main]`. Only valid together with `wsgi_server_use`; the key `use` is not allowed here.
 
 **`trusted_proxy`** -- A comma-separated list of IP addresses or hostnames of trusted reverse proxies. When set, Zope will trust proxy-related headers (such as `X-Forwarded-For`) from these sources. Each value becomes a separate `trusted-proxy` directive in `zope.conf`. Example: `"10.0.0.1,10.0.0.2"`.
 
