@@ -2,6 +2,11 @@
 
 ## 3.1.1 (unreleased)
 
+- Feature: Generic `wsgi_server_use`/`wsgi_server_options` to run any PasteDeploy
+  WSGI server (e.g. pyruvate) in `[server:main]` instead of the built-in waitress
+  wiring. Part of #64.
+  [@jensens, 2026-09-18]
+
 - Fix: Declare the `plone:` and `i18n:` namespace prefixes on `<configure>` in
   the `site.zcml` template. Setting `zcml_resources_directory_location` renders
   `<plone:static/>` and `zcml_locales_directory_location` renders
