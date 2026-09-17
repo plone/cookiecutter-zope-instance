@@ -209,6 +209,7 @@
   "enable_xmlrpc": true,
   "trusted_proxy": "",
   "product_config": {},
+  "zope_conf_include_file_location": "",
   "datetime_format": "",
   "debug_mode": false,
   "debug_exceptions": false,
