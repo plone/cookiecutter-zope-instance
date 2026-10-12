@@ -29,6 +29,7 @@ New to the template? Start with the {doc}`/tutorials/index`.
 - {doc}`set-product-config`
 - {doc}`add-wsgi-middleware`
 - {doc}`add-arbitrary-zope-conf`
+- {doc}`use-alternative-wsgi-server`
 
 ## Deploy to production
 
@@ -64,6 +65,7 @@ configure-logging
 set-product-config
 add-wsgi-middleware
 add-arbitrary-zope-conf
+use-alternative-wsgi-server
 run-behind-reverse-proxy
 use-environment-variables
 enable-debug-profiling
