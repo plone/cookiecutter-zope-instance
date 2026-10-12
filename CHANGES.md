@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.1 (unreleased)
+
+- No changes yet.
+
 ## 3.2.0 (2026-10-12)
 
 - Feature: `zope_conf_include_file_location` renders a ZConfig `%include` at the end
