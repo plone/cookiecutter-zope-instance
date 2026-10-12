@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.1.1 (unreleased)
+## 3.2.0 (2026-10-12)
 
 - Feature: `zope_conf_include_file_location` renders a ZConfig `%include` at the end
   of the generated `zope.conf`, as an escape hatch for configuration without a
