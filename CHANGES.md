@@ -2,7 +2,15 @@
 
 ## 3.2.1 (unreleased)
 
-- No changes yet.
+- Fix: Abort with an error on invalid `default_context` overrides instead of
+  generating incomplete `etc/*` files. Cookiecutter discards every override
+  after the first invalid one (e.g. `log_syslog: ""`, as produced by an empty
+  `INSTANCE_log_syslog`) with only a warning. The template's Jinja extension
+  now validates booleans and choices against `cookiecutter.json` before any
+  file is written, for every invocation style (`--config-file`,
+  `COOKIECUTTER_CONFIG`, `~/.cookiecutterrc`, `gh:` or local template).
+  Fixes #43.
+  [@jensens]
 
 ## 3.2.0 (2026-10-12)
 
