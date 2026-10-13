@@ -5,7 +5,7 @@
 project = "cookiecutter-zope-instance"
 copyright = "2022-2026, Plone Foundation"  # noqa: A001
 author = "Jens Klein and contributors"
-release = "3.0"
+release = "3.2"
 
 # -- General configuration ---------------------------------------------------
 
@@ -43,10 +43,6 @@ html_theme_options = {
         {
             "title": "GitHub",
             "url": "https://github.com/plone/cookiecutter-zope-instance",
-        },
-        {
-            "title": "PyPI",
-            "url": "https://pypi.org/project/cookiecutter-zope-instance/",
         },
     ],
 }

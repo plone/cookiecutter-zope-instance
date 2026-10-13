@@ -8,6 +8,7 @@ standard SQL operators.
 
 ## Prerequisites
 
+- New to this template? Start with {doc}`/tutorials/first-zope-instance`.
 - A running PostgreSQL 14+ server
 - The `zodb-pgjsonb` and `zodb-json-codec` Python packages installed
 - A PostgreSQL database created for your Zope instance
@@ -54,6 +55,9 @@ default_context:
 
 ```yaml
 default_context:
+    # Serving (bind to localhost when behind a reverse proxy)
+    wsgi_listen: 127.0.0.1:8080
+
     initial_user_name: admin
     initial_user_password: admin
 
@@ -67,6 +71,9 @@ default_context:
     # ZODB object cache
     db_cache_size: 50000
 ```
+
+For the full set of annotated sample configurations, including development and
+other backend variants, see {doc}`/reference/sample-configurations`.
 
 ## Optional: S3 tiered blob storage
 

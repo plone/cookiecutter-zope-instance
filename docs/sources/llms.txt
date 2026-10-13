@@ -13,7 +13,7 @@ configuration file.
 - License: GPL-2.0
 - Python: 3.10+
 - Repository: https://github.com/plone/cookiecutter-zope-instance
-- PyPI: https://pypi.org/project/cookiecutter-zope-instance/
+- Install: used directly from GitHub via `cookiecutter gh:plone/cookiecutter-zope-instance` (not published on PyPI)
 
 ## Features
 
@@ -103,6 +103,7 @@ separator for nested dict values.
 ## Documentation Sections
 
 - [Tutorials](tutorials/index.md): First instance, Docker deployment
-- [How-To Guides](how-to/index.md): RelStorage, PGJsonb, ZEO, z3blobs, CORS, env vars, upgrading
-- [Reference](reference/index.md): All configuration variables documented
-- [Explanation](explanation/index.md): Storage backends, blob handling, rationale
+- [How-To Guides](how-to/index.md): set the listen host/port, configure a storage backend (filestorage, RelStorage, PGJsonb, ZEO, z3blobs), configure the application (CORS, logging, product-config), deploy to production (reverse proxy, environment variables), enable debug/profiling, operate (pack/GC, backup/restore, migrate storage), upgrade
+- [Reference](reference/index.md): All configuration variables, plus sample configurations
+- [Explanation](explanation/index.md): Storage backends, blob handling, configuration workflow, rationale
+- [Glossary](glossary.md): Key terms (blob, FileStorage, RelStorage, ZEO, PGJsonb, ZODB)

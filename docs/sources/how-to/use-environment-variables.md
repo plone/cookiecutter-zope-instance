@@ -41,21 +41,18 @@ picked up by the transform script. The prefix is stripped and the remaining
 name becomes the configuration key:
 
 ```bash
-export INSTANCE_wsgi_fast_listen=
+# Override scalars; the INSTANCE_ prefix is stripped to form the key
 export INSTANCE_wsgi_listen=127.0.0.1:8080
-export INSTANCE_initial_user_password=
-export INSTANCE_debug_mode=false
-export INSTANCE_verbose_security=false
 export INSTANCE_db_storage=relstorage
-export INSTANCE_db_blob_mode=cache
-export INSTANCE_db_relstorage_keep_history=false
-export INSTANCE_db_relstorage=postgresql
 export INSTANCE_db_relstorage_postgresql_dsn="host='db' dbname='plone' user='plone' password='verysecret'"
-export INSTANCE_db_cache_size=50000
-export INSTANCE_db_cache_size_bytes=1500MB
+
+# An empty value clears a key (here, generate a fresh password)
+export INSTANCE_initial_user_password=
 ```
 
-Setting a variable to an empty string effectively clears that value.
+Setting a variable to an empty string clears that value.
+For a complete production set applied end-to-end, see
+{doc}`/tutorials/docker-deployment`.
 
 ## Step 4: run the transform script
 
@@ -83,16 +80,19 @@ export INSTANCE_environment_DICT_PTS_LANGUAGES="de en"
 export INSTANCE_environment_DICT_zope_i18n_allowed_languages="de en"
 ```
 
+See {doc}`/explanation/configuration-workflow` for how the `_DICT_` infix
+works.
+
 ## Docker integration pattern
 
-See the {doc}`/tutorials/docker-deployment` tutorial for a complete example.
-The key points:
-
-- **Pin the template version** at build time (download the zip archive).
-- **Run the transform + cookiecutter in an entrypoint**, not at build time,
-  so that `INSTANCE_*` environment variables (secrets, DSNs) are available.
-- **No network at runtime** -- the entrypoint uses only local files.
+For why the transform runs in the container entrypoint, why the template
+version is pinned, and how the entrypoint needs no network access at runtime,
+see {doc}`/explanation/configuration-workflow`.
+The {doc}`/tutorials/docker-deployment` tutorial applies the whole pattern
+end-to-end.
 
 ## Next steps
 
+- {doc}`/explanation/configuration-workflow` -- Why this workflow is shaped
+  the way it is.
 - {doc}`/reference/helpers` -- Reference documentation for helper scripts.

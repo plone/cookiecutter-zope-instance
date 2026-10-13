@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.3 (unreleased)
+## 3.2.1 (unreleased)
 
 - Fix: Validate cookiecutter config overrides before project generation.
   Cookiecutter silently discards every remaining `default_context` override
@@ -10,6 +10,32 @@
   `~/.cookiecutterrc`), validates each override against the types declared
   in `cookiecutter.json`, and aborts with an actionable error.
   [Fixes #43]
+  [@jensens]
+
+## 3.2.0 (2026-10-12)
+
+- Feature: `zope_conf_include_file_location` renders a ZConfig `%include` at the end
+  of the generated `zope.conf`, as an escape hatch for configuration without a
+  dedicated option (e.g. an additional `<zodb_db>` mount). Part of #64.
+- Feature: Generic `wsgi_server_use`/`wsgi_server_options` to run any PasteDeploy
+  WSGI server (e.g. pyruvate) in `[server:main]` instead of the built-in waitress
+  wiring. Part of #64.
+  [@jensens, 2026-09-18]
+
+- Fix: Declare the `plone:` and `i18n:` namespace prefixes on `<configure>` in
+  the `site.zcml` template. Setting `zcml_resources_directory_location` renders
+  `<plone:static/>` and `zcml_locales_directory_location` renders
+  `<i18n:registerTranslations/>`, neither of which had its prefix bound, so the
+  generated file was not well-formed XML and Zope refused to start.
+  [@kunalKumar-13]
+
+## 3.1.0 (2026-06-18)
+
+- Feature: Generic `wsgi_filters` option to inject arbitrary WSGI/PasteDeploy
+  filters into the pipeline (e.g. `plone.observability`). Each filter has a
+  `use`, optional `options`, and optional `position` (`outer`/`inner`). The
+  built-in `profile` and `translogger` filters now render through the same
+  unified pipeline path.
   [@jensens]
 
 ## 3.0.2 (2026-04-03)

@@ -15,7 +15,9 @@
 {%- set zcml_resources_directory_location = old_zcml_resources_directory_location if old_zcml_resources_directory_location else cookiecutter.zcml_resources_directory_location %}<configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:meta="http://namespaces.zope.org/meta"
-    xmlns:five="http://namespaces.zope.org/five">
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone">
 
   <include package="Products.Five" />
 

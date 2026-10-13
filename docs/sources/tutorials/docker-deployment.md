@@ -162,12 +162,11 @@ else
 fi
 ```
 
-Key design choices:
-
-- The template zip and helper script are **downloaded at build time** and pinned
-  to a specific version -- no network access at container startup (stability +
-  security).
-- The entrypoint only runs the transform and cookiecutter against local files.
+The template and helper are downloaded and pinned at build time, and the
+entrypoint runs only against local files, so no network access is needed at
+startup.
+For the reasoning behind generating at startup and pinning the version, see
+{doc}`/explanation/configuration-workflow`.
 
 Now start the container with runtime environment variables:
 
@@ -192,23 +191,17 @@ services:
       - "8080:8080"
 ```
 
-## Advanced: dict values with `_DICT_`
+## Set dictionary values
 
-Some template variables are dictionaries. The transform script supports a
-special `_DICT_` infix to set individual keys inside a dict:
+Some template variables are dictionaries.
+Use the `_DICT_` infix to set a single entry inside one:
 
 ```bash
-export INSTANCE_environment_DICT_zope_i18n_compile_mo_files=true
 export INSTANCE_environment_DICT_TZ=Europe/Berlin
 ```
 
-This results in:
-
-```yaml
-environment:
-    zope_i18n_compile_mo_files: 'true'
-    TZ: 'Europe/Berlin'
-```
+See {doc}`/explanation/configuration-workflow` for how the `_DICT_` infix
+works.
 
 ## What you learned
 

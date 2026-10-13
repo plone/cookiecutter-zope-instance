@@ -4,30 +4,49 @@
 
 Goal-oriented guides for common tasks.
 
-## Database backends
+These guides follow the life of an instance, from first configuration through
+production deployment to day-to-day operations.
+Choose a storage backend such as {term}`FileStorage`, {term}`RelStorage`,
+{term}`ZEO`, or {term}`PGJsonb`, then deploy and operate it.
+New to the template? Start with the {doc}`/tutorials/index`.
 
+## Set up the server
+
+- {doc}`set-listen-host-port`
+
+## Choose a storage backend
+
+- {doc}`configure-filestorage`
 - {doc}`configure-relstorage`
 - {doc}`configure-pgjsonb`
 - {doc}`configure-zeo`
 - {doc}`configure-z3blobs`
 
-## Storage migration
-
-- {doc}`migrate-storage`
-
-## Web layer
+## Configure the application
 
 - {doc}`configure-cors`
-
-## Logging
-
 - {doc}`configure-logging`
+- {doc}`set-product-config`
+- {doc}`add-wsgi-middleware`
+- {doc}`add-arbitrary-zope-conf`
+- {doc}`use-alternative-wsgi-server`
 
-## Operations
+## Deploy to production
 
+- {doc}`run-behind-reverse-proxy`
 - {doc}`use-environment-variables`
 
-## Upgrading
+## Develop and debug
+
+- {doc}`enable-debug-profiling`
+
+## Operate
+
+- {doc}`pack-and-gc`
+- {doc}`backup-and-restore`
+- {doc}`migrate-storage`
+
+## Upgrade
 
 - {doc}`upgrade-v1-to-v2`
 
@@ -35,13 +54,23 @@ Goal-oriented guides for common tasks.
 ---
 hidden: true
 ---
+set-listen-host-port
+configure-filestorage
 configure-relstorage
 configure-pgjsonb
 configure-zeo
 configure-z3blobs
-migrate-storage
 configure-cors
 configure-logging
+set-product-config
+add-wsgi-middleware
+add-arbitrary-zope-conf
+use-alternative-wsgi-server
+run-behind-reverse-proxy
 use-environment-variables
+enable-debug-profiling
+pack-and-gc
+backup-and-restore
+migrate-storage
 upgrade-v1-to-v2
 ```

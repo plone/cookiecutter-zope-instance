@@ -7,6 +7,7 @@ This guide walks you through enabling S3-backed blob storage using
 
 ## Prerequisites
 
+- New to this template? Start with {doc}`/tutorials/first-zope-instance`.
 - The `zodb-s3blobs` Python package installed
 - An S3-compatible storage service (AWS S3, MinIO, Ceph, etc.)
 - A bucket created for your blob data
@@ -55,6 +56,9 @@ default_context:
 
 ```yaml
 default_context:
+    # Serving (bind to localhost when behind a reverse proxy)
+    wsgi_listen: 127.0.0.1:8080
+
     initial_user_name: admin
     initial_user_password: admin
     zcml_package_includes: my.addon
@@ -98,6 +102,8 @@ storage with PGJsonb, use the built-in S3 tiering instead. See
 
 ## Next steps
 
+- {doc}`/reference/sample-configurations` -- Complete, copy-paste
+  configurations for every backend, including the z3blobs wrapper.
 - {doc}`/reference/database-z3blobs` -- Full reference for all z3blobs settings.
 - {doc}`/explanation/blob-handling` -- How blobs work across different backends.
 - {doc}`/explanation/storage-backends` -- Comparison of all storage backends.
