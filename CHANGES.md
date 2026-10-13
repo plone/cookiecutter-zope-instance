@@ -2,14 +2,14 @@
 
 ## 3.2.1 (unreleased)
 
-- Fix: Validate cookiecutter config overrides before project generation.
-  Cookiecutter silently discards every remaining `default_context` override
-  after the first invalid one (e.g. an unparseable boolean from
-  `INSTANCE_log_syslog=""`), producing incomplete `etc/*` files. The
-  pre-generation hook now re-reads `$COOKIECUTTER_CONFIG` (or
-  `~/.cookiecutterrc`), validates each override against the types declared
-  in `cookiecutter.json`, and aborts with an actionable error.
-  [Fixes #43]
+- Fix: Abort with an error on invalid `default_context` overrides instead of
+  generating incomplete `etc/*` files. Cookiecutter discards every override
+  after the first invalid one (e.g. `log_syslog: ""`, as produced by an empty
+  `INSTANCE_log_syslog`) with only a warning. The template's Jinja extension
+  now validates booleans and choices against `cookiecutter.json` before any
+  file is written, for every invocation style (`--config-file`,
+  `COOKIECUTTER_CONFIG`, `~/.cookiecutterrc`, `gh:` or local template).
+  Fixes #43.
   [@jensens]
 
 ## 3.2.0 (2026-10-12)

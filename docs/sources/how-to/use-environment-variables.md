@@ -51,6 +51,9 @@ export INSTANCE_initial_user_password=
 ```
 
 Setting a variable to an empty string clears that value.
+This only works for text options: an empty value for a boolean (e.g.
+`INSTANCE_log_syslog=`) or a choice (e.g. `INSTANCE_db_storage=`) makes
+cookiecutter abort with an error naming the variable.
 For a complete production set applied end-to-end, see
 {doc}`/tutorials/docker-deployment`.
 
