@@ -2,6 +2,9 @@
 
 ## 3.2.1 (unreleased)
 
+- Test the template on Python 3.15 in CI.
+  [@jensens]
+
 - Fix: Abort with an error on invalid `default_context` overrides instead of
   generating incomplete `etc/*` files. Cookiecutter discards every override
   after the first invalid one (e.g. `log_syslog: ""`, as produced by an empty
